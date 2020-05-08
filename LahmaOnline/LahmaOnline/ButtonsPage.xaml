@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:Style="clr-namespace:LahmaOnline.StyleViews.Styles"
+             x:Class="LahmaOnline.ButtonsPage">
+    <ContentPage.Content>
+        <StackLayout >
+            <StackLayout  Orientation="Horizontal" HorizontalOptions="Center">
+                <Label Text="RTL"/>
+                <Switch Toggled="SwitchLanguage"/>
+                <Label Text="LTR"/>
+            </StackLayout>
+            <ScrollView Orientation="Vertical">
+                <FlexLayout x:Name="flexLayout"
+                        Wrap="Wrap" Direction="Row"
+                        JustifyContent="Center">
+                    <Button Text="RegisterUser" Clicked="OpenRegisterUserPage" BackgroundColor="#8A4523"
+                    Style="{x:Static Style:GeneralStyles.PrimaryButtonStyle}"/>
+                    <Button Text="LoginPage" Clicked="OpenLoginPage" BackgroundColor="#8A4523"
+                    Style="{x:Static Style:GeneralStyles.PrimaryButtonStyle}"/>
+                    <Button Text="HomePage" Clicked="OpenHomePage" BackgroundColor="#8A4523"
+                    Style="{x:Static Style:GeneralStyles.PrimaryButtonStyle}"/>
+                    <Button Text="ListProduct" Clicked="OpenListProductPage" BackgroundColor="#8A4523"
+                    Style="{x:Static Style:GeneralStyles.PrimaryButtonStyle}"/>
+                    <Button Text="ProfilePage" Clicked="OpenProfilePage" BackgroundColor="#8A4523"
+                    Style="{x:Static Style:GeneralStyles.PrimaryButtonStyle}"/>
+                    <Button Text="AboutUsPage" Clicked="OpenAboutUsPage" BackgroundColor="#8A4523"
+                    Style="{x:Static Style:GeneralStyles.PrimaryButtonStyle}"/>
+                    <Button Text="BagCartPage" Clicked="OpenBagCartPage" BackgroundColor="#8A4523"
+                    Style="{x:Static Style:GeneralStyles.PrimaryButtonStyle}"/>
+                    <Button Text="CheckOutPage" Clicked="OpenCheckOutPage" BackgroundColor="#3A1D0F"
+                    Style="{x:Static Style:GeneralStyles.PrimaryButtonStyle}"/>
+                    <Button Text="ContentUsPage" Clicked="OpenContentUsPage" BackgroundColor="#8A4523"
+                    Style="{x:Static Style:GeneralStyles.PrimaryButtonStyle}"/>
+                    <Button Text="DeliveryAreas" Clicked="OpenDeliveryAreas" BackgroundColor="#8A4523"
+                    Style="{x:Static Style:GeneralStyles.PrimaryButtonStyle}"/>
+                    <Button Text="InvoiceDetailsPage" Clicked="OpenInvoiceDetailsPage" BackgroundColor="#8A4523"
+                    Style="{x:Static Style:GeneralStyles.PrimaryButtonStyle}"/>
+                    <Button Text="License" Clicked="OpenLicense" BackgroundColor="#8A4523"
+                    Style="{x:Static Style:GeneralStyles.PrimaryButtonStyle}"/>
+                    <Button Text="MyFavouritesPage" Clicked="OpenMyFavouritesPage" BackgroundColor="#8A4523"
+                    Style="{x:Static Style:GeneralStyles.PrimaryButtonStyle}"/>
+                    <Button Text="MyOrdersPage" Clicked="OpenMyOrdersPage" BackgroundColor="#8A4523"
+                    Style="{x:Static Style:GeneralStyles.PrimaryButtonStyle}"/>
+                    <Button Text="TermsAndConditions" Clicked="OpenTermsAndConditions" BackgroundColor="#8A4523"
+                    Style="{x:Static Style:GeneralStyles.PrimaryButtonStyle}"/>
+                </FlexLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

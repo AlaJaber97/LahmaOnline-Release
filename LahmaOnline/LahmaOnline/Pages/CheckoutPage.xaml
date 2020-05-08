@@ -1,0 +1,420 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="LahmaOnline.Pages.CheckoutPage"
+             BackgroundColor="#F4F7FA"
+             xmlns:CustomRenderer="clr-namespace:LahmaOnline.CustomRenderer"
+             xmlns:Style="clr-namespace:LahmaOnline.StyleViews.Styles"
+             xmlns:FFImage="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             xmlns:XResource="clr-namespace:LahmaOnline.MultiLanguage"
+             xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
+             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:xf="clr-namespace:LahmaOnline.Effect"
+             xmlns:contentviewhelper="clr-namespace:LahmaOnline.Pages.ContentViewHelper"
+             android:Application.WindowSoftInputModeAdjust="Resize"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <Grid Grid.Row="0" Margin="0" Padding="0" RowSpacing="0" ColumnSpacing="0" VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <!--Navigation Bar-->
+            <StackLayout  Orientation="Horizontal" Grid.Row="0" Style="{x:Static Style:GeneralStyles.NavBarStyle}" VerticalOptions="Start">
+                <FFImage:SvgCachedImage Source="BackArrowWhite.svg" Rotation="{Binding .,Converter={StaticResource Key=CalRotation}}" 
+                                        Style="{x:Static Style:GeneralStyles.FFImage20X20Style}">
+                    <FFImage:SvgCachedImage.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="BackPage"/>
+                    </FFImage:SvgCachedImage.GestureRecognizers>
+                </FFImage:SvgCachedImage>
+                <Label Text="{x:Static XResource:MLResource.CheckOut}" Style="{x:Static Style:GeneralStyles.LabelTitlePageStyle}"/>
+            </StackLayout>
+            <!--Content Page-->
+            <ScrollView Grid.Row="1" Style="{x:Static Style:GeneralStyles.ScrollViewPadding10x10x10x20}"
+                                        HorizontalOptions="FillAndExpand" VerticalOptions="Fill">
+                <StackLayout    Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace10Padding5_Style}">
+                    <Frame IsClippedToBounds="True"  Style="{x:Static Style:GeneralStyles.FrameRaduis10Padding5_Style}"
+                                         HasShadow="True" BorderColor="White" OutlineColor="White"
+                                         VerticalOptions="Start" HorizontalOptions="Fill">
+                        <StackLayout  Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace5Padding5_Style}" HorizontalOptions="FillAndExpand">
+                            <Label Text="{x:Static XResource:MLResource.CartSummary}" Style="{x:Static Style:GeneralStyles.LabelTitleSize25}"/>
+                            <StackLayout  Style="{x:Static Style:GeneralStyles.StackSpasing25Style}" HorizontalOptions="FillAndExpand">
+                                <StackLayout  Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace5_Style}">
+                                    <!--Subtotal-->
+                                    <StackLayout  Orientation="Horizontal" Margin="0" Padding="0" Spacing="0" HorizontalOptions="FillAndExpand">
+                                        <Label HorizontalOptions="StartAndExpand" TextColor="#272A3F">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="{x:Static XResource:MLResource.Subtotal}" Style="{x:Static Style:GeneralStyles.SpanTitleFont20_Style}"/>
+                                                    <Span Text="( " Style="{x:Static Style:GeneralStyles.SpanTitleFont20_Style}"/>
+                                                    <Span Text="{Binding CheckoutProperty.ItemsCount}" Style="{x:Static Style:GeneralStyles.SpanTitleFont20_Style}"/>
+                                                    <Span Text=" "/>
+                                                    <Span Text="{x:Static XResource:MLResource.items}" Style="{x:Static Style:GeneralStyles.SpanTitleFont20_Style}"/>
+                                                    <Span Text=" )" Style="{x:Static Style:GeneralStyles.SpanTitleFont20_Style}"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <Label HorizontalOptions="End" TextColor="#272A3F">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="{Binding CheckoutProperty.SubTotal, StringFormat='{0:N2}'}" Style="{x:Static Style:GeneralStyles.SpanPriceFont18_Style}"/>
+                                                    <Span Text=" "/>
+                                                    <Span Text="{x:Static XResource:MLResource.AED}" Style="{x:Static Style:GeneralStyles.SpanCurrencyFont14_Style}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                    </StackLayout>
+                                    <!--PaymentLessThan50-->
+                                    <StackLayout     Orientation="Horizontal" Margin="0" Padding="0" Spacing="0" HorizontalOptions="FillAndExpand">
+                                        <Label Text="{x:Static XResource:MLResource.PaymentLessThan50AED}" Style="{x:Static Style:GeneralStyles.LabelTitleFont22_Style}"
+                                           FontAttributes="None" TextColor="#272A3F" HorizontalOptions="StartAndExpand"/>
+                                        <Label HorizontalOptions="End" TextColor="#272A3F">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span x:Name="PaymentLessThan50" Text="{Binding CheckoutProperty.AddtionTax, StringFormat='{0:N2}'}"  Style="{x:Static Style:GeneralStyles.SpanPriceFont18_Style}"/>
+                                                    <Span Text=" "/>
+                                                    <Span Text="{x:Static XResource:MLResource.AED}" Style="{x:Static Style:GeneralStyles.SpanCurrencyFont14_Style}"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <StackLayout.Triggers>
+                                            <DataTrigger TargetType="StackLayout"
+                                               Binding="{Binding Source={x:Reference PaymentLessThan50}, Path=Text}"
+                                               Value="0.00">
+                                                <Setter Property="IsVisible" Value="False"/>
+                                            </DataTrigger>
+                                        </StackLayout.Triggers>
+                                    </StackLayout>
+                                    <!--Deliver-->
+                                    <StackLayout     Orientation="Horizontal" Margin="0" Padding="0" Spacing="0" HorizontalOptions="FillAndExpand">
+                                        <Label Text="{x:Static XResource:MLResource.DeliveryCharges}" Style="{x:Static Style:GeneralStyles.LabelTitleFont22_Style}"
+                                           FontAttributes="None" TextColor="#272A3F" HorizontalOptions="StartAndExpand"/>
+                                        <Label HorizontalOptions="End" TextColor="#272A3F">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="{Binding CheckoutProperty.AddtionTax, StringFormat='{0:N2}'}"
+                                            Style="{x:Static Style:GeneralStyles.SpanPriceFont18_Style}"/>
+                                                    <Span Text=" "/>
+                                                    <Span Text="{x:Static XResource:MLResource.AED}"
+                                             Style="{x:Static Style:GeneralStyles.SpanCurrencyFont14_Style}"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <StackLayout.Triggers>
+                                            <DataTrigger TargetType="StackLayout"
+                                               Binding="{Binding Source={x:Reference PaymentLessThan50}, Path=Text}"
+                                               Value="0.00">
+                                                <Setter Property="IsVisible" Value="False"/>
+                                            </DataTrigger>
+                                        </StackLayout.Triggers>
+                                    </StackLayout>
+                                    <!--Total Before Tax-->
+                                    <StackLayout Orientation="Horizontal" Margin="0" Padding="0" Spacing="0" HorizontalOptions="FillAndExpand">
+                                        <Label Text="{x:Static XResource:MLResource.TotalBeforeTax}" Style="{x:Static Style:GeneralStyles.LabelTitleFont22_Style}"
+                                       FontAttributes="None" TextColor="#272A3F" HorizontalOptions="StartAndExpand"/>
+                                        <Label HorizontalOptions="End" TextColor="#272A3F">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="{Binding CheckoutProperty.TotalBeforeTax, StringFormat='{0:N2}'}" Style="{x:Static Style:GeneralStyles.SpanPriceFont18_Style}"/>
+                                                    <Span Text=" "/>
+                                                    <Span Text="{x:Static XResource:MLResource.AED}" Style="{x:Static Style:GeneralStyles.SpanCurrencyFont14_Style}"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                    </StackLayout>
+                                    <!--Tax (5%)-->
+                                    <StackLayout Orientation="Horizontal" Margin="0" Padding="0" Spacing="0" HorizontalOptions="FillAndExpand">
+                                        <Label TextColor="#272A3F" HorizontalOptions="StartAndExpand">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="{x:Static XResource:MLResource.Tax}" Style="{x:Static Style:GeneralStyles.SpanTitleFont20_Style}"/>
+                                                    <Span Text="( " Style="{x:Static Style:GeneralStyles.SpanTitleFont20_Style}"/>
+                                                    <Span Text="5" Style="{x:Static Style:GeneralStyles.SpanTitleFont20_Style}" />
+                                                    <Span Text="% )" Style="{x:Static Style:GeneralStyles.SpanTitleFont20_Style}"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <Label HorizontalOptions="End" TextColor="#272A3F">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="{Binding CheckoutProperty.TotalTax, StringFormat='{0:N2}'}" Style="{x:Static Style:GeneralStyles.SpanPriceFont18_Style}"/>
+                                                    <Span Text=" "/>
+                                                    <Span Text="{x:Static XResource:MLResource.AED}" Style="{x:Static Style:GeneralStyles.SpanCurrencyFont14_Style}"/>
+
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                    </StackLayout>
+                                    <!--Total-->
+                                    <StackLayout Orientation="Horizontal" Margin="0" Padding="0" Spacing="0" HorizontalOptions="FillAndExpand">
+                                        <Label Text="{x:Static XResource:MLResource.TotalAmount}" Style="{x:Static Style:GeneralStyles.LabelTitleFont22_Style}"
+                                       FontAttributes="None"
+                                       TextColor="#272A3F" HorizontalOptions="StartAndExpand"/>
+                                        <Label HorizontalOptions="End" TextColor="#272A3F">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="{Binding CheckoutProperty.TotalAmount, StringFormat='{0:N2}'}" Style="{x:Static Style:GeneralStyles.SpanPriceFont18_Style}"/>
+                                                    <Span Text=" "/>
+                                                    <Span Text="{x:Static XResource:MLResource.AED}" Style="{x:Static Style:GeneralStyles.SpanCurrencyFont14_Style}"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                    </StackLayout>
+                                    <!--Spareted LINE-->
+                                    <StackLayout  Orientation="Horizontal" HorizontalOptions="Center" Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace3_Style}">
+                                        <BoxView Style="{x:Static Style:GeneralStyles.BoxSparetedLineStyle}"/>
+                                        <BoxView Style="{x:Static Style:GeneralStyles.BoxSparetedLineStyle}"/>
+                                        <BoxView Style="{x:Static Style:GeneralStyles.BoxSparetedLineStyle}"/>
+                                        <BoxView Style="{x:Static Style:GeneralStyles.BoxSparetedLineStyle}"/>
+                                        <BoxView Style="{x:Static Style:GeneralStyles.BoxSparetedLineStyle}"/>
+                                        <BoxView Style="{x:Static Style:GeneralStyles.BoxSparetedLineStyle}"/>
+                                        <BoxView Style="{x:Static Style:GeneralStyles.BoxSparetedLineStyle}"/>
+                                        <BoxView Style="{x:Static Style:GeneralStyles.BoxSparetedLineStyle}"/>
+                                        <BoxView Style="{x:Static Style:GeneralStyles.BoxSparetedLineStyle}"/>
+                                        <BoxView Style="{x:Static Style:GeneralStyles.BoxSparetedLineStyle}"/>
+                                        <BoxView Style="{x:Static Style:GeneralStyles.BoxSparetedLineStyle}"/>
+                                        <BoxView Style="{x:Static Style:GeneralStyles.BoxSparetedLineStyle}"/>
+                                        <BoxView Style="{x:Static Style:GeneralStyles.BoxSparetedLineStyle}"/>
+                                        <BoxView Style="{x:Static Style:GeneralStyles.BoxSparetedLineStyle}"/>
+                                        <BoxView Style="{x:Static Style:GeneralStyles.BoxSparetedLineStyle}"/>
+                                        <BoxView Style="{x:Static Style:GeneralStyles.BoxSparetedLineStyle}"/>
+                                        <BoxView Style="{x:Static Style:GeneralStyles.BoxSparetedLineStyle}"/>
+                                        <BoxView Style="{x:Static Style:GeneralStyles.BoxSparetedLineStyle}"/>
+                                        <BoxView Style="{x:Static Style:GeneralStyles.BoxSparetedLineStyle}"/>
+                                        <BoxView Style="{x:Static Style:GeneralStyles.BoxSparetedLineStyle}"/>
+                                        <BoxView Style="{x:Static Style:GeneralStyles.BoxSparetedLineStyle}"/>
+                                        <BoxView Style="{x:Static Style:GeneralStyles.BoxSparetedLineStyle}"/>
+                                    </StackLayout>
+                                </StackLayout>
+                                <StackLayout  Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace5_Style}">
+                                    <StackLayout  Orientation="Horizontal" Margin="0" Padding="0" Spacing="0" HorizontalOptions="FillAndExpand">
+                                        <Label Text="{x:Static XResource:MLResource.DeliveryCharges}" TextColor="#272A3F" HorizontalOptions="StartAndExpand"  Style="{x:Static Style:GeneralStyles.LabelTitleFont22_Style}" />
+                                        <Label HorizontalOptions="End" TextColor="#272A3F">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="{x:Static XResource:MLResource.AED}"
+                                              Style="{x:Static Style:GeneralStyles.SpanCurrencyFont14_Style}"/>
+                                                    <Span Text=" "/>
+                                                    <Span x:Name="labDeliveryCharges" Text="{Binding CheckoutProperty.DeliveryCharges, StringFormat='{0:N2}'}"
+                                              Style="{x:Static Style:GeneralStyles.SpanPriceFont22_Style}"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <StackLayout.Triggers>
+                                            <DataTrigger TargetType="StackLayout"
+                                               Binding="{Binding Source={x:Reference labDeliveryCharges}, Path=Text}"
+                                               Value="0.00">
+                                                <Setter Property="IsVisible" Value="False"/>
+                                            </DataTrigger>
+                                        </StackLayout.Triggers>
+                                    </StackLayout>
+                                    <StackLayout  Orientation="Horizontal" Margin="0" Padding="0" Spacing="0" HorizontalOptions="FillAndExpand">
+                                        <Label Text="{x:Static XResource:MLResource.TotalAmount}"
+                           Style="{x:Static Style:GeneralStyles.LabelTitlePageStyle}"
+                           TextColor="#272A3F" HorizontalOptions="StartAndExpand"/>
+                                        <Label HorizontalOptions="End" TextColor="#272A3F">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="{Binding CheckoutProperty.TotalAmount, StringFormat='{0:N2}'}" Style="{x:Static Style:GeneralStyles.SpanPriceFont22_Style}"/>
+                                                    <Span Text=" "/>
+                                                    <Span Text="{x:Static XResource:MLResource.AED}" Style="{x:Static Style:GeneralStyles.SpanCurrencyFont18_Style}"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                    </StackLayout>
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+
+                    <Frame IsClippedToBounds="True"  Style="{x:Static Style:GeneralStyles.FrameRaduis10Padding5_Style}"
+                                           HasShadow="True" BorderColor="White" OutlineColor="White" 
+                                           VerticalOptions="Start" HorizontalOptions="Fill">
+                        <StackLayout  Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace5Padding5_Style}" HorizontalOptions="FillAndExpand">
+                            <Label Text="{x:Static XResource:MLResource.RecipientDetails}" 
+                                       Style="{x:Static Style:GeneralStyles.LabelTitleSize25}"/>
+
+                            <StackLayout  Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace10Padding20_10_Style}" HorizontalOptions="FillAndExpand">
+                                <Frame IsClippedToBounds="True"  x:Name="fraEmail" BorderColor="#707070" HasShadow="False" 
+                                               Style="{x:Static Style:GeneralStyles.FrameRaduis10Padding0x0x3x0_Style}">
+                                    <CustomRenderer:CustomEntry x:Name="txtEmail" VerticalOptions="Center"
+                                                        TextColor="#272A3F" IsTextPredictionEnabled="False" 
+                                                        HorizontalOptions="FillAndExpand" Keyboard="Email"
+                                                        Text="{Binding CheckoutProperty.ModelCart.CustomerInfo.Email}"
+                                                        Placeholder="{x:Static XResource:MLResource.Email}"
+                                                        Style="{x:Static Style:GeneralStyles.EntryCustomFont10Margin4x2x2x2}"/>
+                                </Frame>
+                                <Frame IsClippedToBounds="True"  x:Name="fraPass" BorderColor="#707070" HasShadow="False" 
+                                               Style="{x:Static Style:GeneralStyles.FrameRaduis10Padding0x0x3x0_Style}">
+                                    <CustomRenderer:CustomEntry x:Name="txtPass" VerticalOptions="Center"
+                                                        TextColor="#272A3F" IsTextPredictionEnabled="False" 
+                                                        HorizontalOptions="FillAndExpand" IsPassword="True"
+                                                        Text="{Binding CheckoutProperty.ModelCart.CustomerInfo.Password}"
+                                                        Placeholder="{x:Static XResource:MLResource.Password}"
+                                                        Style="{x:Static Style:GeneralStyles.EntryCustomFont10Margin4x2x2x2}">
+                                        <CustomRenderer:CustomEntry.Effects>
+                                            <xf:ShowHidePassEffect/>
+                                        </CustomRenderer:CustomEntry.Effects>
+                                    </CustomRenderer:CustomEntry>
+                                </Frame>
+                                <Frame IsClippedToBounds="True"  x:Name="fraNameAr" BorderColor="#707070" HasShadow="False" 
+                                               Style="{x:Static Style:GeneralStyles.FrameRaduis10Padding0x0x3x0_Style}">
+                                    <CustomRenderer:CustomEntry x:Name="txtNameAr" VerticalOptions="Center"
+                                                        TextColor="#272A3F" IsTextPredictionEnabled="False" 
+                                                        HorizontalOptions="FillAndExpand"
+                                                        Text="{Binding CheckoutProperty.ModelCart.CustomerInfo.ArFullName}"
+                                                        Placeholder="{x:Static XResource:MLResource.FullNameAr}"
+                                                        Style="{x:Static Style:GeneralStyles.EntryCustomFont10Margin4x2x2x2}"/>
+                                </Frame>
+                                <Frame IsClippedToBounds="True"  x:Name="fraName" BorderColor="#707070" HasShadow="False" 
+                                               Style="{x:Static Style:GeneralStyles.FrameRaduis10Padding0x0x3x0_Style}">
+                                    <CustomRenderer:CustomEntry x:Name="txtName" VerticalOptions="Center"
+                                                        TextColor="#272A3F" IsTextPredictionEnabled="False" 
+                                                        HorizontalOptions="FillAndExpand"
+                                                        Text="{Binding CheckoutProperty.ModelCart.CustomerInfo.EnFullName}"
+                                                        Placeholder="{x:Static XResource:MLResource.FullNameEn}"
+                                                        Style="{x:Static Style:GeneralStyles.EntryCustomFont10Margin4x2x2x2}"/>
+                                </Frame>
+
+                                <Frame IsClippedToBounds="True"  x:Name="fraMobile" BorderColor="#707070" HasShadow="False" 
+                                               Style="{x:Static Style:GeneralStyles.FrameRaduis10Padding0x0x3x0_Style}">
+                                    <CustomRenderer:CustomEntry x:Name="txtMobile" VerticalOptions="Center"
+                                                        TextColor="#272A3F" IsTextPredictionEnabled="False" 
+                                                        HorizontalOptions="FillAndExpand" Keyboard="Telephone"
+                                                        Text="{Binding CheckoutProperty.ModelCart.CustomerInfo.Mobile}"
+                                                        Placeholder="{x:Static XResource:MLResource.NumberPhone}"
+                                                        Style="{x:Static Style:GeneralStyles.EntryCustomFont10Margin4x2x2x2}"/>
+                                </Frame>
+                            </StackLayout>
+                            <Label Text="{x:Static XResource:MLResource.YourRegisterToUs}"
+                                   HorizontalTextAlignment="End" TextColor="#272A3F"
+                                   Style="{x:Static Style:GeneralStyles.LabelTitleFont22_Style}"/>
+                        </StackLayout>
+                    </Frame>
+                    <Frame IsClippedToBounds="True"  Style="{x:Static Style:GeneralStyles.FrameRaduis10Padding5_Style}"
+                                           HasShadow="True" BorderColor="White" OutlineColor="White" 
+                                           VerticalOptions="Start" HorizontalOptions="Fill">
+                        <StackLayout  Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace10Padding5_Style}" HorizontalOptions="FillAndExpand">
+                            <Label Text="{x:Static XResource:MLResource.DeliveryInfromation}" Style="{x:Static Style:GeneralStyles.LabelTitleSize25}"/>
+                            <StackLayout  Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace10Padding20_10_Style}">
+                                <Frame IsClippedToBounds="True"  x:Name="fraEmarities" Style="{x:Static Style:GeneralStyles.FrameRaduis10Padding0x0x3x0_Style}" 
+                                            BorderColor="#707070" HasShadow="False">
+                                    <Picker Title="{x:Static XResource:MLResource.SelectEmarities}"
+                                        Style="{x:Static Style:GeneralStyles.PickerFont10Margin4x2x2x2}"
+                                        ItemsSource="{Binding  CheckoutProperty.DeliveryArea}"
+                                        SelectedItem="{Binding CheckoutProperty.DeliverySelect}"
+                                        ItemDisplayBinding="{Binding Name}"/>
+                                </Frame>
+                                <Frame IsClippedToBounds="True"  x:Name="fraAddress" BorderColor="#707070" HasShadow="False" 
+                                       Style="{x:Static Style:GeneralStyles.FrameRaduis10Padding0x0x3x0_Style}">
+                                    <CustomRenderer:CustomEntry x:Name="txtAddress" VerticalOptions="Center"
+                                                        TextColor="#272A3F" IsTextPredictionEnabled="False" 
+                                                        HorizontalOptions="FillAndExpand"
+                                                        Placeholder="{x:Static XResource:MLResource.DeliveryAddress}"
+                                                        Style="{x:Static Style:GeneralStyles.EntryCustomFont10Margin4x2x2x2}"/>
+                                </Frame>
+                                <Button Text="{x:Static XResource:MLResource.SelectRecieveLocation}" 
+                                        TextColor="White"  Clicked="OpenMap"
+                                        BackgroundColor="#3A1D0F" Margin="0"
+                                        Style="{x:Static Style:GeneralStyles.ButtonSubmitStyle}"
+                                        HorizontalOptions="End" VerticalOptions="Start"/>
+                                <input:RadioButtonGroupView Style="{x:Static Style:GeneralStyles.InputChoiceGroupSpase10Padding5}" x:Name="MethodPayment">
+                                    <input:RadioButton Text="{x:Static XResource:MLResource.PaymentUponReceipt}" Value="1" IsChecked="True" Style="{x:Static Style:GeneralStyles.InputChoiceFont20}"/>
+                                    <input:RadioButton Text="{x:Static XResource:MLResource.PaymentByCreditCard}" Value="2" IsChecked="False" Style="{x:Static Style:GeneralStyles.InputChoiceFont20}"/>
+                                </input:RadioButtonGroupView>
+                            </StackLayout>
+                            <input:CheckBox  x:Name="IsAgreeOnTermsAndConditions" Text="{x:Static XResource:MLResource.Terms_conditions}"
+                                             TextColor="#3A1D0F" Style="{x:Static Style:GeneralStyles.CheckBoxLabelFont15Subtitel}" Type="Material" />
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+            </ScrollView>
+
+            <Button Grid.Row="2" Text="{x:Static XResource:MLResource.Submit}" 
+                                        TextColor="White" Clicked="Submit"
+                                        BackgroundColor="#3A1D0F"
+                                        Style="{x:Static Style:GeneralStyles.CButtonMarign0Height80}"
+                                        HorizontalOptions="FillAndExpand" VerticalOptions="End"/>
+
+            <contentviewhelper:Loader Grid.Row="0" Grid.RowSpan="3" IsVisible="{Binding CheckoutProperty.IsLoading}"/>
+
+            <StackLayout x:Name="MapContentView" Grid.Row="0" Margin="0" Padding="0" Spacing="0" Grid.RowSpan="3" 
+                         BackgroundColor="#4D4A4948" IsVisible="False" VerticalOptions="FillAndExpand">
+                <!--Navigation Bar Map Page-->
+                <StackLayout  Orientation="Vertical" 
+                              Style="{x:Static Style:GeneralStyles.StackLayoutPadding20x10Spacing5}" 
+                              BackgroundColor="#3A1D0F"
+                              VerticalOptions="Start">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Start"
+                                 Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace10Padding5_Style}">
+                        <Label x:Name="HintText" 
+                           Text="{x:Static XResource:MLResource.ClickOnMapToSelectLocation}"
+                           HorizontalTextAlignment="Center" VerticalOptions="Start"
+                               HorizontalOptions="FillAndExpand"
+                            TextColor="White"
+                           Style="{x:Static Style:GeneralStyles.LabelFont15Subtitel}"/>
+                        <ActivityIndicator x:Name="HintRefresh" IsRunning="False" Color="#AA784A" 
+                                           IsVisible="True" Style="{x:Static Style:GeneralStyles.ActivityIndicator30X30}"
+                                           HorizontalOptions="End" VerticalOptions="Start"/>
+                    </StackLayout>
+                    <Frame IsClippedToBounds="True"  BorderColor="#707070" HasShadow="False" BackgroundColor="White"
+                           Style="{x:Static Style:GeneralStyles.FrameRaduis10_Style}">
+                        <StackLayout Margin="0" Padding="0" Spacing="0">
+                            <StackLayout Orientation="Horizontal" Margin="0" Padding="0">
+                                <FFImage:SvgCachedImage Source="SearchGray.svg" Style="{x:Static Style:GeneralStyles.FFImage20X20Margin10Style}"
+                                                    VerticalOptions="Center" HorizontalOptions="End">
+                                    <FFImage:SvgCachedImage.Triggers>
+                                        
+                                    </FFImage:SvgCachedImage.Triggers>
+                                </FFImage:SvgCachedImage>
+                                <CustomRenderer:CustomEntry x:Name="SearchLocation" VerticalOptions="Center"
+                                                            TextColor="#272A3F" IsTextPredictionEnabled="False" 
+                                                            HorizontalOptions="FillAndExpand"
+                                                            ReturnType="Search" Completed="SeacrhAddress_TextChanged"
+                                                            Text="{Binding CheckoutProperty.GooglePlacesApiAutoComplet.AddressText}"                                                            
+                                                            Placeholder="{x:Static XResource:MLResource.Search}"
+                                                            Style="{x:Static Style:GeneralStyles.EntryCustomFont10Margin4x2x2x2}"/>
+                                <!--TextChanged="SeacrhAddress_TextChanged"-->
+                            </StackLayout>
+
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+                <Grid Margin="0" Padding="0" VerticalOptions="FillAndExpand">
+                    <!--Add map from Code (Because I need to Get Permission Before Show it)-->
+                    <Grid x:Name="ContentMap" VerticalOptions="FillAndExpand"/>
+                    <StackLayout x:Name="ListSuggestPlaces" Orientation="Vertical" BackgroundColor="Transparent"
+                                 Style="{x:Static Style:GeneralStyles.StackLayoutMargin0_15_0_0Padding20x10Spacing5}" IsVisible="False">
+                        <ListView ItemsSource="{Binding CheckoutProperty.GooglePlacesApiAutoComplet.Addresses}"
+                                  BackgroundColor="#70FFFFFF" VerticalOptions="Start"
+                                  ItemSelected="PlacesLocations_ItemSelected">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <TextCell Text="{Binding Address}" TextColor="Black"/>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackLayout>
+                </Grid>
+                <Frame IsClippedToBounds="True"  Style="{x:Static Style:GeneralStyles.FrameRaduis10Padding5_Style}" VerticalOptions="End">
+                    <StackLayout Style="{x:Static Style:GeneralStyles.StackLayoutPadding20x10Spasing10}" BackgroundColor="White" Spacing="0" >
+                        <Button x:Name="ConfiremBut" 
+                                Text="{x:Static XResource:MLResource.Confirm}" TextColor="White"
+                                Style="{x:Static Style:GeneralStyles.ButtonMoveStyle}" Clicked="ConfiremLocation"
+                                BackgroundColor="#3A1D0F"
+                                HorizontalOptions="FillAndExpand" VerticalOptions="Start"/>
+
+                        <Button Text="{x:Static XResource:MLResource.Later}" TextColor="#3A1D0F"
+                                Style="{x:Static Style:GeneralStyles.ButtonMoveStyle}" Clicked="HideMap"
+                                BorderColor="#3A1D0F" BorderWidth="1" BackgroundColor="White"
+                                HorizontalOptions="FillAndExpand" VerticalOptions="Start"/>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

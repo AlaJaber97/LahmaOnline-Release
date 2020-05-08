@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:UserControl="clr-namespace:LahmaOnline.UserControls"
+             xmlns:CustomRenderer="clr-namespace:LahmaOnline.CustomRenderer"
+             xmlns:FFImage="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             xmlns:Style="clr-namespace:LahmaOnline.StyleViews.Styles"
+             x:Class="LahmaOnline.Pages.LoginPage"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:XResource="clr-namespace:LahmaOnline.MultiLanguage"
+             xmlns:ContentViewHelper="clr-namespace:LahmaOnline.Pages.ContentViewHelper"
+             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:xf="clr-namespace:LahmaOnline.Effect"
+             android:Application.WindowSoftInputModeAdjust="Resize"
+             BackgroundImageSource="BGlogin.png">
+    <ContentPage.Content>
+        <Grid Margin="0" Padding="0">
+            <FFImage:SvgCachedImage Source="BGlogin.svg" Margin="0" Aspect="AspectFill"/>
+            <StackLayout  Style="{x:Static Style:GeneralStyles.StackPadding20Spacing10}">
+                <StackLayout  Orientation="Horizontal" Style="{x:Static Style:GeneralStyles.StackLayoutMaring20x10Spacing5}">
+                    <Label Text="{x:Static XResource:MLResource.Signin}" FontAttributes="Bold" TextColor="#3A1D0F"  HorizontalOptions="StartAndExpand"/>
+                    <Label Text="{x:Static XResource:MLResource.Signup}" TextColor="#6E7990" HorizontalOptions="EndAndExpand">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OpenRegisterPage"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+
+                <FFImage:SvgCachedImage Source="Logo.svg" Aspect="AspectFill" VerticalOptions="Start"
+                                        HorizontalOptions="Start" Style="{x:Static Style:GeneralStyles.FFImage50X50Style}"/>
+                <StackLayout  Margin="0" Padding="0" Spacing="0">
+                    <Label Text="{x:Static XResource:MLResource.WelcometoLahma}" TextColor="#272A3F" FontAttributes="Bold" HorizontalOptions="Start" Style="{x:Static Style:GeneralStyles.LabelFontSize35}"/>
+                    <Label Text="{x:Static XResource:MLResource.Let_sgetstarted}" Style="{x:Static Style:GeneralStyles.LabelTitleSize25}"/>
+                </StackLayout>
+                <Frame IsClippedToBounds="True"  x:Name="fraEmail" BorderColor="#707070" HasShadow="False" 
+                       Style="{x:Static Style:GeneralStyles.FrameRaduis10Padding0x0x3x0_Style}">
+                    <CustomRenderer:CustomEntry x:Name="txtEmail" VerticalOptions="Center"
+                                                        TextColor="#272A3F" IsTextPredictionEnabled="False" 
+                                                        HorizontalOptions="FillAndExpand" Keyboard="Email"
+                                                        Placeholder="{x:Static XResource:MLResource.Email}"
+                                                        Style="{x:Static Style:GeneralStyles.EntryCustomFont10Margin4x2x2x2}"/>
+                </Frame>
+                <Frame IsClippedToBounds="True"  x:Name="fraPass" BorderColor="#707070" HasShadow="False" 
+                       Style="{x:Static Style:GeneralStyles.FrameRaduis10Padding0x0x3x0_Style}">
+                    <CustomRenderer:CustomEntry x:Name="txtPassword" VerticalOptions="Center"
+                                                TextColor="#272A3F" IsTextPredictionEnabled="False" 
+                                                HorizontalOptions="FillAndExpand" IsPassword="True"
+                                                Placeholder="{x:Static XResource:MLResource.Password}"
+                                                Style="{x:Static Style:GeneralStyles.EntryCustomFont10Margin4x2x2x2}">
+                        <CustomRenderer:CustomEntry.Effects>
+                            <xf:ShowHidePassEffect/>
+                        </CustomRenderer:CustomEntry.Effects>
+                    </CustomRenderer:CustomEntry>
+                </Frame>
+                <Label Text="{x:Static XResource:MLResource.ForgetPassword}" TextColor="#3A1D0F" HorizontalOptions="End" Style="{x:Static Style:GeneralStyles.LabelFont15Subtitel}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="ForgetPassword"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <Button Text="{x:Static XResource:MLResource.Signin}" TextColor="White"
+                        Style="{x:Static Style:GeneralStyles.CButtonRaduis10Marign30x0}"
+                        Clicked="LoginAction"
+                        BackgroundColor="#3A1D0F"
+                        HorizontalOptions="FillAndExpand" VerticalOptions="Start"/>
+                <Button Text="{x:Static XResource:MLResource.Signup}" TextColor="#3A1D0F"
+                    BorderColor="#3A1D0F" 
+                    Style="{x:Static Style:GeneralStyles.ButtonRaduis10Marign30x0}"
+                    BackgroundColor="White" Clicked="OpenRegisterPage"
+                    HorizontalOptions="FillAndExpand" VerticalOptions="Start"/>
+                <Label Text="{x:Static XResource:MLResource.ContinueWithoutSignin}" TextColor="#272A3F" 
+                       HorizontalOptions="End" 
+                       Style="{x:Static Style:GeneralStyles.LabelFont15Subtitel}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OpenHomePage"/>
+                    </Label.GestureRecognizers>
+                </Label>
+
+            </StackLayout>
+            <ContentView x:Name="ForgetPopup"  IsVisible="False" Margin="0" Padding="0" 
+                         VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" 
+                         BackgroundColor="#4D4A4948">
+                <Frame IsClippedToBounds="True"  Style="{x:Static Style:GeneralStyles.FrameContactInUp}" 
+                       VerticalOptions="Center" HorizontalOptions="CenterAndExpand">
+                    <StackLayout Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace10Padding20_10_Style}" HorizontalOptions="FillAndExpand">
+                        <FFImage:SvgCachedImage Source="forgetpass.svg" HorizontalOptions="Center" VerticalOptions="Start" Style="{x:Static Style:GeneralStyles.FFImage50X50Style}"/>
+                        <Label Text="{x:Static XResource:MLResource.Trouble_Logging_In}" Style="{x:Static Style:GeneralStyles.LabelTextPriceInvoiceStyle}" HorizontalTextAlignment="Center"/>
+                        <Label Text="{x:Static XResource:MLResource.Enter_your_username_or_email}"
+                               Style="{x:Static Style:GeneralStyles.LabelEmailUserStyle}" HorizontalTextAlignment="Center"/>
+                        <Frame IsClippedToBounds="True"  x:Name="fraEmailForgetUser" BorderColor="#707070" HasShadow="False" 
+                               Style="{x:Static Style:GeneralStyles.FrameMaring15Raduis10}">
+                            <CustomRenderer:CustomEntry x:Name="txtEmailforgetuser"                                                         
+                                                        VerticalOptions="Center" 
+                                                        TextColor="#272A3F" IsTextPredictionEnabled="False" 
+                                                        HorizontalOptions="FillAndExpand" Keyboard="Email"
+                                                        Placeholder="{x:Static XResource:MLResource.Email}"
+                                                        Style="{x:Static Style:GeneralStyles.EntryCustomFont10Margin4x2x2x2}"/>
+                        </Frame>
+                        <Button Text="{x:Static XResource:MLResource.Send_Login_Link}" TextColor="White"
+                                BackgroundColor="#3A1D0F" Clicked="SendLoginLink"
+                                Style="{x:Static Style:GeneralStyles.ButtonRaduis10Marign30x0}"
+                                HorizontalOptions="FillAndExpand" VerticalOptions="Start"/>
+                    </StackLayout>
+                </Frame>
+            </ContentView>
+
+            <ContentViewHelper:Loader IsVisible="{Binding LoginProperty.IsLoading}"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Chat\**" />
+    <EmbeddedResource Remove="Chat\**" />
+    <None Remove="Chat\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="M\Mobile\Base.cs" />
+    <Compile Remove="M\Mobile\InfoLahmaOnline.cs" />
+    <Compile Remove="M\Mobile\Invoice.cs" />
+    <Compile Remove="M\Mobile\UserProfile.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
+  </ItemGroup>
+
+</Project>

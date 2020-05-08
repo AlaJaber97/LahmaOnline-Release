@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="312.48" height="306.48" viewBox="0 0 312.48 306.48">
+  <defs>
+    <clipPath id="clip-path">
+      <rect width="312.48" height="306.48" fill="none"/>
+    </clipPath>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#ef9c9c"/>
+      <stop offset="1" stop-color="#df4f71"/>
+    </linearGradient>
+  </defs>
+  <g id="Component_5_1" data-name="Component 5 – 1" clip-path="url(#clip-path)">
+    <g id="Group_12" data-name="Group 12" transform="translate(-31 -257)">
+      <path id="Subtraction_1" data-name="Subtraction 1" d="M360.291,225.29H179.418a10.241,10.241,0,0,1-.137-20.48h70.34a10.314,10.314,0,0,1-2.046-.2,10.243,10.243,0,0,0,0-20.071,10.318,10.318,0,0,1,2.048-.2h-46.7a10.241,10.241,0,0,1-.137-20.48h63.218a10.241,10.241,0,1,0,0-20.481H165.24a10.241,10.241,0,0,1-.137-20.48h33.387a10.241,10.241,0,0,0,0-20.481H188.179a10.241,10.241,0,0,1-.137-20.48h23.768a10.241,10.241,0,1,0,0-20.481H167.243a10.241,10.241,0,0,1-.137-20.48h63.672a10.241,10.241,0,1,0,0-20.481H217.671a10.241,10.241,0,0,1,0-20.481H397.9a10.241,10.241,0,1,1,0,20.481H350.387a10.241,10.241,0,0,0,0,20.481h68.368a10.241,10.241,0,0,1-.137,20.48H369.23a10.241,10.241,0,0,0,0,20.481h32.087a10.241,10.241,0,0,1-.137,20.48H378.241a10.317,10.317,0,0,1,2.048.2,10.243,10.243,0,0,0,0,20.071,10.315,10.315,0,0,1-2.046.2h26.352a10.241,10.241,0,0,1-.137,20.48H369.23a10.241,10.241,0,0,0,0,20.481h6.69a10.241,10.241,0,0,1-.137,20.48H324.991a10.241,10.241,0,0,0,0,20.481h35.436a10.241,10.241,0,0,1-.137,20.48Z" transform="translate(-98.666 297.855)" fill="#f9f9f9"/>
+      <rect id="Rectangle_22" data-name="Rectangle 22" width="37" height="20.48" rx="10.24" transform="translate(160 543)" fill="#f9f9f9"/>
+      <rect id="Rectangle_24" data-name="Rectangle 24" width="74" height="20.48" rx="10.24" transform="translate(189 257)" fill="#f9f9f9"/>
+      <circle id="Ellipse_7" data-name="Ellipse 7" cx="10.24" cy="10.24" r="10.24" transform="translate(323 420)" fill="#f9f9f9"/>
+      <circle id="Ellipse_9" data-name="Ellipse 9" cx="10.24" cy="10.24" r="10.24" transform="translate(31 339)" fill="#f9f9f9"/>
+      <g id="Group_6" data-name="Group 6" transform="translate(295.855 371.917) rotate(45)">
+        <line id="Line_1" data-name="Line 1" y2="9.812" transform="translate(4.906 0)" fill="none" stroke="#95d7f3" stroke-linecap="round" stroke-width="2"/>
+        <line id="Line_2" data-name="Line 2" y2="9.812" transform="translate(9.812 4.906) rotate(90)" fill="none" stroke="#95d7f3" stroke-linecap="round" stroke-width="2"/>
+      </g>
+      <g id="Group_11" data-name="Group 11" transform="translate(313.855 462.917) rotate(45)">
+        <line id="Line_1-2" data-name="Line 1" y2="9.812" transform="translate(4.906 0)" fill="none" stroke="#95d7f3" stroke-linecap="round" stroke-width="2"/>
+        <line id="Line_2-2" data-name="Line 2" y2="9.812" transform="translate(9.812 4.906) rotate(90)" fill="none" stroke="#95d7f3" stroke-linecap="round" stroke-width="2"/>
+      </g>
+      <g id="Group_7" data-name="Group 7" transform="translate(145.855 290.917) rotate(45)">
+        <line id="Line_1-3" data-name="Line 1" y2="9.812" transform="translate(4.906 0)" fill="none" stroke="#95d7f3" stroke-linecap="round" stroke-width="2"/>
+        <line id="Line_2-3" data-name="Line 2" y2="9.812" transform="translate(9.812 4.906) rotate(90)" fill="none" stroke="#95d7f3" stroke-linecap="round" stroke-width="2"/>
+      </g>
+      <g id="Group_8" data-name="Group 8" transform="translate(64.855 391.917) rotate(45)">
+        <line id="Line_1-4" data-name="Line 1" y2="9.812" transform="translate(4.906 0)" fill="none" stroke="#95d7f3" stroke-linecap="round" stroke-width="2"/>
+        <line id="Line_2-4" data-name="Line 2" y2="9.812" transform="translate(9.812 4.906) rotate(90)" fill="none" stroke="#95d7f3" stroke-linecap="round" stroke-width="2"/>
+      </g>
+      <g id="Group_10" data-name="Group 10" transform="translate(227.855 526.917) rotate(45)">
+        <line id="Line_1-5" data-name="Line 1" y2="9.812" transform="translate(4.906 0)" fill="none" stroke="#95d7f3" stroke-linecap="round" stroke-width="2"/>
+        <line id="Line_2-5" data-name="Line 2" y2="9.812" transform="translate(9.812 4.906) rotate(90)" fill="none" stroke="#95d7f3" stroke-linecap="round" stroke-width="2"/>
+      </g>
+      <g id="Ellipse_2" data-name="Ellipse 2" transform="translate(231 276)" fill="none" stroke="#95d7f3" stroke-width="2">
+        <circle cx="4" cy="4" r="4" stroke="none"/>
+        <circle cx="4" cy="4" r="3" fill="none"/>
+      </g>
+      <g id="Ellipse_3" data-name="Ellipse 3" transform="translate(268 430)" fill="none" stroke="#95d7f3" stroke-width="2">
+        <circle cx="4" cy="4" r="4" stroke="none"/>
+        <circle cx="4" cy="4" r="3" fill="none"/>
+      </g>
+      <g id="Ellipse_6" data-name="Ellipse 6" transform="translate(75 329)" fill="none" stroke="#95d7f3" stroke-width="2">
+        <circle cx="4" cy="4" r="4" stroke="none"/>
+        <circle cx="4" cy="4" r="3" fill="none"/>
+      </g>
+      <g id="Ellipse_4" data-name="Ellipse 4" transform="translate(103 499)" fill="none" stroke="#95d7f3" stroke-width="2">
+        <circle cx="4" cy="4" r="4" stroke="none"/>
+        <circle cx="4" cy="4" r="3" fill="none"/>
+      </g>
+    </g>
+    <g id="Group_14" data-name="Group 14" transform="translate(-31 -257)">
+      <g id="Group_13" data-name="Group 13">
+        <g id="Path_1" data-name="Path 1" transform="translate(118 315)" fill="#f3f3f3">
+          <path d="M 135 191 L 5 191 C 2.794399976730347 191 1 189.2055969238281 1 187 L 1 5 C 1 2.794399976730347 2.794399976730347 1 5 1 L 135 1 C 137.2055969238281 1 139 2.794399976730347 139 5 L 139 187 C 139 189.2055969238281 137.2055969238281 191 135 191 Z" stroke="none"/>
+          <path d="M 5 2 C 3.345794677734375 2 2 3.345794677734375 2 5 L 2 187 C 2 188.6542053222656 3.345794677734375 190 5 190 L 135 190 C 136.6542053222656 190 138 188.6542053222656 138 187 L 138 5 C 138 3.345794677734375 136.6542053222656 2 135 2 L 5 2 M 5 0 L 135 0 C 137.7614135742188 0 140 2.23858642578125 140 5 L 140 187 C 140 189.7614135742188 137.7614135742188 192 135 192 L 5 192 C 2.23858642578125 192 0 189.7614135742188 0 187 L 0 5 C 0 2.23858642578125 2.23858642578125 0 5 0 Z" stroke="none" fill="#a4a4a4"/>
+        </g>
+        <path id="Subtraction_3" data-name="Subtraction 3" d="M130,184H2a2,2,0,0,1-2-2V2A2,2,0,0,1,2,0H42V2a6.007,6.007,0,0,0,6,6H85a6.007,6.007,0,0,0,6-6V0h39a2,2,0,0,1,2,2V133.586a17.522,17.522,0,0,0,0,34.569V182A2,2,0,0,1,130,184Z" transform="translate(122 319)" fill="#fff"/>
+        <g id="Union_1" data-name="Union 1" transform="translate(166 305)" fill="#fff">
+          <path d="M 39.99959945678711 18.99979972839355 L 5.000400066375732 18.99979972839355 C 2.794569969177246 18.99979972839355 1 17.20562934875488 1 15.00029945373535 L 1 9 C 1 6.794169902801514 2.794569969177246 4.999599933624268 5.000400066375732 4.999599933624268 L 15.1004695892334 4.999599933624268 L 15.91784000396729 4.999599933624268 L 16.08046913146973 4.198579788208008 C 16.45677947998047 2.345199823379517 18.10510063171387 0.9999998807907104 19.99979972839355 0.9999998807907104 L 25.00020027160645 0.9999998807907104 C 26.89489936828613 0.9999998807907104 28.54322052001953 2.345199823379517 28.91953086853027 4.198579788208008 L 29.08216094970703 4.999599933624268 L 29.8995304107666 4.999599933624268 L 39.99959945678711 4.999599933624268 C 42.20542907714844 4.999599933624268 44 6.794169902801514 44 9 L 44 15.00029945373535 C 44 17.20562934875488 42.20542907714844 18.99979972839355 39.99959945678711 18.99979972839355 Z" stroke="none"/>
+          <path d="M 39.99959945678711 17.99979972839355 C 41.65402984619141 17.99979972839355 43 16.65423011779785 43 15.00029945373535 L 43 9 C 43 7.345570087432861 41.65402984619141 5.999599933624268 39.99959945678711 5.999599933624268 L 29.8995304107666 5.999599933624268 L 28.26479911804199 5.999599933624268 L 27.93951988220215 4.397559642791748 C 27.65744972229004 3.008319854736328 26.42128944396973 1.99999988079071 25.00020027160645 1.99999988079071 L 19.99979972839355 1.99999988079071 C 18.57871055603027 1.99999988079071 17.34255027770996 3.008319854736328 17.06048011779785 4.397559642791748 L 16.73520088195801 5.999599933624268 L 15.1004695892334 5.999599933624268 L 5.000400066375732 5.999599933624268 C 3.345969915390015 5.999599933624268 2 7.345570087432861 2 9 L 2 15.00029945373535 C 2 16.65423011779785 3.345969915390015 17.99979972839355 5.000400066375732 17.99979972839355 L 39.99959945678711 17.99979972839355 M 39.99959945678711 19.99979972839355 L 5.000400066375732 19.99979972839355 C 2.238300085067749 19.99979972839355 -3.552713678800501e-15 17.76149940490723 -3.552713678800501e-15 15.00029945373535 L -3.552713678800501e-15 9 C -3.552713678800501e-15 6.238800048828125 2.238300085067749 3.999599933624268 5.000400066375732 3.999599933624268 L 15.1004695892334 3.999599933624268 C 15.56387996673584 1.717219829559326 17.58122062683105 -1.358032193365943e-07 19.99979972839355 -1.358032193365943e-07 L 25.00020027160645 -1.358032193365943e-07 C 27.41877937316895 -1.358032193365943e-07 29.43611907958984 1.717219829559326 29.8995304107666 3.999599933624268 L 39.99959945678711 3.999599933624268 C 42.76169967651367 3.999599933624268 45 6.238800048828125 45 9 L 45 15.00029945373535 C 45 17.76149940490723 42.76169967651367 19.99979972839355 39.99959945678711 19.99979972839355 Z" stroke="none" fill="#a3a3a3"/>
+        </g>
+        <g id="Group_2" data-name="Group 2" transform="translate(-5 25)">
+          <g id="Group_1" data-name="Group 1" transform="translate(153.667 335.151)">
+            <rect id="Rectangle_4" data-name="Rectangle 4" width="13.141" height="13.141" transform="translate(0 0)" fill="#f3f3f3"/>
+            <rect id="Rectangle_5" data-name="Rectangle 5" width="62.419" height="4.928" transform="translate(17.247 0)" fill="#f3f3f3"/>
+            <rect id="Rectangle_6" data-name="Rectangle 6" width="51.742" height="4.928" transform="translate(17.247 6.57)" fill="#f3f3f3"/>
+          </g>
+          <g id="Group_1-2" data-name="Group 1" transform="translate(153.667 359.79)">
+            <rect id="Rectangle_4-2" data-name="Rectangle 4" width="13.141" height="13.141" fill="#f3f3f3"/>
+            <rect id="Rectangle_5-2" data-name="Rectangle 5" width="62.419" height="4.928" transform="translate(17.247)" fill="#f3f3f3"/>
+            <rect id="Rectangle_6-2" data-name="Rectangle 6" width="51.742" height="4.928" transform="translate(17.247 6.57)" fill="#f3f3f3"/>
+          </g>
+          <g id="Group_1-3" data-name="Group 1" transform="translate(153.667 384.43)">
+            <rect id="Rectangle_4-3" data-name="Rectangle 4" width="13.141" height="13.141" fill="#f3f3f3"/>
+            <rect id="Rectangle_5-3" data-name="Rectangle 5" width="62.419" height="4.928" transform="translate(17.247)" fill="#f3f3f3"/>
+            <rect id="Rectangle_6-3" data-name="Rectangle 6" width="51.742" height="4.928" transform="translate(17.247 6.57)" fill="#f3f3f3"/>
+          </g>
+          <g id="Group_1-4" data-name="Group 1" transform="translate(153.667 409.069)">
+            <rect id="Rectangle_4-4" data-name="Rectangle 4" width="13.141" height="13.141" fill="#f3f3f3"/>
+            <rect id="Rectangle_5-4" data-name="Rectangle 5" width="62.419" height="4.928" transform="translate(17.247)" fill="#f3f3f3"/>
+            <rect id="Rectangle_6-4" data-name="Rectangle 6" width="51.742" height="4.928" transform="translate(17.247 6.57)" fill="#f3f3f3"/>
+          </g>
+          <g id="Group_1-5" data-name="Group 1" transform="translate(153.667 433.708)">
+            <rect id="Rectangle_4-5" data-name="Rectangle 4" width="13.141" height="13.141" fill="#f3f3f3"/>
+            <rect id="Rectangle_5-5" data-name="Rectangle 5" width="62.419" height="4.928" transform="translate(17.247)" fill="#f3f3f3"/>
+            <rect id="Rectangle_6-5" data-name="Rectangle 6" width="51.742" height="4.928" transform="translate(17.247 6.57)" fill="#f3f3f3"/>
+          </g>
+        </g>
+      </g>
+      <g id="Group_4" data-name="Group 4" transform="translate(-5 84)">
+        <circle id="Ellipse_1" data-name="Ellipse 1" cx="15.52" cy="15.52" r="15.52" transform="translate(239.922 385.87) rotate(-45)" fill="url(#linear-gradient)"/>
+        <g id="Group_3" data-name="Group 3" transform="translate(261.855 378.917) rotate(45)">
+          <line id="Line_1-6" data-name="Line 1" y2="9.812" transform="translate(4.906 0)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="3"/>
+          <line id="Line_2-6" data-name="Line 2" y2="9.812" transform="translate(9.812 4.906) rotate(90)" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="3"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

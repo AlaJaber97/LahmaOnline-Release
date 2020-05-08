@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:CustomRenderer="clr-namespace:LahmaOnline.CustomRenderer"
+             xmlns:Style="clr-namespace:LahmaOnline.StyleViews.Styles"
+             x:Class="LahmaOnline.UserControls.GradientPicker" 
+             x:Name="this">
+  <ContentView.Content>
+        <Frame IsClippedToBounds="True"  x:Name="FrameContainer" OutlineColor="#F5F4F6" Margin="0" Padding="0" HasShadow="False">
+            <StackLayout  x:Name="StackLayout" Orientation="Horizontal" Margin="0" Spacing="0" Padding="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" 
+                         Style="{x:Static Style:GeneralStyles.ViewFlowDirection}">
+                <CustomRenderer:VGradientBoxView x:Name="GradientBox" Margin="0" HorizontalOptions="Start" VerticalOptions="Fill"/>
+                <Picker x:Name="PickerChoice" Margin="0" 
+                        HorizontalOptions="FillAndExpand" SelectedIndexChanged="OnSelectItem"
+                        VerticalOptions="Fill" BackgroundColor="Transparent"
+                        ItemsSource="{Binding ItemSource,Source={x:Reference this}}"/>
+                <Image x:Name="ImgArrow" Margin="0" HorizontalOptions="End" VerticalOptions="Center" BackgroundColor="Transparent"/>
+            </StackLayout>
+        </Frame>
+  </ContentView.Content>
+</ContentView>

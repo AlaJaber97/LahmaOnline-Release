@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="19.758" height="24.735" viewBox="0 0 19.758 24.735">
+  <defs>
+    <clipPath id="clip-path">
+      <rect width="19.758" height="24.735" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="BagButUnActive" clip-path="url(#clip-path)">
+    <g id="Group_50773" data-name="Group 50773">
+      <g id="Group_50772" data-name="Group 50772">
+        <path id="Path_16688" data-name="Path 16688" d="M577.753,534.733l-1.432-16.11a.564.564,0,0,0-.56-.514h-3.068l0-.124a4.815,4.815,0,0,0-9.628,0l0,.124h-3.068a.56.56,0,0,0-.56.514L558,534.769a3.437,3.437,0,0,0,3.626,3.216h12.5a3.438,3.438,0,0,0,3.628-3.2Zm-13.56-16.752a3.685,3.685,0,0,1,7.368,0l0,.128h-7.372Zm9.936,18.874h-12.5a2.334,2.334,0,0,1-2.5-2.039l1.382-15.572h2.55v2.219a.565.565,0,1,0,1.13,0v-2.219h7.372v2.219a.565.565,0,1,0,1.13,0v-2.219h2.55l1.386,15.558A2.334,2.334,0,0,1,574.129,536.855Z" transform="translate(-557.999 -513.25)" fill="#6e798a"/>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:Style="clr-namespace:LahmaOnline.StyleViews.Styles"
+             mc:Ignorable="d"
+             x:Class="LahmaOnline.UserControls.FormalFrame">
+  <ContentView.Content>
+      <StackLayout  Margin="0" Padding="0" Spacing="0">
+            <Frame IsClippedToBounds="True"  BorderColor="#4DCFCCC8" OutlineColor="#4DCFCCC8" HasShadow="True" Style="{x:Static Style:GeneralStyles.FrameDeliveryAreas}" 
+                   HorizontalOptions="FillAndExpand">
+                <StackLayout  Orientation="Horizontal" Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace5_Style}">
+                    <BoxView x:Name="BXindicator"  VerticalOptions="Start" Style="{x:Static Style:GeneralStyles.BoxLabelDeliveryAreasStyle}"/>
+                    <StackLayout  Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace5_Style}">
+                        <Label x:Name="TitleFrame"  Style="{x:Static Style:GeneralStyles.LabelTitleSize25}"/>
+                        <Label x:Name="ContentFrame" Style="{x:Static Style:GeneralStyles.SpanPriceFont18_Style}" LineBreakMode="WordWrap"/>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+  </ContentView.Content>
+</ContentView>

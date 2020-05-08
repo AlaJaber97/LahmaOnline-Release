@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="25" height="6.574" viewBox="0 0 25 6.574">
+  <defs>
+    <clipPath id="clip-path">
+      <rect width="25" height="6.574" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="MoreButActive" clip-path="url(#clip-path)">
+    <g id="Group_50749" data-name="Group 50749">
+      <g id="Group_50748" data-name="Group 50748">
+        <g id="Group_50747" data-name="Group 50747">
+          <path id="Path_16681" data-name="Path 16681" d="M672.478,517.793a3.287,3.287,0,1,0,3.29,3.286A3.291,3.291,0,0,0,672.478,517.793Zm0,5.535a2.249,2.249,0,1,1,2.25-2.249A2.251,2.251,0,0,1,672.478,523.328Z" transform="translate(-669.188 -517.793)" fill="#3a1d0f"/>
+        </g>
+      </g>
+    </g>
+    <g id="Group_50752" data-name="Group 50752" transform="translate(9.21)">
+      <g id="Group_50751" data-name="Group 50751">
+        <g id="Group_50750" data-name="Group 50750">
+          <path id="Path_16682" data-name="Path 16682" d="M677.083,517.793a3.287,3.287,0,1,0,3.29,3.286A3.291,3.291,0,0,0,677.083,517.793Zm0,5.535a2.249,2.249,0,1,1,2.25-2.249A2.251,2.251,0,0,1,677.083,523.328Z" transform="translate(-673.793 -517.793)" fill="#3a1d0f"/>
+        </g>
+      </g>
+    </g>
+    <g id="Group_50755" data-name="Group 50755" transform="translate(18.422)">
+      <g id="Group_50754" data-name="Group 50754">
+        <g id="Group_50753" data-name="Group 50753">
+          <path id="Path_16683" data-name="Path 16683" d="M681.687,517.793a3.287,3.287,0,1,0,3.29,3.286A3.289,3.289,0,0,0,681.687,517.793Zm0,5.535a2.249,2.249,0,1,1,2.25-2.249A2.251,2.251,0,0,1,681.687,523.328Z" transform="translate(-678.399 -517.793)" fill="#3a1d0f"/>
+        </g>
+      </g>
+      <circle id="Ellipse_2772" data-name="Ellipse 2772" cx="3" cy="3" r="3" transform="translate(0.002 0.122)" opacity="0.3" fill="#3a1d0f"/>
+    </g>
+    <circle id="Ellipse_2773" data-name="Ellipse 2773" cx="3" cy="3" r="3" transform="translate(9.424 0.122)" opacity="0.3" fill="#3a1d0f"/>
+    <circle id="Ellipse_2774" data-name="Ellipse 2774" cx="3" cy="3" r="3" transform="translate(0.424 0.122)"  opacity="0.3" fill="#3a1d0f"/>
+  </g>
+</svg>

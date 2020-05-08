@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:FFImage="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             xmlns:Style="clr-namespace:LahmaOnline.StyleViews.Styles"
+             x:Class="LahmaOnline.Pages.ContentViewHelper.Loader"
+             Margin="0" Padding="0" BackgroundColor="#aD4A4948"
+             VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+  <ContentView.Content>
+      <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+            <Label Text="Please Wait" Style="{x:Static Style:GeneralStyles.LabelAboutUSStyle}" HorizontalTextAlignment="Center" TextColor="White"/>
+            <ActivityIndicator Color="#492D1D" Style="{x:Static Style:GeneralStyles.ActivityIndicator120X120}"
+                               IsRunning="True"/>
+        </StackLayout>
+  </ContentView.Content>
+</ContentView>

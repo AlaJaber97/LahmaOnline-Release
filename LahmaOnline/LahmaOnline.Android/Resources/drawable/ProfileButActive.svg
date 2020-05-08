@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24.934" height="25.001" viewBox="0 0 24.934 25.001">
+  <defs>
+    <clipPath id="clip-path">
+      <rect width="24.934" height="25.001" fill="none"/>
+    </clipPath>
+    <clipPath id="clip-path-2">
+      <rect width="24.933" height="25" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="ProfileButActive" clip-path="url(#clip-path)">
+    <g id="Group_51555" data-name="Group 51555" transform="translate(0)">
+      <g id="Group_51551" data-name="Group 51551" transform="translate(8.387 6.138)">
+        <g id="Group_51550" data-name="Group 51550">
+          <g id="Group_51549" data-name="Group 51549">
+            <path id="Path_16906" data-name="Path 16906" d="M1103.534,625.938a4.091,4.091,0,1,0-4.079-4.092A4.09,4.09,0,0,0,1103.534,625.938Zm0-7.182a3.091,3.091,0,1,1-3.082,3.09A3.089,3.089,0,0,1,1103.534,618.756Z" transform="translate(-1099.455 -617.756)" fill="#3a1d0f"/>
+          </g>
+        </g>
+      </g>
+      <g id="Group_51554" data-name="Group 51554">
+        <g id="Group_51553" data-name="Group 51553">
+          <g id="Group_51552" data-name="Group 51552">
+            <path id="Path_16907" data-name="Path 16907" d="M1107.717,614.687a12.5,12.5,0,1,0,12.467,12.5A12.484,12.484,0,0,0,1107.717,614.687Zm0,1a11.5,11.5,0,0,1,8.517,19.192,10.977,10.977,0,0,0-17,.038,11.5,11.5,0,0,1,8.485-19.23Zm-7.777,19.942a9.977,9.977,0,0,1,15.59-.032,11.421,11.421,0,0,1-15.59.032Z" transform="translate(-1095.25 -614.687)" fill="#3a1d0f"/>
+          </g>
+        </g>
+      </g>
+    </g>
+    <g id="Component_13_3" data-name="Component 13 – 3" transform="translate(0 0.001)" clip-path="url(#clip-path-2)">
+      <g id="Group_54448" data-name="Group 54448" opacity="0.28">
+        <g id="Group_51556" data-name="Group 51556">
+          <ellipse id="Ellipse_2757" data-name="Ellipse 2757" cx="12.467" cy="12.5" rx="12.467" ry="12.5" fill="#3a1d0f"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

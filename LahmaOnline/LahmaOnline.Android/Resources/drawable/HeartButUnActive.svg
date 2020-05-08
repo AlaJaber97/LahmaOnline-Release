@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24.966" height="22.374" viewBox="0 0 24.966 22.374">
+  <defs>
+    <clipPath id="clip-path">
+      <rect width="24.966" height="22.374" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="HeartButUnActive" clip-path="url(#clip-path)">
+    <g id="Group_53189" data-name="Group 53189" transform="translate(18.244 0)">
+      <g id="Group_53188" data-name="Group 53188">
+        <g id="Group_53187" data-name="Group 53187">
+          <path id="Path_17375" data-name="Path 17375" d="M835.384,818.344Z" transform="translate(-835.384 -818.344)" fill="#6e798a"/>
+        </g>
+      </g>
+    </g>
+    <g id="Group_53192" data-name="Group 53192">
+      <g id="Group_53191" data-name="Group 53191">
+        <g id="Group_53190" data-name="Group 53190">
+          <path id="Path_17376" data-name="Path 17376" d="M844.493,819.344a5.952,5.952,0,0,1,5.5,4.642c.393,1.55.453,4.05-1.5,7.166-1.888,3.014-5.173,5.846-9.769,8.422-4.6-2.576-7.879-5.408-9.767-8.42-1.951-3.116-1.889-5.618-1.5-7.168a5.951,5.951,0,0,1,5.5-4.642,5.82,5.82,0,0,1,4.906,3.188,1,1,0,0,0,1.708,0,5.828,5.828,0,0,1,4.909-3.19v-1h0c-2.067,0-4.2,1.1-5.762,3.67-1.558-2.574-3.693-3.67-5.76-3.67-6.877,0-12.965,12.144,5.76,22.374,18.729-10.23,12.641-22.374,5.762-22.374" transform="translate(-826.25 -818.344)" fill="#6e798a"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

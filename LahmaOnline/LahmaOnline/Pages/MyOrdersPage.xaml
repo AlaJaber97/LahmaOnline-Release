@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="LahmaOnline.Pages.MyOrdersPage"
+             BackgroundColor="#F4F7FA"
+             xmlns:UserControl="clr-namespace:LahmaOnline.UserControls"
+             xmlns:CustomRenderer="clr-namespace:LahmaOnline.CustomRenderer"
+             xmlns:Style="clr-namespace:LahmaOnline.StyleViews.Styles"
+             xmlns:FFImage="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             xmlns:XResource="clr-namespace:LahmaOnline.MultiLanguage"
+             xmlns:ConView="clr-namespace:LahmaOnline.Pages"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+
+        <Grid Margin="0" Padding="0" Grid.Row="0" VerticalOptions="FillAndExpand"  HorizontalOptions="FillAndExpand">
+            <StackLayout  Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace5_Style}" VerticalOptions="FillAndExpand"  HorizontalOptions="FillAndExpand">
+                <!--Navigation Bar-->
+                <StackLayout  Orientation="Horizontal" Style="{x:Static Style:GeneralStyles.NavBarStyle}" VerticalOptions="Start">
+                    <FFImage:SvgCachedImage Source="BackArrowWhite.svg" Rotation="{Binding .,Converter={StaticResource Key=CalRotation}}" Style="{x:Static Style:GeneralStyles.Image20X20Style}">
+                        <FFImage:SvgCachedImage.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="BackPage"/>
+                        </FFImage:SvgCachedImage.GestureRecognizers>
+                    </FFImage:SvgCachedImage>
+                    <Label Text="{x:Static XResource:MLResource.MyOrders}" Style="{x:Static Style:GeneralStyles.LabelTitlePageStyle}"/>
+                </StackLayout>
+                <!--Content Page-->
+                <ListView x:Name="ListOrders" Margin="0" ItemsSource="{Binding MyOrdersProperty.Orders}" 
+                          IsRefreshing="{Binding MyOrdersProperty.IsLoading}"
+                          HorizontalOptions="FillAndExpand" HasUnevenRows="True"
+                  CachingStrategy="RecycleElementAndDataTemplate" SeparatorVisibility="None" VerticalScrollBarVisibility="Never"
+                  SelectionMode="None">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Frame IsClippedToBounds="True"  Style="{x:Static Style:GeneralStyles.FrameMaring15Raduis10}" BackgroundColor="White" BorderColor="White" OutlineColor="White" HasShadow="True"  HorizontalOptions="FillAndExpand">
+                                    <StackLayout Orientation="Vertical" Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace10Padding20_10_Style}"  HorizontalOptions="FillAndExpand">
+                                        <StackLayout Orientation="Horizontal" Style="{x:Static Style:GeneralStyles.StackPadding20Spacing10}"  HorizontalOptions="FillAndExpand">
+                                            <StackLayout  Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace10_Style}" Orientation="Horizontal"
+                                                       
+                                                       BindableLayout.ItemsSource="{Binding ListItemMax3Only}" >
+                                                <BindableLayout.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Frame IsClippedToBounds="True"  Style="{x:Static Style:GeneralStyles.FrameImage80X80Style}"
+                                                                BorderColor="LightGray" OutlineColor="LightGray" HasShadow="True"
+                                                               HorizontalOptions="Start" VerticalOptions="Start">
+                                                            <Image Aspect="Fill" Margin="0" Source="{Binding ImageUrl}"/>
+                                                        </Frame>
+                                                    </DataTemplate>
+                                                </BindableLayout.ItemTemplate>
+                                            </StackLayout>
+                                            <Label IsVisible="{Binding IsThereMore3items}" HorizontalOptions="End" VerticalOptions="Center" TextColor="#272A3F"
+                                                    Style="{x:Static Style:GeneralStyles.LabelTitlePageStyle}">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{x:Static XResource:MLResource.More}"/>
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                        </StackLayout>
+                                        <StackLayout Margin="0" Padding="0" HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+                                            <Label TextColor="#9AA1B1" HorizontalOptions="StartAndExpand">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{x:Static XResource:MLResource.TotalAmount}" Style="{x:Static Style:GeneralStyles.SpanPriceFont18_Style}"/>
+                                                        <Span Text=": " Style="{x:Static Style:GeneralStyles.SpanPriceFont18_Style}"/>
+                                                        <Span Text="{Binding TotalPrice,StringFormat='{0:N2}'}" Style="{x:Static Style:GeneralStyles.SpanPriceFont18_Style}" TextColor="#272A3F"/>
+                                                        <Span Text=" "/>
+                                                        <Span Text="{x:Static XResource:MLResource.AED}" Style="{x:Static Style:GeneralStyles.SpanCurrencyFont14_Style}" TextColor="#272A3F"/>
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                            <Label TextColor="#9AA1B1" HorizontalOptions="EndAndExpand">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{x:Static XResource:MLResource.InvoiceDate}" Style="{x:Static Style:GeneralStyles.SpanPriceFont18_Style}"/>
+                                                        <Span Text=": " Style="{x:Static Style:GeneralStyles.SpanPriceFont18_Style}"/>
+                                                        <Span Text="{Binding InvoiceDate,StringFormat='{0:dd-MMM-yyyy}'}" Style="{x:Static Style:GeneralStyles.SpanPriceFont18_Style}" TextColor="#272A3F"/>
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                        </StackLayout>
+                                    </StackLayout>
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OpenInvoiceDetails"/>
+                                    </Frame.GestureRecognizers>
+                                </Frame>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <ListView.Footer>
+                        <StackLayout Margin="0" Padding="0" Spacing="0">
+                            <StackLayout Margin="0" Padding="0" Spacing="0" IsVisible="{Binding MyOrdersProperty.IsNoItems}">
+                                <FFImage:SvgCachedImage Source="EmptyList.svg" HorizontalOptions="Center" VerticalOptions="Center"
+                                                        Style="{x:Static Style:GeneralStyles.FFImage250X250Style}"/>
+                                <Label Text="{x:Static XResource:MLResource.NoInvoice}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center"
+                                       Style="{x:Static Style:GeneralStyles.LabelTitleSize25}"/>
+                            </StackLayout>
+                            <Grid Margin="0" Padding="0" RowSpacing="0" IsVisible="False">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Button Grid.Column="1" x:Name="ButNext"
+                                    Text="{x:Static XResource:MLResource.Next}" TextColor="White"
+                                    Clicked="NextListInvoice" 
+                                    Style="{x:Static Style:GeneralStyles.ButtonMoveStyle}"
+                                    BackgroundColor="#3A1D0F"
+                                    HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                                    <Button.Triggers>
+                                        <DataTrigger TargetType="Button" 
+                                                 Binding="{Binding Source={x:Reference ButPrevious},Path=IsVisible}"
+                                                 Value="False">
+                                            <Setter Property="Grid.Column" Value="0"/>
+                                            <Setter Property="Grid.ColumnSpan" Value="2"/>
+                                        </DataTrigger>
+                                    </Button.Triggers>
+                                </Button>
+                                <Button Grid.Column="0" x:Name="ButPrevious" IsVisible="False" 
+                                    Text="{x:Static XResource:MLResource.Previous}" TextColor="White"
+                                    Clicked="PreviousListInvoice" Style="{x:Static Style:GeneralStyles.ButtonMoveStyle}"
+                                    BackgroundColor="#3A1D0F"
+                                    HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                                    <Button.Triggers>
+                                        <DataTrigger TargetType="Button" 
+                                                 Binding="{Binding Source={x:Reference ButNext},Path=IsVisible}"
+                                                 Value="False">
+                                            <Setter Property="Grid.Column" Value="0"/>
+                                            <Setter Property="Grid.ColumnSpan" Value="2"/>
+                                        </DataTrigger>
+                                    </Button.Triggers>
+                                </Button>
+                                <Grid.Triggers>
+                                    <DataTrigger TargetType="Grid" Binding="{Binding MyOrdersProperty.IsNoItems}"
+                                                 Value="False">
+                                        <Setter Property="IsVisible" Value="True"/>
+                                    </DataTrigger>
+                                </Grid.Triggers>
+                            </Grid>
+                        </StackLayout>
+                    </ListView.Footer>
+                </ListView>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

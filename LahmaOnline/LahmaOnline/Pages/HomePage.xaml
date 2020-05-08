@@ -1,0 +1,466 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"  
+             BackgroundColor="#F4F7FA"
+             xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
+             xmlns:UserControl="clr-namespace:LahmaOnline.UserControls"
+             xmlns:CustomRenderer="clr-namespace:LahmaOnline.CustomRenderer"
+             xmlns:Style="clr-namespace:LahmaOnline.StyleViews.Styles"
+             xmlns:FFImage="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+             android:Application.WindowSoftInputModeAdjust="Resize"
+             xmlns:XResource="clr-namespace:LahmaOnline.MultiLanguage"
+             xmlns:ConView="clr-namespace:LahmaOnline.Pages"
+             NavigationPage.HasNavigationBar="False"
+             x:Class="LahmaOnline.Pages.HomePage" >
+    <ContentPage.Content>
+        <Grid Margin="0" Padding="0" Style="{x:Static Style:GeneralStyles.ViewFlowDirection}">
+            <Grid Grid.Row="0" Margin="0" Padding="0" RowSpacing="0" ColumnSpacing="0" VerticalOptions="FillAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <!--Navigation Bar-->
+                <StackLayout  Grid.Row="0" Orientation="Horizontal" Style="{x:Static Style:GeneralStyles.NavBarStyle}">
+                    <!--<FFImage:SvgCachedImage Source="customer_service.svg" Style="{x:Static Style:GeneralStyles.FFImage35X35Style}">
+                        <FFImage:SvgCachedImage.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OpenChatPage"/>
+                        </FFImage:SvgCachedImage.GestureRecognizers>
+                    </FFImage:SvgCachedImage>-->
+                    <Label Text="{x:Static XResource:MLResource.TitleProject }" Style="{x:Static Style:GeneralStyles.LabelTitlePageStyle}"/>
+                    <BoxView Style="{x:Static Style:GeneralStyles.BoxImage20X20Style}"/>
+                </StackLayout>
+                <!--Page Content-->
+                <ScrollView Grid.Row="1" Margin="0" Padding="0" Style="{x:Static Style:GeneralStyles.ViewFlowDirection}">
+                    <StackLayout Style="{x:Static Style:GeneralStyles.StackLayoutPageStyle}">
+                        <!--Categories-->
+                        <StackLayout Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace5_Style}">
+                            <Label x:Name="TitleCategory" Text="{x:Static XResource:MLResource.AllCategories}" Style="{x:Static Style:GeneralStyles.LabelTitleWigdthsStyle}"/>
+                            <CollectionView ItemsSource="{Binding HomeProperty.Categories}" 
+                                        Style="{x:Static Style:GeneralStyles.CollectionViewHeightRequest120_Style}">
+                                <CollectionView.ItemsLayout>
+                                    <GridItemsLayout Span="1" Orientation="Horizontal"/>
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackLayout Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace5Padding5_Style}" VerticalOptions="Start">
+                                            <Frame IsClippedToBounds="True"  Style="{x:Static Style:GeneralStyles.FrameImage80X80Style}" BorderColor="White" OutlineColor="White" HasShadow="True">
+                                                <Image Aspect="AspectFit" Margin="0" Source="{Binding ImageUrl}"/>
+                                            </Frame>
+                                            <StackLayout Orientation="Horizontal" Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace5_Style}" Spacing="0" HorizontalOptions="Start">
+                                                <Label Text="{Binding Name}"  Style="{x:Static Style:GeneralStyles.LabelNameCategoreStyle}"
+                                                       HorizontalTextAlignment="Center" HorizontalOptions="Start" LineBreakMode="TailTruncation"/>
+                                                <FFImage:SvgCachedImage Source="arrow_right.svg" IsOpaque="True"  VerticalOptions="Center" 
+                                                                        Rotation="{Binding .,Converter={StaticResource Key=CalRotation}}" 
+                                                                        Style="{x:Static Style:GeneralStyles.FFImage10X10Style}" HorizontalOptions="Start"/>
+                                            </StackLayout>
+                                            <StackLayout.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="OpenCategoryByID"/>
+                                            </StackLayout.GestureRecognizers>
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                                <CollectionView.EmptyView>
+                                    <StackLayout Orientation="Horizontal" Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace10_Style}">
+                                        <StackLayout Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace5Padding5_Style}" HorizontalOptions="Start">
+                                            <Frame IsClippedToBounds="True"  Style="{x:Static Style:GeneralStyles.FrameImage80X80Style}"  BorderColor="#CFCCC8" OutlineColor="#CFCCC8" BackgroundColor="#CFCCC8" HasShadow="True">
+                                                <FFImage:SvgCachedImage Source="coming_soon2_AR.svg" Aspect="Fill" Margin="0" IsOpaque="True">
+                                                    <FFImage:SvgCachedImage.Triggers>
+                                                        <DataTrigger TargetType="FFImage:SvgCachedImage" 
+                                                                     Binding="{Binding Source={x:Reference TitleCategory}, Path=Text}"
+                                                                     Value="All Categories">
+                                                            <Setter Property="Source" Value="coming_soon_EN.svg"/>
+                                                        </DataTrigger>
+                                                    </FFImage:SvgCachedImage.Triggers>
+                                                </FFImage:SvgCachedImage>
+                                            </Frame>
+                                            <StackLayout Orientation="Horizontal" Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace5_Style}" HorizontalOptions="Center">
+                                                <BoxView Style="{x:Static Style:GeneralStyles.BoxLabel10X40Style}" />
+                                                <FFImage:SvgCachedImage Source="arrow_right.svg" IsOpaque="True"  
+                                                                        Rotation="{Binding .,Converter={StaticResource Key=CalRotation}}"
+                                                                        Style="{x:Static Style:GeneralStyles.FFImage10X10Style}" VerticalOptions="Center" HorizontalOptions="Start"/>
+                                            </StackLayout>
+                                        </StackLayout>
+                                        <StackLayout Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace5Padding5_Style}" HorizontalOptions="Start">
+                                            <Frame IsClippedToBounds="True"  Style="{x:Static Style:GeneralStyles.FrameImage80X80Style}"
+                                                           BorderColor="#CFCCC8" OutlineColor="#CFCCC8" BackgroundColor="#CFCCC8" HasShadow="True">
+                                                <FFImage:SvgCachedImage Source="coming_soon2_AR.svg" Aspect="Fill" Margin="0" IsOpaque="True">
+                                                    <FFImage:SvgCachedImage.Triggers>
+                                                        <DataTrigger TargetType="FFImage:SvgCachedImage" 
+                                                                     Binding="{Binding Source={x:Reference TitleCategory}, Path=Text}"
+                                                                     Value="All Categories">
+                                                            <Setter Property="Source" Value="coming_soon_EN.svg"/>
+                                                        </DataTrigger>
+                                                    </FFImage:SvgCachedImage.Triggers>
+                                                </FFImage:SvgCachedImage>
+                                            </Frame>
+                                            <StackLayout Orientation="Horizontal" Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace5_Style}" HorizontalOptions="Center">
+                                                <BoxView Style="{x:Static Style:GeneralStyles.BoxLabel10X40Style}" />
+                                                <FFImage:SvgCachedImage Source="arrow_right.svg" IsOpaque="True" 
+                                                                        Rotation="{Binding .,Converter={StaticResource Key=CalRotation}}"
+                                                                        Style="{x:Static Style:GeneralStyles.FFImage10X10Style}" VerticalOptions="Center" HorizontalOptions="Start"/>
+                                            </StackLayout>
+                                        </StackLayout>
+                                        <StackLayout Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace5Padding5_Style}" HorizontalOptions="Start">
+                                            <Frame IsClippedToBounds="True"  Style="{x:Static Style:GeneralStyles.FrameImage80X80Style}"
+                                                           BorderColor="#CFCCC8" OutlineColor="#CFCCC8" BackgroundColor="#CFCCC8" HasShadow="True">
+                                                <FFImage:SvgCachedImage Source="coming_soon2_AR.svg" Aspect="Fill" Margin="0" IsOpaque="True">
+                                                    <FFImage:SvgCachedImage.Triggers>
+                                                        <DataTrigger TargetType="FFImage:SvgCachedImage" 
+                                                                     Binding="{Binding Source={x:Reference TitleCategory}, Path=Text}"
+                                                                     Value="All Categories">
+                                                            <Setter Property="Source" Value="coming_soon_EN.svg"/>
+                                                        </DataTrigger>
+                                                    </FFImage:SvgCachedImage.Triggers>
+                                                </FFImage:SvgCachedImage>
+                                            </Frame>
+                                            <StackLayout Orientation="Horizontal" Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace5_Style}" HorizontalOptions="Center">
+                                                <BoxView Style="{x:Static Style:GeneralStyles.BoxLabel10X40Style}" />
+                                                <FFImage:SvgCachedImage Source="arrow_right.svg" IsOpaque="True" Rotation="{Binding .,Converter={StaticResource Key=CalRotation}}" Style="{x:Static Style:GeneralStyles.FFImage10X10Style}" VerticalOptions="Center" HorizontalOptions="Start"/>
+                                            </StackLayout>
+                                        </StackLayout>
+                                        <StackLayout Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace5Padding5_Style}" HorizontalOptions="Start">
+                                            <Frame IsClippedToBounds="True"  Style="{x:Static Style:GeneralStyles.FrameImage80X80Style}"
+                                                           BorderColor="#CFCCC8" OutlineColor="#CFCCC8" BackgroundColor="#CFCCC8" HasShadow="True">
+                                                <FFImage:SvgCachedImage Source="coming_soon2_AR.svg" Aspect="Fill" Margin="0" IsOpaque="True">
+                                                    <FFImage:SvgCachedImage.Triggers>
+                                                        <DataTrigger TargetType="FFImage:SvgCachedImage" 
+                                                                     Binding="{Binding Source={x:Reference TitleCategory}, Path=Text}"
+                                                                     Value="All Categories">
+                                                            <Setter Property="Source" Value="coming_soon_EN.svg"/>
+                                                        </DataTrigger>
+                                                    </FFImage:SvgCachedImage.Triggers>
+                                                </FFImage:SvgCachedImage>
+
+                                            </Frame>
+                                            <StackLayout Orientation="Horizontal" Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace5_Style}" HorizontalOptions="Center">
+                                                <BoxView Style="{x:Static Style:GeneralStyles.BoxLabel10X40Style}" />
+                                                <FFImage:SvgCachedImage Source="arrow_right.svg" IsOpaque="True" Rotation="{Binding .,Converter={StaticResource Key=CalRotation}}" Style="{x:Static Style:GeneralStyles.FFImage10X10Style}" VerticalOptions="Center" HorizontalOptions="Start"/>
+                                            </StackLayout>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </CollectionView.EmptyView>
+                            </CollectionView>
+                        </StackLayout>
+                        <!--New Arrival-->
+                        <StackLayout Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace10_Style}">
+                            <StackLayout Orientation="Horizontal" Margin="0" Padding="0" Spacing="0"  Style="{x:Static Style:GeneralStyles.ViewFlowDirection}">
+                                <Label Text="{x:Static XResource:MLResource.NewArrival}" Style="{x:Static Style:GeneralStyles.LabelTitleWigdthsStyle}"/>
+                            </StackLayout>
+
+                            <CollectionView ItemsSource="{Binding HomeProperty.NewArrival}" FlowDirection="RightToLeft"
+                                            Style="{x:Static Style:GeneralStyles.CollectionViewHeightRequest210_Style}">
+                                <CollectionView.ItemsLayout>
+                                    <GridItemsLayout Span="1" Orientation="Horizontal" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackLayout Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace5Padding5_Style}" HorizontalOptions="Start">
+                                            <Frame IsClippedToBounds="True"  Style="{x:Static Style:GeneralStyles.FrameImage110X120Style}"
+                                                            BorderColor="White" OutlineColor="White" HasShadow="True" HorizontalOptions="Start" VerticalOptions="Start">
+                                                <Image Aspect="Fill" Margin="0" Source="{Binding ImageUrl}"/>
+                                            </Frame>
+                                            <StackLayout Margin="0" Padding="0" Spacing="0" HorizontalOptions="Start"  Style="{x:Static Style:GeneralStyles.ViewFlowDirection}">
+                                                <Label Text="{Binding Name}" LineBreakMode="TailTruncation" Style="{x:Static Style:GeneralStyles.LabelNameProductStyle}"/>
+                                                <Label TextColor="#272A3F" HorizontalOptions="Start">
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <Span Text="{Binding PriceSale, StringFormat='{0:N2} '}" Style="{x:Static Style:GeneralStyles.SpanCategoryAndOriginFont18_Style}"/>
+                                                            <Span Text=" "/>
+                                                            <Span Text="{x:Static XResource:MLResource.AED}" Style="{x:Static Style:GeneralStyles.SpanCurrencyFont14_Style}"/>
+                                                            <Span Text="/" Style="{x:Static Style:GeneralStyles.SpanCurrencyFont14_Style}"/>
+                                                            <Span Text="{Binding ShortCut}" Style="{x:Static Style:GeneralStyles.SpanCurrencyFont14_Style}"/>
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+                                            </StackLayout>
+                                            <StackLayout.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="ObservProductBuy"/>
+                                            </StackLayout.GestureRecognizers>
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                                <CollectionView.EmptyView>
+                                    <StackLayout Orientation="Horizontal" Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace5Padding5_Style}" HorizontalOptions="Start">
+                                        <StackLayout Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace5Padding5_Style}" HorizontalOptions="Start">
+                                            <Frame IsClippedToBounds="True"  Style="{x:Static Style:GeneralStyles.FrameImage110X120Style}"
+                                                           BorderColor="#CFCCC8" OutlineColor="#CFCCC8" HasShadow="True" BackgroundColor="#CFCCC8">
+                                                <FFImage:SvgCachedImage Source="coming_soon2_AR.svg" Aspect="Fill" Margin="0" IsOpaque="True">
+                                                    <FFImage:SvgCachedImage.Triggers>
+                                                        <DataTrigger TargetType="FFImage:SvgCachedImage" 
+                                                                     Binding="{Binding Source={x:Reference TitleCategory}, Path=Text}"
+                                                                     Value="All Categories">
+                                                            <Setter Property="Source" Value="coming_soon_EN.svg"/>
+                                                        </DataTrigger>
+                                                    </FFImage:SvgCachedImage.Triggers>
+                                                </FFImage:SvgCachedImage>
+                                            </Frame>
+                                            <StackLayout Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace5_Style}" HorizontalOptions="Start">
+                                                <BoxView BackgroundColor="#CFCCC8" Style="{x:Static Style:GeneralStyles.BoxLabel10X60Style}"/>
+                                                <BoxView BackgroundColor="#CFCCC8" Style="{x:Static Style:GeneralStyles.BoxLabel10X40Style}"/>
+                                            </StackLayout>
+                                        </StackLayout>
+                                        <StackLayout Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace5Padding5_Style}" HorizontalOptions="Start">
+                                            <Frame IsClippedToBounds="True"  Style="{x:Static Style:GeneralStyles.FrameImage110X120Style}"
+                                                           BorderColor="#CFCCC8" OutlineColor="#CFCCC8" HasShadow="True" BackgroundColor="#CFCCC8">
+                                                <FFImage:SvgCachedImage Source="coming_soon2_AR.svg" Aspect="Fill" Margin="0" IsOpaque="True">
+                                                    <FFImage:SvgCachedImage.Triggers>
+                                                        <DataTrigger TargetType="FFImage:SvgCachedImage" 
+                                                                     Binding="{Binding Source={x:Reference TitleCategory}, Path=Text}"
+                                                                     Value="All Categories">
+                                                            <Setter Property="Source" Value="coming_soon_EN.svg"/>
+                                                        </DataTrigger>
+                                                    </FFImage:SvgCachedImage.Triggers>
+                                                </FFImage:SvgCachedImage>
+                                            </Frame>
+                                            <StackLayout  Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace5_Style}" HorizontalOptions="Start">
+                                                <BoxView BackgroundColor="#CFCCC8" Style="{x:Static Style:GeneralStyles.BoxLabel10X60Style}"/>
+                                                <BoxView BackgroundColor="#CFCCC8" Style="{x:Static Style:GeneralStyles.BoxLabel10X40Style}"/>
+                                            </StackLayout>
+                                        </StackLayout>
+                                        <StackLayout Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace5Padding5_Style}" HorizontalOptions="Start">
+                                            <Frame IsClippedToBounds="True"  Style="{x:Static Style:GeneralStyles.FrameImage110X120Style}"
+                                                           BorderColor="#CFCCC8" OutlineColor="#CFCCC8" HasShadow="True" BackgroundColor="#CFCCC8">
+                                                <FFImage:SvgCachedImage Source="coming_soon2_AR.svg" Aspect="Fill" Margin="0" IsOpaque="True">
+                                                    <FFImage:SvgCachedImage.Triggers>
+                                                        <DataTrigger TargetType="FFImage:SvgCachedImage" 
+                                                                     Binding="{Binding Source={x:Reference TitleCategory}, Path=Text}"
+                                                                     Value="All Categories">
+                                                            <Setter Property="Source" Value="coming_soon_EN.svg"/>
+                                                        </DataTrigger>
+                                                    </FFImage:SvgCachedImage.Triggers>
+                                                </FFImage:SvgCachedImage>
+                                            </Frame>
+                                            <StackLayout Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace5_Style}" HorizontalOptions="Start">
+                                                <BoxView BackgroundColor="#CFCCC8" Style="{x:Static Style:GeneralStyles.BoxLabel10X60Style}"/>
+                                                <BoxView BackgroundColor="#CFCCC8" Style="{x:Static Style:GeneralStyles.BoxLabel10X40Style}"/>
+                                            </StackLayout>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </CollectionView.EmptyView>
+
+                            </CollectionView>
+                        </StackLayout>
+                        <!--Top Selections-->
+                        <StackLayout Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace10_Style}">
+                            <StackLayout Orientation="Horizontal" Margin="0" Padding="0" Spacing="0" Style="{x:Static Style:GeneralStyles.ViewFlowDirection}">
+                                <Label Text="{x:Static XResource:MLResource.TopSelection}" Style="{x:Static Style:GeneralStyles.LabelTitleWigdthsStyle}"/>
+                            </StackLayout>
+
+                            <CollectionView ItemsSource="{Binding HomeProperty.TopSelection}" Style="{x:Static Style:GeneralStyles.CollectionViewHeightRequest210_Style}">
+                                <CollectionView.ItemsLayout>
+                                    <GridItemsLayout Orientation="Horizontal" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackLayout Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace5Padding5_Style}" HorizontalOptions="Start">
+                                            <Frame IsClippedToBounds="True"  Style="{x:Static Style:GeneralStyles.FrameImage110X120Style}"
+                                                            BorderColor="White" OutlineColor="White" HasShadow="True" HorizontalOptions="Start" VerticalOptions="Start">
+                                                <Image Aspect="Fill" Margin="0" Source="{Binding ImageUrl}"/>
+                                            </Frame>
+                                            <StackLayout Margin="0" Padding="0" Spacing="0" HorizontalOptions="Start"  Style="{x:Static Style:GeneralStyles.ViewFlowDirection}">
+                                                <Label Text="{Binding Name}" LineBreakMode="TailTruncation" Style="{x:Static Style:GeneralStyles.LabelNameProductStyle}"/>
+                                                <Label TextColor="#272A3F" HorizontalOptions="Start">
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <Span Text="{Binding PriceSale, StringFormat='{0:N2} '}" Style="{x:Static Style:GeneralStyles.SpanCategoryAndOriginFont18_Style}"/>
+                                                            <Span Text=" "/>
+                                                            <Span Text="{x:Static XResource:MLResource.AED}" Style="{x:Static Style:GeneralStyles.SpanCurrencyFont14_Style}"/>
+                                                            <Span Text="/" Style="{x:Static Style:GeneralStyles.SpanCurrencyFont14_Style}"/>
+                                                            <Span Text="{Binding ShortCut}" Style="{x:Static Style:GeneralStyles.SpanCurrencyFont14_Style}"/>
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+                                            </StackLayout>
+                                            <StackLayout.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="ObservProductBuy"/>
+                                            </StackLayout.GestureRecognizers>
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                                <CollectionView.EmptyView>
+                                    <StackLayout Orientation="Horizontal" Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace5Padding5_Style}" HorizontalOptions="Start">
+                                        <StackLayout Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace5Padding5_Style}" HorizontalOptions="Start">
+                                            <Frame IsClippedToBounds="True"  Style="{x:Static Style:GeneralStyles.FrameImage110X120Style}"
+                                                            BorderColor="#CFCCC8" OutlineColor="#CFCCC8" HasShadow="True" BackgroundColor="#CFCCC8">
+                                                <FFImage:SvgCachedImage Source="coming_soon2_AR.svg" Aspect="Fill" Margin="0" IsOpaque="True">
+                                                    <FFImage:SvgCachedImage.Triggers>
+                                                        <DataTrigger TargetType="FFImage:SvgCachedImage" 
+                                                                     Binding="{Binding Source={x:Reference TitleCategory}, Path=Text}"
+                                                                     Value="All Categories">
+                                                            <Setter Property="Source" Value="coming_soon_EN.svg"/>
+                                                        </DataTrigger>
+                                                    </FFImage:SvgCachedImage.Triggers>
+                                                </FFImage:SvgCachedImage>
+                                            </Frame>
+                                            <StackLayout Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace5_Style}" HorizontalOptions="Start">
+                                                <BoxView BackgroundColor="#CFCCC8" Style="{x:Static Style:GeneralStyles.BoxLabel10X60Style}"/>
+                                                <BoxView BackgroundColor="#CFCCC8" Style="{x:Static Style:GeneralStyles.BoxLabel10X40Style}"/>
+                                            </StackLayout>
+                                        </StackLayout>
+                                        <StackLayout Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace5Padding5_Style}" HorizontalOptions="Start">
+                                            <Frame IsClippedToBounds="True"  Style="{x:Static Style:GeneralStyles.FrameImage110X120Style}"
+                                                            BorderColor="#CFCCC8" OutlineColor="#CFCCC8" HasShadow="True" BackgroundColor="#CFCCC8">
+                                                <FFImage:SvgCachedImage Source="coming_soon2_AR.svg" Aspect="Fill" Margin="0" IsOpaque="True">
+                                                    <FFImage:SvgCachedImage.Triggers>
+                                                        <DataTrigger TargetType="FFImage:SvgCachedImage" 
+                                                                     Binding="{Binding Source={x:Reference TitleCategory}, Path=Text}"
+                                                                     Value="All Categories">
+                                                            <Setter Property="Source" Value="coming_soon_EN.svg"/>
+                                                        </DataTrigger>
+                                                    </FFImage:SvgCachedImage.Triggers>
+                                                </FFImage:SvgCachedImage>
+                                            </Frame>
+                                            <StackLayout Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace5_Style}" HorizontalOptions="Start">
+                                                <BoxView BackgroundColor="#CFCCC8" Style="{x:Static Style:GeneralStyles.BoxLabel10X60Style}"/>
+                                                <BoxView BackgroundColor="#CFCCC8" Style="{x:Static Style:GeneralStyles.BoxLabel10X40Style}"/>
+                                            </StackLayout>
+                                        </StackLayout>
+                                        <StackLayout Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace5Padding5_Style}" HorizontalOptions="Start">
+                                            <Frame IsClippedToBounds="True"  Style="{x:Static Style:GeneralStyles.FrameImage110X120Style}"
+                                                           BorderColor="#CFCCC8" OutlineColor="#CFCCC8" HasShadow="True" BackgroundColor="#CFCCC8">
+                                                <FFImage:SvgCachedImage Source="coming_soon2_AR.svg" Aspect="Fill" Margin="0" IsOpaque="True">
+                                                    <FFImage:SvgCachedImage.Triggers>
+                                                        <DataTrigger TargetType="FFImage:SvgCachedImage" 
+                                                                     Binding="{Binding Source={x:Reference TitleCategory}, Path=Text}"
+                                                                     Value="All Categories">
+                                                            <Setter Property="Source" Value="coming_soon_EN.svg"/>
+                                                        </DataTrigger>
+                                                    </FFImage:SvgCachedImage.Triggers>
+                                                </FFImage:SvgCachedImage>
+                                            </Frame>
+                                            <StackLayout Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace5_Style}" HorizontalOptions="Start">
+                                                <BoxView BackgroundColor="#CFCCC8" Style="{x:Static Style:GeneralStyles.BoxLabel10X60Style}"/>
+                                                <BoxView BackgroundColor="#CFCCC8" Style="{x:Static Style:GeneralStyles.BoxLabel10X40Style}"/>
+                                            </StackLayout>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </CollectionView.EmptyView>
+                            </CollectionView>
+                        </StackLayout>
+                    </StackLayout>
+                </ScrollView>
+            </Grid>
+            <!--Popup ProductSelected Details-->
+            <ContentView x:Name="HolderPage" Margin="0" Padding="0" VerticalOptions="FillAndExpand"
+                         HorizontalOptions="FillAndExpand" BackgroundColor="#4D4A4948">
+                <ContentView.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="ObservProductBuy"/>
+                </ContentView.GestureRecognizers>
+            </ContentView>
+            <Grid x:Name="FrameProduct" Margin="0" Padding="0" VerticalOptions="End">
+                <BoxView Style="{x:Static Style:GeneralStyles.BoxBGproductStyle}"/>
+                <StackLayout  Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace10Padding15x30_Style}">
+                    <StackLayout  Orientation="Horizontal" Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace10_Style}" 
+                                 HorizontalOptions="FillAndExpand">
+                        <Frame IsClippedToBounds="True"  Style="{x:Static Style:GeneralStyles.FrameImage110X120Style}"
+                               BorderColor="White" OutlineColor="White" BackgroundColor="#CFCCC8" HasShadow="True" HorizontalOptions="Start" VerticalOptions="Start">
+                            <Image Aspect="AspectFill" Margin="0" Source="{Binding HomeProperty.ProductSelected.ImageUrl}"/>
+                        </Frame>
+                        <StackLayout Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace15_Style}" 
+                                     VerticalOptions="Start" HorizontalOptions="StartAndExpand" >
+                            <Label Text="{Binding HomeProperty.ProductSelected.Name}" HorizontalOptions="Start"
+                                       LineBreakMode="TailTruncation" Style="{x:Static Style:GeneralStyles.LabelNameProductBoldStyle}"/>
+
+                            <Label TextColor="#272A3F" HorizontalOptions="Start">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding HomeProperty.ProductSelected.PriceSale, StringFormat='{0:N2} '}" Style="{x:Static Style:GeneralStyles.SpanCategoryAndOriginFont18_Style}"/>
+                                        <Span Text=" "/>
+                                        <Span Text="{x:Static XResource:MLResource.AED}" Style="{x:Static Style:GeneralStyles.SpanCurrencyFont14_Style}"/>
+                                        <Span Text="/" Style="{x:Static Style:GeneralStyles.SpanCurrencyFont14_Style}"/>
+                                        <Span Text="{Binding HomeProperty.ProductSelected.ShortCut}" Style="{x:Static Style:GeneralStyles.SpanCurrencyFont14_Style}"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+
+                            <Button HorizontalOptions="StartAndExpand" Text="{x:Static XResource:MLResource.MoreDetails}" 
+                                    Clicked="OpenProductDetailsPage" Margin="0" Padding="0"
+                                    VerticalOptions="Start" BorderColor="#3A1D0F" BackgroundColor="WhiteSmoke"
+                                    TextColor="#3A1D0F" Style="{x:Static Style:GeneralStyles.ButtonSubmitStyleWithBord}"/>
+                        </StackLayout>
+
+                        <UserControl:RateStars HorizontalOptions="EndAndExpand" FillStarImage="star_filled.svg" EmptyStarImage="star_empty.svg" ValueRate="{Binding HomeProperty.ProductSelected.Rate}"/>
+
+                    </StackLayout>
+                    <!--is fat/ is size / is nutural-->
+                    <StackLayout Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace5_Style}">
+
+                        <input:RadioButtonGroupView x:Name="FatOption" Orientation="Horizontal" IsRequired="True" Spacing="10" IsVisible="{Binding HomeProperty.ProductSelected.IsFat}">
+                            <input:RadioButton Text="{x:Static XResource:MLResource.Fat}" Value="1" IsChecked="True" Style="{x:Static Style:GeneralStyles.InputChoice}"/>
+                            <input:RadioButton Text="{x:Static XResource:MLResource.Without_Fat}" Value="2" Style="{x:Static Style:GeneralStyles.InputChoice}"/>
+                        </input:RadioButtonGroupView>
+
+                        <input:RadioButtonGroupView x:Name="SizeOption" Orientation="Horizontal" IsRequired="True"  Spacing="10" IsVisible="{Binding HomeProperty.ProductSelected.IsSizing}">
+                            <input:RadioButton Text="{x:Static XResource:MLResource.Large}" Value="1" IsChecked="True" Style="{x:Static Style:GeneralStyles.InputChoice}"/>
+                            <input:RadioButton Text="{x:Static XResource:MLResource.Medium}" Value="2" Style="{x:Static Style:GeneralStyles.InputChoice}"/>
+                            <input:RadioButton Text="{x:Static XResource:MLResource.Small}" Value="3" Style="{x:Static Style:GeneralStyles.InputChoice}"/>
+                        </input:RadioButtonGroupView>
+
+
+                        <input:RadioButtonGroupView x:Name="SoftOption" Orientation="Horizontal" IsRequired="True"  Spacing="10" IsVisible="{Binding HomeProperty.ProductSelected.IsNature}">
+                            <input:RadioButton Text="{x:Static XResource:MLResource.Soft}" Value="1" IsChecked="True" Style="{x:Static Style:GeneralStyles.InputChoice}"/>
+                            <input:RadioButton Text="{x:Static XResource:MLResource.Roughly}" Value="2" Style="{x:Static Style:GeneralStyles.InputChoice}"/>
+                        </input:RadioButtonGroupView>
+                    </StackLayout>
+
+                    <!--Sprated Line-->
+                    <StackLayout  Orientation="Horizontal" Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace3_Style}">
+                        <BoxView Style="{x:Static Style:GeneralStyles.BoxSparetedLineStyle}"/>
+                        <BoxView Style="{x:Static Style:GeneralStyles.BoxSparetedLineStyle}"/>
+                        <BoxView Style="{x:Static Style:GeneralStyles.BoxSparetedLineStyle}"/>
+                        <BoxView Style="{x:Static Style:GeneralStyles.BoxSparetedLineStyle}"/>
+                        <BoxView Style="{x:Static Style:GeneralStyles.BoxSparetedLineStyle}"/>
+                        <BoxView Style="{x:Static Style:GeneralStyles.BoxSparetedLineStyle}"/>
+                        <BoxView Style="{x:Static Style:GeneralStyles.BoxSparetedLineStyle}"/>
+                        <BoxView Style="{x:Static Style:GeneralStyles.BoxSparetedLineStyle}"/>
+                        <BoxView Style="{x:Static Style:GeneralStyles.BoxSparetedLineStyle}"/>
+                        <BoxView Style="{x:Static Style:GeneralStyles.BoxSparetedLineStyle}"/>
+                        <BoxView Style="{x:Static Style:GeneralStyles.BoxSparetedLineStyle}"/>
+                        <BoxView Style="{x:Static Style:GeneralStyles.BoxSparetedLineStyle}"/>
+                        <BoxView Style="{x:Static Style:GeneralStyles.BoxSparetedLineStyle}"/>
+                        <BoxView Style="{x:Static Style:GeneralStyles.BoxSparetedLineStyle}"/>
+                        <BoxView Style="{x:Static Style:GeneralStyles.BoxSparetedLineStyle}"/>
+                        <BoxView Style="{x:Static Style:GeneralStyles.BoxSparetedLineStyle}"/>
+                        <BoxView Style="{x:Static Style:GeneralStyles.BoxSparetedLineStyle}"/>
+                        <BoxView Style="{x:Static Style:GeneralStyles.BoxSparetedLineStyle}"/>
+                        <BoxView Style="{x:Static Style:GeneralStyles.BoxSparetedLineStyle}"/>
+                        <BoxView Style="{x:Static Style:GeneralStyles.BoxSparetedLineStyle}"/>
+                        <BoxView Style="{x:Static Style:GeneralStyles.BoxSparetedLineStyle}"/>
+                        <BoxView Style="{x:Static Style:GeneralStyles.BoxSparetedLineStyle}"/>
+                        <BoxView Style="{x:Static Style:GeneralStyles.BoxSparetedLineStyle}"/>
+                        <BoxView Style="{x:Static Style:GeneralStyles.BoxSparetedLineStyle}"/>
+                        <BoxView Style="{x:Static Style:GeneralStyles.BoxSparetedLineStyle}"/>
+                        <BoxView Style="{x:Static Style:GeneralStyles.BoxSparetedLineStyle}"/>
+                    </StackLayout>
+                    <!--select weight-->
+                    <StackLayout Orientation="Horizontal" Margin="0" Padding="0" Spacing="0"  Style="{x:Static Style:GeneralStyles.ViewFlowDirection}">
+                        <Label Text="{Binding HomeProperty.ProductSelected.FullShortCut}" Style="{x:Static Style:GeneralStyles.LabelWeightStyle}"/>
+                        <StackLayout  Orientation="Horizontal" Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace10_Style}">
+                            <ImageButton Source="minus" BackgroundColor="Transparent" BorderColor="#3A1D0F" Style="{x:Static Style:GeneralStyles.ImageButtonMinusPlusStyle}"
+                                         Clicked="MinusWeight"/>
+                            <Entry x:Name="Weight" Text="{Binding HomeProperty.ProductSelected.Quentity}" Placeholder="1.00" 
+                                   MaxLength="4" Keyboard="Numeric"
+                                   Style="{x:Static Style:GeneralStyles.EntryWeightStyle}" />
+                            <ImageButton Source="plus" BackgroundColor="Transparent" BorderColor="#3A1D0F" Style="{x:Static Style:GeneralStyles.ImageButtonMinusPlusStyle}"
+                                         Clicked="PlusWeight"/>
+                        </StackLayout>
+                    </StackLayout>
+                    <!--entry note-->
+                    <CustomRenderer:CustomEditorWithBord x:Name="Note"  Placeholder="{x:Static XResource:MLResource.WriteTobutcher}"                                                    
+                                                          AutoSize="TextChanges" TextColor="#272A3F" IsTextPredictionEnabled="True"
+                                                          Text="{Binding HomeProperty.ProductSelected.Note}" 
+                                                          Style="{x:Static Style:GeneralStyles.EditorNoteStyle}"/>
+                    <!--button submit-->
+                    <Button Text="{x:Static XResource:MLResource.AddToCart}" Clicked="AddToCartAction"
+                                                BackgroundColor="#3A1D0F"
+                                                Style="{x:Static Style:GeneralStyles.ButtonSubmitStyle}"/>
+                </StackLayout>
+            </Grid>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

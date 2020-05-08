@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:Style="clr-namespace:LahmaOnline.StyleViews.Styles"
+             xmlns:FFImage="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             xmlns:XResource="clr-namespace:LahmaOnline.MultiLanguage"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="#E64A4948"
+             x:Class="LahmaOnline.Pages.Menu">
+    <!--BackgroundColor="#4D4A4948"-->
+    <ContentPage.Content>
+        <StackLayout  Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace5_Style}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <Grid Margin="0" Padding="0" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Frame IsClippedToBounds="True"  x:Name="MyOrderButton" Grid.Column="0" Grid.Row="0" Style="{x:Static Style:GeneralStyles.FrameOptionMenuMarign0Padding10Raduis5H50W50}" HasShadow="False" BackgroundColor="White">
+                    <StackLayout  Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace5_Style}" HorizontalOptions="Center" VerticalOptions="Center">
+                        <FFImage:SvgCachedImage Source="check.svg" Style="{x:Static Style:GeneralStyles.FFImage35X35Style}"/>
+                        <Label Text="{x:Static XResource:MLResource.MyOrders}"  Style="{x:Static Style:GeneralStyles.LabeNameOptionMenu}"/>
+                    </StackLayout>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="MyOrdersPage"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+                <Frame IsClippedToBounds="True"  x:Name="MyWishlistButton" Grid.Column="1" Grid.Row="0" Style="{x:Static Style:GeneralStyles.FrameOptionMenuMarign0Padding10Raduis5H50W50}" HasShadow="False" BackgroundColor="White">
+                    <StackLayout  Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace5_Style}" HorizontalOptions="Center" VerticalOptions="Center">
+                        <FFImage:SvgCachedImage Source="favorites.svg" Style="{x:Static Style:GeneralStyles.FFImage35X35Style}"/>
+                        <Label Text="{x:Static XResource:MLResource.Favourites}" Style="{x:Static Style:GeneralStyles.LabeNameOptionMenu}"/>
+                    </StackLayout>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OpenMyFavoritesPage"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+                <Frame IsClippedToBounds="True"  x:Name="ButTermsAndConditions" Grid.Column="2" Grid.Row="0" Style="{x:Static Style:GeneralStyles.FrameOptionMenuMarign0Padding10Raduis5H50W50}" HasShadow="False" BackgroundColor="White">
+                    <StackLayout  Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace5_Style}" HorizontalOptions="Center" VerticalOptions="Center">
+                        <FFImage:SvgCachedImage Source="policy.svg" Style="{x:Static Style:GeneralStyles.FFImage35X35Style}"/>
+                        <Label Text="{x:Static XResource:MLResource.Terms_conditions}" Style="{x:Static Style:GeneralStyles.LabeNameOptionMenu}"/>
+                    </StackLayout>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OpenTermsAndConditionsPage"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+
+                <Frame IsClippedToBounds="True"  Grid.Column="0" Grid.Row="1" Style="{x:Static Style:GeneralStyles.FrameOptionMenuMarign0Padding10Raduis5H50W50}" HasShadow="False" BackgroundColor="White">
+                    <StackLayout  Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace5_Style}" HorizontalOptions="Center" VerticalOptions="Center">
+                        <FFImage:SvgCachedImage Source="file.svg" Style="{x:Static Style:GeneralStyles.FFImage35X35Style}"/>
+                        <Label Text="{x:Static XResource:MLResource.License}" Style="{x:Static Style:GeneralStyles.LabeNameOptionMenu}"/>
+                    </StackLayout>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OpenLicensePage"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+
+                <FFImage:SvgCachedImage x:Name="LogoEle" Source="logo.svg" Grid.Column="1" Grid.Row="1" Style="{x:Static Style:GeneralStyles.FFImage50X50Style}"/>
+
+                <Frame IsClippedToBounds="True"  Grid.Column="2" Grid.Row="1" Style="{x:Static Style:GeneralStyles.FrameOptionMenuMarign0Padding10Raduis5H50W50}" HasShadow="False" BackgroundColor="White">
+                    <StackLayout  Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace5_Style}" HorizontalOptions="Center" VerticalOptions="Center">
+                        <FFImage:SvgCachedImage Source="Address.svg" Style="{x:Static Style:GeneralStyles.FFImage35X35Style}"/>
+                        <Label Text="{x:Static XResource:MLResource.DeliveryAreas}" Style="{x:Static Style:GeneralStyles.LabeNameOptionMenu}"/>
+                    </StackLayout>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OpenDeliveryAreasPage"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+
+                <Frame IsClippedToBounds="True"  Grid.Column="0" Grid.Row="2" Style="{x:Static Style:GeneralStyles.FrameOptionMenuMarign0Padding10Raduis5H50W50}" HasShadow="False" BackgroundColor="White">
+                    <StackLayout  Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace5_Style}" HorizontalOptions="Center" VerticalOptions="Center">
+                        <FFImage:SvgCachedImage x:Name="imgButtonSigInOut" Source="logoutGray.svg" Style="{x:Static Style:GeneralStyles.FFImage35X35Style}"/>
+                        <Label x:Name="txtButtonSigInOut" Text="{x:Static XResource:MLResource.Signout}" Style="{x:Static Style:GeneralStyles.LabeNameOptionMenu}"/>
+                    </StackLayout>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="SingOutUser"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+                <Frame IsClippedToBounds="True"  Grid.Column="1" Grid.Row="2" Style="{x:Static Style:GeneralStyles.FrameOptionMenuMarign0Padding10Raduis5H50W50}" HasShadow="False" BackgroundColor="White">
+                    <StackLayout  Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace5_Style}" HorizontalOptions="Center" VerticalOptions="Center">
+                        <FFImage:SvgCachedImage Source="employee.svg" Style="{x:Static Style:GeneralStyles.FFImage35X35Style}"/>
+                        <Label Text="{x:Static XResource:MLResource.AboutUs}" Style="{x:Static Style:GeneralStyles.LabeNameOptionMenu}"/>
+                    </StackLayout>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OpenAboutUsPage"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+                <Frame IsClippedToBounds="True"  Grid.Column="2" Grid.Row="2" Style="{x:Static Style:GeneralStyles.FrameOptionMenuMarign0Padding10Raduis5H50W50}" HasShadow="False" BackgroundColor="White">
+                    <StackLayout  Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace5_Style}" HorizontalOptions="Center" VerticalOptions="Center">
+                        <FFImage:SvgCachedImage Source="contact.svg" Style="{x:Static Style:GeneralStyles.FFImage35X35Style}"/>
+                        <Label Text="{x:Static XResource:MLResource.ContactUs}" Style="{x:Static Style:GeneralStyles.LabeNameOptionMenu}"/>
+                    </StackLayout>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OpenContactUsPage"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

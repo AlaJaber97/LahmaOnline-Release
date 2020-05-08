@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="94.778" height="94.727" viewBox="0 0 94.778 94.727">
+  <defs>
+    <clipPath id="clip-path">
+      <rect width="94.778" height="94.727" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="ButSsearchActive" clip-path="url(#clip-path)">
+    <g id="Group_49884" data-name="Group 49884">
+      <g id="Group_49883" data-name="Group 49883">
+        <g id="Group_49882" data-name="Group 49882">
+          <path id="Path_16436" data-name="Path 16436" d="M692.852,252.639a39.732,39.732,0,1,1,39.757-39.732A39.79,39.79,0,0,1,692.852,252.639Zm0-73.683a33.951,33.951,0,1,0,33.972,33.951A34,34,0,0,0,692.852,178.956Z" transform="translate(-653.096 -173.175)" fill="#3a1c0e"/>
+        </g>
+      </g>
+    </g>
+    <g id="Group_49887" data-name="Group 49887" transform="translate(62.938 62.891)">
+      <g id="Group_49886" data-name="Group 49886">
+        <g id="Group_49885" data-name="Group 49885">
+          <path id="Path_16437" data-name="Path 16437" d="M689.122,212.082a2.916,2.916,0,0,1-2.047-.845l-26.059-26.052a2.891,2.891,0,0,1,4.085-4.091l26.06,26.052a2.891,2.891,0,0,1-2.038,4.936Z" transform="translate(-660.168 -180.246)" fill="#3a1c0e"/>
+        </g>
+      </g>
+    </g>
+    <ellipse id="Ellipse_2775" data-name="Ellipse 2775" cx="37.825" cy="37.825" rx="37.825" ry="37.825" 
+             transform="translate(2.262 1.264)" fill="#3a1d0f" opacity="0.4"/>
+  </g>
+</svg>

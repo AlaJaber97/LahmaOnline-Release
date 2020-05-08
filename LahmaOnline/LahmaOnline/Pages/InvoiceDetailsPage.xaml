@@ -1,0 +1,279 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             BackgroundColor="#F4F7FA"
+             xmlns:UserControl="clr-namespace:LahmaOnline.UserControls"
+             xmlns:Style="clr-namespace:LahmaOnline.StyleViews.Styles"
+             xmlns:FFImage="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             xmlns:XResource="clr-namespace:LahmaOnline.MultiLanguage"
+             xmlns:ConView="clr-namespace:LahmaOnline.Pages"
+             xmlns:CustomRenderer="clr-namespace:LahmaOnline.CustomRenderer"
+             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:ContentViewHelper="clr-namespace:LahmaOnline.Pages.ContentViewHelper"
+             android:Application.WindowSoftInputModeAdjust="Resize"
+             NavigationPage.HasNavigationBar="False" 
+             mc:Ignorable="d"
+             x:Class="LahmaOnline.Pages.InvoiceDetailsPage">
+    <ContentPage.Content>
+        <Grid Margin="0" Padding="0" RowSpacing="0"  VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <!--Navigation Bar-->
+            <StackLayout Grid.Row="0" Orientation="Horizontal" Style="{x:Static Style:GeneralStyles.NavBarStyle}" VerticalOptions="Start">
+                <FFImage:SvgCachedImage Source="BackArrowWhite.svg" Rotation="{Binding .,Converter={StaticResource Key=CalRotation}}"
+                                        Style="{x:Static Style:GeneralStyles.FFImage20X20Style}">
+                    <FFImage:SvgCachedImage.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="BackPage"/>
+                    </FFImage:SvgCachedImage.GestureRecognizers>
+                </FFImage:SvgCachedImage>
+                <Label Text="{x:Static XResource:MLResource.DetailsInvoice}" Style="{x:Static Style:GeneralStyles.LabelTitlePageStyle}"/>
+                <FFImage:SvgCachedImage  Style="{x:Static Style:GeneralStyles.FFImage20X20Style}"/>
+            </StackLayout>
+            <!--Content Page-->
+            <ListView x:Name="ListItemInvoice" Grid.Row="1" Margin="0" VerticalOptions="Fill" HasUnevenRows="True"
+                      SelectionMode="None" CachingStrategy="RecycleElementAndDataTemplate" SeparatorVisibility="None"
+                      ItemsSource="{Binding InvoiceDetailsProperty.Invoice.ListItem}" VerticalScrollBarVisibility="Never">
+                <!--Invoice-->
+                <ListView.Header>
+                    <StackLayout Style="{x:Static Style:GeneralStyles.StackLayoutWithPadding5x5_Style}" HorizontalOptions="FillAndExpand" BackgroundColor="#3A1D0F">
+                        <Label HorizontalTextAlignment="Center" TextColor="White">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{x:Static XResource:MLResource.TotalPrice}"
+                                          Style="{x:Static Style:GeneralStyles.LabelTextAboutUsStyle}" TextColor="White"/>
+                                    <Span Text="&#x0a;"/>
+                                    <Span Text="{Binding InvoiceDetailsProperty.Invoice.TotalPrice,StringFormat='{0:N2}'}"
+                                          Style="{x:Static Style:GeneralStyles.LabelTextPriceInvoiceStyle}" TextColor="White"/>
+                                    <Span Text=" "/>
+                                    <Span Text="{x:Static XResource:MLResource.AED}"
+                                          Style="{x:Static Style:GeneralStyles.LabelTextAboutUsStyle}" TextColor="White" FontAttributes="Bold"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <StackLayout Orientation="Horizontal" Margin="0" Padding="0" Spacing="0" HorizontalOptions="FillAndExpand">
+                            <Label HorizontalOptions="StartAndExpand" TextColor="White" HorizontalTextAlignment="Center" >
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{x:Static XResource:MLResource.InvoiceDate}" Style="{x:Static Style:GeneralStyles.LabelTextAboutUsStyle}" TextColor="White"/>
+                                        <Span Text="&#x0a;"/>
+                                        <Span Text="{Binding InvoiceDetailsProperty.Invoice.InvoiceDate,StringFormat='{0:dd.MM.yyyy}'}" Style="{x:Static Style:GeneralStyles.LabelTextAboutUsStyle}" TextColor="White"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                            <Label HorizontalOptions="EndAndExpand" HorizontalTextAlignment="Center">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{x:Static XResource:MLResource.InvoiceID}" Style="{x:Static Style:GeneralStyles.LabelTextAboutUsStyle}" TextColor="White"/>
+                                        <Span Text="&#x0a;"/>
+                                        <Span Text="{Binding InvoiceDetailsProperty.Invoice.Id}" Style="{x:Static Style:GeneralStyles.LabelTextAboutUsStyle}" TextColor="White"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </StackLayout>
+                    </StackLayout>
+                </ListView.Header>
+                <!--ItemOrder-->
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Style="{x:Static Style:GeneralStyles.StackLayoutWithPadding5x5_Style}">
+                                <Frame IsClippedToBounds="True"  Style="{x:Static Style:GeneralStyles.FrameRaduis10_Style}"
+                                       BorderColor="White" OutlineColor="White" HasShadow="True" HorizontalOptions="FillAndExpand">
+                                    <StackLayout  Orientation="Horizontal" Style="{x:Static Style:GeneralStyles.StackLayoutWithSpacing10Padding20x10x10x10_Style}">
+                                        <Frame IsClippedToBounds="True"  Style="{x:Static Style:GeneralStyles.FrameImage110X120Style}"
+                                                   BorderColor="White" OutlineColor="White" HasShadow="True" HorizontalOptions="Start" VerticalOptions="Start">
+                                            <Image Aspect="Fill" Margin="0" Source="{Binding ImageUrl}"/>
+                                        </Frame>
+                                        <StackLayout  Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace5_Style}" HorizontalOptions="FillAndExpand">
+                                            <Label Text="{Binding ItemName}" Style="{x:Static Style:GeneralStyles.LabelNameProductStyle}" LineBreakMode="TailTruncation"/>
+                                            <Label>
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{x:Static XResource:MLResource.Weight}" Style="{x:Static Style:GeneralStyles.SpanUnitPrice}"/>
+                                                        <Span Text=": " Style="{x:Static Style:GeneralStyles.SpanUnitPrice}"/>
+                                                        <Span Text="{Binding Qty,StringFormat='{0:N2}'}" Style="{x:Static Style:GeneralStyles.SpanPriceFont18_Style}" TextColor="#272A3F"/>
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                            <StackLayout Margin="0" Padding="0" Spacing="0">
+                                                <Label Text="{Binding Source={x:Static XResource:MLResource.SpecificationItem}, StringFormat='{0}:'}" 
+                                                       Style="{x:Static Style:GeneralStyles.LabelUnitPrice}"/>
+                                                <StackLayout Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace15Padding20_0_Style}" Spacing="0">
+                                                    <Label Style="{x:Static Style:GeneralStyles.LabelUnitPrice}" IsVisible="{Binding IsFat}">
+                                                        <Label.Triggers>
+                                                            <DataTrigger TargetType="Label" Binding="{Binding Fat}"
+                                                                 Value="1">
+                                                                <Setter Property="Text" Value="{Binding Source={x:Static XResource:MLResource.Fat}, StringFormat='• {0}'}"/>
+                                                            </DataTrigger>
+                                                            <DataTrigger TargetType="Label" Binding="{Binding Fat}"
+                                                                 Value="2">
+                                                                <Setter Property="Text" Value="{Binding Source={x:Static XResource:MLResource.Without_Fat}, StringFormat='• {0}'}"/>
+                                                            </DataTrigger>
+                                                        </Label.Triggers>
+                                                    </Label>
+                                                    <Label Style="{x:Static Style:GeneralStyles.LabelUnitPrice}" IsVisible="{Binding IsSize}">
+                                                        <Label.Triggers>
+                                                            <DataTrigger TargetType="Label" Binding="{Binding Size}"
+                                                                 Value="1">
+                                                                <Setter Property="Text" Value="{Binding Source={x:Static XResource:MLResource.Small}, StringFormat='• {0}'}"/>
+                                                            </DataTrigger>
+                                                            <DataTrigger TargetType="Label" Binding="{Binding Size}"
+                                                                 Value="2">
+                                                                <Setter Property="Text" Value="{Binding Source={x:Static XResource:MLResource.Medium}, StringFormat='• {0}'}"/>
+                                                            </DataTrigger>
+                                                            <DataTrigger TargetType="Label" Binding="{Binding Size}"
+                                                                 Value="3">
+                                                                <Setter Property="Text" Value="{Binding Source={x:Static XResource:MLResource.Large}, StringFormat='• {0}'}"/>
+                                                            </DataTrigger>
+                                                        </Label.Triggers>
+                                                    </Label>
+                                                    <Label Style="{x:Static Style:GeneralStyles.LabelUnitPrice}" IsVisible="{Binding IsNature}">
+                                                        <Label.Triggers>
+                                                            <DataTrigger TargetType="Label" Binding="{Binding Nature}"
+                                                                 Value="1">
+                                                                <Setter Property="Text" Value="{Binding Source={x:Static XResource:MLResource.Soft}, StringFormat='• {0}'}"/>
+                                                            </DataTrigger>
+                                                            <DataTrigger TargetType="Label" Binding="{Binding Nature}"
+                                                                 Value="2">
+                                                                <Setter Property="Text" Value="{Binding Source={x:Static XResource:MLResource.Roughly}, StringFormat='• {0}'}"/>
+                                                            </DataTrigger>
+                                                        </Label.Triggers>
+                                                    </Label>
+                                                </StackLayout>
+                                                <StackLayout.Triggers>
+                                                    <MultiTrigger TargetType="StackLayout">
+                                                        <MultiTrigger.Conditions>
+                                                            <BindingCondition Binding="{Binding Fat}"     Value="0"/>
+                                                            <BindingCondition Binding="{Binding Nature}"  Value="0"/>
+                                                            <BindingCondition Binding="{Binding Size}"    Value="0"/>
+                                                        </MultiTrigger.Conditions>
+                                                        <Setter Property="IsVisible" Value="False"/>
+                                                    </MultiTrigger>
+                                                </StackLayout.Triggers>
+                                            </StackLayout>
+                                            <Label LineBreakMode="WordWrap">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{x:Static XResource:MLResource.Note}" Style="{x:Static Style:GeneralStyles.SpanUnitPrice}"/>
+                                                        <Span Text=": " Style="{x:Static Style:GeneralStyles.SpanUnitPrice}"/>
+                                                        <Span x:Name="LabNote" Text="{Binding ItemNote}" Style="{x:Static Style:GeneralStyles.SpanCurrencyFont14_Style}" FontAttributes="Bold" TextColor="#272A3F"/>
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                                <Label.Triggers>
+                                                    <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference LabNote}, Path=Text}"
+                                                                 Value="">
+                                                        <Setter Property="IsVisible" Value="False"/>
+                                                    </DataTrigger>
+                                                </Label.Triggers>
+                                            </Label>
+
+                                            <Button Text="{x:Static XResource:MLResource.Evaluation}" TextColor="White" HorizontalOptions="End"
+                                                    BackgroundColor="#633119" Clicked="ShowEvalutionView" IsVisible="False"
+                                                    Style="{x:Static Style:GeneralStyles.ButtonFont10Raduis5}">
+                                                <Button.Triggers>
+                                                    <DataTrigger TargetType="Button" Binding="{Binding Rate}" Value="0">
+                                                        <Setter Property="IsVisible" Value="True"/>
+                                                    </DataTrigger>
+                                                </Button.Triggers>
+                                            </Button>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </Frame>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <ContentView x:Name="HolderPage" IsVisible="False" Grid.Row="1" Margin="0" Padding="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="#4D4A4948">
+
+                <ContentView.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="ShowEvalutionView"/>
+                </ContentView.GestureRecognizers>
+            </ContentView>
+            <Frame IsClippedToBounds="True"  Style="{x:Static Style:GeneralStyles.FrameMaring30Raduis10}" Grid.Row="1"
+                       VerticalOptions="Center" HorizontalOptions="Fill" IsVisible="False">
+                <StackLayout Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace10Padding20_10_Style}" HorizontalOptions="FillAndExpand">
+                    <FFImage:SvgCachedImage Source="close.svg" Style="{x:Static Style:GeneralStyles.FFImage15X15Style}" HorizontalOptions="End">
+                        <FFImage:SvgCachedImage.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="ShowEvalutionView"/>
+                        </FFImage:SvgCachedImage.GestureRecognizers>
+                    </FFImage:SvgCachedImage>
+                    <Frame IsClippedToBounds="True"  Style="{x:Static Style:GeneralStyles.FrameImage80X80Style}"
+                               BorderColor="White" OutlineColor="White" BackgroundColor="#CFCCC8" HasShadow="True" 
+                               HorizontalOptions="CenterAndExpand" VerticalOptions="Start">
+                        <Image  Aspect="AspectFill" Margin="0" Source="{Binding InvoiceDetailsProperty.ItemSelectd.ImageUrl}"/>
+                    </Frame>
+                    <Label Text="{x:Static XResource:MLResource.YOURRATING}" Style="{x:Static Style:GeneralStyles.LabelNameProductStyle}"/>
+                    <StackLayout Orientation="Horizontal" Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace10_Style}" HorizontalOptions="Center">
+                        <StackLayout Orientation="Horizontal" Margin="0" Padding="0" Spacing="0">
+                            <FFImage:SvgCachedImage Source="star_empty.svg" Style="{x:Static Style:GeneralStyles.FFImage15X15Style}"/>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="SelectRating"/>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                        <Label Text="|"/>
+                        <StackLayout Orientation="Horizontal" Margin="0" Padding="0" Spacing="0">
+                            <FFImage:SvgCachedImage Source="star_empty.svg" Style="{x:Static Style:GeneralStyles.FFImage15X15Style}"/>
+                            <FFImage:SvgCachedImage Source="star_empty.svg" Style="{x:Static Style:GeneralStyles.FFImage15X15Style}"/>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="SelectRating"/>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                        <Label Text="|"/>
+                        <StackLayout Orientation="Horizontal" Margin="0" Padding="0" Spacing="0">
+                            <FFImage:SvgCachedImage Source="star_empty.svg" Style="{x:Static Style:GeneralStyles.FFImage15X15Style}"/>
+                            <FFImage:SvgCachedImage Source="star_empty.svg" Style="{x:Static Style:GeneralStyles.FFImage15X15Style}"/>
+                            <FFImage:SvgCachedImage Source="star_empty.svg" Style="{x:Static Style:GeneralStyles.FFImage15X15Style}"/>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="SelectRating"/>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace10_Style}" HorizontalOptions="Center">
+                        <StackLayout Orientation="Horizontal" Margin="0" Padding="0" Spacing="0">
+                            <FFImage:SvgCachedImage Source="star_empty.svg" Style="{x:Static Style:GeneralStyles.FFImage15X15Style}"/>
+                            <FFImage:SvgCachedImage Source="star_empty.svg" Style="{x:Static Style:GeneralStyles.FFImage15X15Style}"/>
+                            <FFImage:SvgCachedImage Source="star_empty.svg" Style="{x:Static Style:GeneralStyles.FFImage15X15Style}"/>
+                            <FFImage:SvgCachedImage Source="star_empty.svg" Style="{x:Static Style:GeneralStyles.FFImage15X15Style}"/>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="SelectRating"/>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                        <Label Text="|"/>
+                        <StackLayout Orientation="Horizontal" Margin="0" Padding="0" Spacing="0">
+                            <FFImage:SvgCachedImage Source="star_empty.svg" Style="{x:Static Style:GeneralStyles.FFImage15X15Style}"/>
+                            <FFImage:SvgCachedImage Source="star_empty.svg" Style="{x:Static Style:GeneralStyles.FFImage15X15Style}"/>
+                            <FFImage:SvgCachedImage Source="star_empty.svg" Style="{x:Static Style:GeneralStyles.FFImage15X15Style}"/>
+                            <FFImage:SvgCachedImage Source="star_empty.svg" Style="{x:Static Style:GeneralStyles.FFImage15X15Style}"/>
+                            <FFImage:SvgCachedImage Source="star_empty.svg" Style="{x:Static Style:GeneralStyles.FFImage15X15Style}"/>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="SelectRating"/>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    </StackLayout>
+                    <Label Text="{x:Static XResource:MLResource.YOURREVIEW}" Style="{x:Static Style:GeneralStyles.LabelNameProductStyle}"/>
+                    <CustomRenderer:CustomEditor Style="{x:Static Style:GeneralStyles.EditorNoteHegith100Style}"
+                                                     BackgroundColor="#F2F2F2" Placeholder="{x:Static XResource:MLResource.WriteYourCommentHere}" PlaceholderColor="#BFBFBF"
+                                                     TextColor="Black" Text="{Binding InvoiceDetailsProperty.ReviewComment.Comment}"/>
+                    <Button Text="{x:Static XResource:MLResource.SubmitYourComment}" BackgroundColor="#3A1D0F" 
+                                        Clicked="SubmitReview"
+                                        TextColor="White" VerticalOptions="End"
+                                        Style="{x:Static Style:GeneralStyles.ButtonRaduis10Marign30x0}"/>
+                </StackLayout>
+                <Frame.Triggers>
+                    <DataTrigger TargetType="Frame" Binding="{Binding Source={x:Reference HolderPage},Path=IsVisible}" Value="True">
+                        <Setter Property="IsVisible" Value="True"/>
+                    </DataTrigger>
+                </Frame.Triggers>
+            </Frame>
+            
+            <!--Wait-->
+            <ContentViewHelper:Loader IsVisible="{Binding InvoiceDetailsProperty.IsLoading}"/>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

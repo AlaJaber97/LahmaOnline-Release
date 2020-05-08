@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:CustomRenderer="clr-namespace:LahmaOnline.CustomRenderer"
+             mc:Ignorable="d"
+             x:Class="LahmaOnline.UserControls.BarShowImagesProduct">
+  <ContentView.Content>
+        <StackLayout  Margin="0" Padding="0" Spacing="0">
+            <Grid x:Name="CollectionImages" BackgroundColor="Transparent" Padding="0" ColumnSpacing="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"></RowDefinition>
+                </Grid.RowDefinitions>
+            </Grid>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

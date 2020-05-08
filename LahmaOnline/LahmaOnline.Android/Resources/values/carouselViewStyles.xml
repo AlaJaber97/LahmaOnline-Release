@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+  <declare-styleable name="ViewPagerIndicator">
+    <!-- Style of the circle indicator. -->
+    <attr name="vpiCirclePageIndicatorStyle" format="reference"/>
+  </declare-styleable>
+
+  <declare-styleable name="CirclePageIndicator">
+    <!-- Whether or not the indicators should be centered. -->
+    <attr name="vpiCentered" format="boolean" />
+    <!-- Color of the filled circles that represents pages. -->
+    <attr name="vpiPageColor" format="color" />
+    <!-- Orientation of the indicator. -->
+    <attr name="vpiOrientation">
+      <enum name="horizontal" value="0" />
+      <enum name="vertical" value="1" />
+    </attr>
+    <!-- Whether or not the selected indicator snaps to the circles. -->
+    <attr name="vpiSnap" format="boolean" />
+
+    <!-- Radius of the circles. This is also the spacing between circles. -->
+    <attr name="vpiRadius" format="dimension" />
+    <!-- Color of the filled circle that represents the current page. -->
+    <attr name="vpiFillColor" format="color" />
+    <!-- Color of the open circles. -->
+    <attr name="vpiStrokeColor" format="color" />
+    <!-- Width of the stroke used to draw the circles. -->
+    <attr name="vpiStrokeWidth" format="dimension" />
+
+  </declare-styleable>
+
+  <color name="vpi__background_holo_dark">#ff000000</color>
+  <color name="vpi__background_holo_light">#fff3f3f3</color>
+  <color name="vpi__bright_foreground_holo_dark">@color/vpi__background_holo_light</color>
+  <color name="vpi__bright_foreground_holo_light">@color/vpi__background_holo_dark</color>
+  <color name="vpi__bright_foreground_disabled_holo_dark">#ff4c4c4c</color>
+  <color name="vpi__bright_foreground_disabled_holo_light">#ffb2b2b2</color>
+  <color name="vpi__bright_foreground_inverse_holo_dark">@color/vpi__bright_foreground_holo_light</color>
+  <color name="vpi__bright_foreground_inverse_holo_light">@color/vpi__bright_foreground_holo_dark</color>
+
+  <bool name="default_circle_indicator_centered">true</bool>
+  <color name="default_circle_indicator_fill_color">#FFFFFFFF</color>
+  <color name="default_circle_indicator_page_color">#00000000</color>
+  <integer name="default_circle_indicator_orientation">0</integer>
+  <dimen name="default_circle_indicator_radius">3dp</dimen>
+  <bool name="default_circle_indicator_snap">false</bool>
+  <color name="default_circle_indicator_stroke_color">#FFDDDDDD</color>
+  <dimen name="default_circle_indicator_stroke_width">1dp</dimen>
+
+  <style name="Theme.PageIndicatorDefaults" parent="android:Theme">
+    <item name="vpiCirclePageIndicatorStyle">@style/Widget.CirclePageIndicator</item>
+  </style>
+
+  <style name="Widget"></style>
+
+  <style name="Widget.CirclePageIndicator" parent="Widget">
+    <item name="vpiCentered">@bool/default_circle_indicator_centered</item>
+    <item name="vpiPageColor">@color/default_circle_indicator_page_color</item>
+    <item name="vpiOrientation">@integer/default_circle_indicator_orientation</item>
+    <item name="vpiSnap">@bool/default_circle_indicator_snap</item>
+
+    <item name="vpiRadius">@dimen/default_circle_indicator_radius</item>
+    <item name="vpiFillColor">@color/default_circle_indicator_fill_color</item>
+    <item name="vpiStrokeColor">@color/default_circle_indicator_stroke_color</item>
+    <item name="vpiStrokeWidth">@dimen/default_circle_indicator_stroke_width</item>
+  </style>
+</resources>

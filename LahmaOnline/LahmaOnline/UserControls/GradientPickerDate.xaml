@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:CustomRenderer="clr-namespace:LahmaOnline.CustomRenderer"
+             xmlns:Style="clr-namespace:LahmaOnline.StyleViews.Styles"
+             x:Class="LahmaOnline.UserControls.GradientPickerDate" >
+  <ContentView.Content>
+        <Frame x:Name="FrameContainer" OutlineColor="#F5F4F6" Margin="0" Padding="0" HasShadow="False">
+            <StackLayout  x:Name="StackLayout" Orientation="Horizontal" Margin="0" Spacing="0" Padding="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" 
+                         Style="{x:Static Style:GeneralStyles.ViewFlowDirection}">
+                <CustomRenderer:VGradientBoxView x:Name="GradientBox" Margin="0" HorizontalOptions="Start" VerticalOptions="Fill"/>
+                <DatePicker x:Name="PickerChoice" Margin="0" 
+                        HorizontalOptions="FillAndExpand" Format="D"
+                        VerticalOptions="Center" BackgroundColor="Transparent"
+                        DateSelected="PickerChoice_DateSelected"/>
+            </StackLayout>
+        </Frame>
+  </ContentView.Content>
+</ContentView>

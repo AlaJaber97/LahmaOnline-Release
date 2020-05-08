@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="LahmaOnline.Pages.ChatPage"
+             xmlns:Custom="clr-namespace:LahmaOnline.CustomRenderer"
+             xmlns:Style="clr-namespace:LahmaOnline.StyleViews.Styles"
+             xmlns:Converter="clr-namespace:LahmaOnline.Converter"
+             BackgroundColor="White">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Converter:InversConverter x:Key="InverseBool" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <ListView
+            Grid.Row="0"
+            x:Name="MessagesListView"
+            FlowDirection="RightToLeft"
+            HasUnevenRows="True"
+            ItemsSource="{Binding Messages}"
+            IsRefreshing="{Binding IsLoading}"
+            IsPullToRefreshEnabled="True"
+            RefreshCommand="{Binding RefreshCommend}"
+            SeparatorVisibility="None"
+            VerticalOptions="End">
+            <ListView.Header>
+                <Frame IsClippedToBounds="True"  x:Name="NoteConnected" Style="{x:Static Style:GeneralStyles.FramePadding10Marign0}"
+                           HasShadow="True">
+                    <Label TextColor="White" Style="{x:Static Style:GeneralStyles.LabelTitleFont22_Style}"/>
+                </Frame>
+            </ListView.Header>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid>
+                            <!--InComming Message-->
+                            <StackLayout Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace3_Style}" FlowDirection="LeftToRight" HorizontalOptions="FillAndExpand"
+                                    IsVisible="{Binding IsSystemMessage}">
+                                <Frame IsClippedToBounds="True"  Style="{x:Static Style:GeneralStyles.FrameOptionMenuMarign0Padding10Raduis5}"
+                                    BackgroundColor="#3A1D0F" 
+                                    WidthRequest="200" HorizontalOptions="Start">
+                                    <Label Text="{Binding Message}" TextColor="White"/>
+                                </Frame>
+                            </StackLayout>
+
+                            <!--OutComming Message-->
+                            <StackLayout Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace3_Style}"
+                                         FlowDirection="RightToLeft" HorizontalOptions="FillAndExpand"
+                                         IsVisible="{Binding IsOwnMessage}">
+                                <Frame IsClippedToBounds="True"  Style="{x:Static Style:GeneralStyles.FrameOptionMenuMarign0Padding10Raduis5}" 
+                                       BackgroundColor="#AA784A"
+                                       WidthRequest="200" HorizontalOptions="Start">
+                                    <Label Text="{Binding Message}" TextColor="White"/>
+                                </Frame>
+                            </StackLayout>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <StackLayout Grid.Row="1" Orientation="Horizontal" Margin="0" Padding="0" Spacing="0" 
+                     Style="{x:Static Style:GeneralStyles.ViewFlowDirection}">
+            <Button
+                BackgroundColor="#3A1D0F"
+                Clicked="SendButton_Clicked"
+                HorizontalOptions="Start"
+                Text="Send"
+                TextColor="White"
+                VerticalOptions="FillAndExpand" />
+            <StackLayout Margin="0" Padding="0" Spacing="10" VerticalOptions="End" HorizontalOptions="FillAndExpand">
+
+                <Entry
+                    BackgroundColor="#F5F9FA"
+                    Placeholder="Name Receive"
+                    PlaceholderColor="#969DAF"
+                    HorizontalOptions="FillAndExpand"
+                    x:Name="txtNameReceive"
+                    Keyboard="Chat"  IsVisible="False"
+                    TextColor="Black" />
+
+                <Entry
+                BackgroundColor="#F5F9FA"
+                Placeholder="Message"
+                PlaceholderColor="#969DAF"
+                HorizontalOptions="FillAndExpand"
+                x:Name="MessageEntry"
+                Keyboard="Chat"  
+                TextColor="Black" />
+            </StackLayout>
+        </StackLayout>
+        <StackLayout x:Name="StackInsertEmail" IsVisible="False" Margin="0" Padding="0" Spacing="0" BackgroundColor="LightGray" Grid.RowSpan="2">
+            <StackLayout Style="{x:Static Style:GeneralStyles.StackLayoutMaring20x10Spacing5}" VerticalOptions="CenterAndExpand">
+                <Custom:CustomEntry BackgroundColor="#F5F9FA"
+                                    Placeholder="Enter you email" PlaceholderColor="#969DAF"
+                                    Text="{Binding UserName}"
+                                    HorizontalOptions="FillAndExpand" Keyboard="Chat"  
+                                    x:Name="txtUserName" TextColor="Black" 
+                                    Style="{x:Static Style:GeneralStyles.EntryWeightFont15Style}"/>
+                <Button BackgroundColor="#3A1D0F" Clicked="ConnectDisconnectEvent"
+                        HorizontalOptions="FillAndExpand" VerticalOptions="Start" 
+                        Text="Connected" TextColor="White"
+                        Style="{x:Static Style:GeneralStyles.ButtonSubmitStyle}"/>
+            </StackLayout>
+        </StackLayout>
+    </Grid>
+</ContentPage>

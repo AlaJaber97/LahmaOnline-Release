@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="19.731" height="24.75" viewBox="0 0 19.731 24.75">
+  <defs>
+    <clipPath id="clip-path">
+      <rect width="19.732" height="24.75" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="BagButActive" clip-path="url(#clip-path)">
+    <g id="Group_53217" data-name="Group 53217">
+      <g id="Group_53216" data-name="Group 53216">
+        <g id="Group_53215" data-name="Group 53215">
+          <g id="Group_53214" data-name="Group 53214">
+            <path id="Path_17383" data-name="Path 17383" d="M809.789,839.246l-1.43-16.12a.566.566,0,0,0-.559-.514h-3.064l0-.124a4.808,4.808,0,0,0-9.615,0l0,.124h-3.064a.56.56,0,0,0-.559.514l-1.432,16.156a3.435,3.435,0,0,0,3.621,3.218h12.487a3.436,3.436,0,0,0,3.623-3.2Zm-13.542-16.762a3.679,3.679,0,0,1,7.356,0l0,.128h-7.362Zm9.923,18.886H793.682a2.332,2.332,0,0,1-2.495-2.04l1.38-15.582h2.545v2.22a.565.565,0,1,0,1.13,0v-2.22h7.36v2.22a.565.565,0,1,0,1.13,0v-2.22h2.547l1.384,15.568A2.332,2.332,0,0,1,806.169,841.37Z" 
+                transform="translate(-790.061 -817.75)" fill="#3a1d0f"/>
+          </g>
+        </g>
+      </g>
+    </g>
+    <g id="Group_54447" data-name="Group 54447" opacity="0.3">
+      <g id="Group_53220" data-name="Group 53220">
+        <g id="Group_53219" data-name="Group 53219">
+          <g id="Group_53218" data-name="Group 53218">
+            <path id="Path_17384" data-name="Path 17384" d="M809.789,839.246l-1.43-16.12a.566.566,0,0,0-.559-.514h-3.064l0-.124a4.808,4.808,0,0,0-9.615,0l0,.124h-3.064a.56.56,0,0,0-.559.514l-1.432,16.156a3.435,3.435,0,0,0,3.621,3.218h12.487a3.436,3.436,0,0,0,3.623-3.2Z" 
+                transform="translate(-790.061 -817.75)" fill="#3a1d0f"/>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

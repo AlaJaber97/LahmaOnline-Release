@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="LahmaOnline.Pages.DeliveryAreas"
+             BackgroundColor="#F4F7FA"
+             xmlns:UserControl="clr-namespace:LahmaOnline.UserControls"
+             xmlns:CustomRenderer="clr-namespace:LahmaOnline.CustomRenderer"
+             xmlns:Style="clr-namespace:LahmaOnline.StyleViews.Styles"
+             xmlns:FFImage="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             xmlns:XResource="clr-namespace:LahmaOnline.MultiLanguage"
+             xmlns:ConView="clr-namespace:LahmaOnline.Pages"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+
+        <Grid Style="{x:Static Style:GeneralStyles.GridPaddingBottom30}" Grid.RowSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <!--Header Page-->
+            <Grid Margin="0" Padding="0" Grid.Row="0">
+                <BoxView BackgroundColor="#4D4A4948" Style="{x:Static Style:GeneralStyles.BoxLabelH300Style}"
+                         HorizontalOptions="FillAndExpand"/>
+                <BoxView BackgroundColor="White" Style="{x:Static Style:GeneralStyles.BoxLabelH300Maring0x0x0x1Style}"
+                         HorizontalOptions="FillAndExpand"/>
+
+                <FFImage:SvgCachedImage Source="BackArrowG.svg" HorizontalOptions="{Binding HorizontalOptionsArrow}" VerticalOptions="Start"
+                                                    Rotation="{Binding .,Converter={StaticResource Key=CalRotation}}"
+                                                    Style="{x:Static Style:GeneralStyles.FFImage20X20WithMargin20Style}">
+                    <FFImage:SvgCachedImage.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="BackPage"/>
+                    </FFImage:SvgCachedImage.GestureRecognizers>
+                </FFImage:SvgCachedImage>
+                <Label Text="{x:Static XResource:MLResource.DeliveryAreas}"
+                               Style="{x:Static Style:GeneralStyles.LabelAboutUSStyle}"
+                               HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+            </Grid>
+            <!--Content Page-->
+            <StackLayout  Style="{x:Static Style:GeneralStyles.StackLayoutWithMarginUp30_Style}" Grid.Row="1">
+                <UserControl:FormalFrame ColorIndicator="#E46767" Title="{x:Static XResource:MLResource.DeliveryAreas}" 
+                                                     ContentText="{Binding DeliveryAreasP.TextPage}"/>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

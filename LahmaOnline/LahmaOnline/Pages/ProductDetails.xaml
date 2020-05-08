@@ -1,0 +1,235 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="LahmaOnline.Pages.ProductDetails"
+             BackgroundColor="White"
+             xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
+             xmlns:UserControl="clr-namespace:LahmaOnline.UserControls"
+             xmlns:CustomRenderer="clr-namespace:LahmaOnline.CustomRenderer"
+             xmlns:Style="clr-namespace:LahmaOnline.StyleViews.Styles"
+             xmlns:FFImage="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             xmlns:XResource="clr-namespace:LahmaOnline.MultiLanguage"
+             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+             android:Application.WindowSoftInputModeAdjust="Resize"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <Grid Margin="0" Padding="0">
+            <Grid Grid.Row="0" Margin="0" Padding="0" RowSpacing="0" ColumnSpacing="0" VerticalOptions="FillAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <!--Navigation Bar-->
+                <StackLayout  Grid.Row="0" Orientation="Horizontal" Style="{x:Static Style:GeneralStyles.NavBarStyle}">
+                    <FFImage:SvgCachedImage Source="BackArrowWhite.svg" Rotation="{Binding .,Converter={StaticResource Key=CalRotation}}"
+                                            Style="{x:Static Style:GeneralStyles.FFImage20X20Style}">
+                        <FFImage:SvgCachedImage.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="BackPage"/>
+                        </FFImage:SvgCachedImage.GestureRecognizers>
+                    </FFImage:SvgCachedImage>
+                    <Label Text="{x:Static XResource:MLResource.TitleProject }" Style="{x:Static Style:GeneralStyles.LabelTitlePageStyle}"/>
+                    <BoxView Style="{x:Static Style:GeneralStyles.BoxImage20X20Style}" BackgroundColor="Transparent"/>
+                </StackLayout>
+                <!--Content Page-->
+                <StackLayout  Grid.Row="1" Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace10_Style}" VerticalOptions="Start">
+                    <ScrollView x:Name="ScrollPage"  Margin="0" Padding="0" VerticalOptions="Start">
+                        <StackLayout  x:Name="PageStack" Margin="0" Padding="0" Spacing="0">
+                            <!--Image Product-->
+                            <Image Source="{Binding DetailsProperty.Product.ImageUrl}" HeightRequest="325" 
+                                   HorizontalOptions="FillAndExpand" Aspect="AspectFill"
+                                   Margin="0" VerticalOptions="Start"/>
+                            <!--Info About Product-->
+                            <StackLayout  Padding="10" Margin="0" Spacing="5" >
+                                <!-- Rate Product-->
+                                <UserControl:RateStars  FillStarImage="star_filled.svg" EmptyStarImage="star_empty.svg" 
+                                                        ValueRate="{Binding DetailsProperty.Product.Rate}" HorizontalOptions="End"/>
+                                <!-- Price Product and Title Product-->
+                                <StackLayout  Orientation="Horizontal" Margin="0" Padding="0" Spacing="0">
+
+                                    <!-- Title Product-->
+                                    <Label Text="{Binding DetailsProperty.Product.Name}"  HorizontalOptions="FillAndExpand" TextColor="#242C37" FontAttributes="Bold" FontSize="20" VerticalOptions="Center"/>
+                                    <!-- Price Product-->
+                                    <Label TextColor="#272A3F">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding DetailsProperty.Product.PriceSale, StringFormat='{0:N2}'}" Style="{x:Static Style:GeneralStyles.SpanPriceFont22_Style}"/>
+                                                <Span Text=" "/>
+                                                <Span Text="{x:Static XResource:MLResource.AED}" Style="{x:Static Style:GeneralStyles.SpanCurrencyFont18_Style}"/>
+                                                <Span Text="/" Style="{x:Static Style:GeneralStyles.SpanCurrencyFont18_Style}"/>
+                                                <Span Text="{Binding DetailsProperty.Product.ShortCut}" Style="{x:Static Style:GeneralStyles.SpanCurrencyFont18_Style}"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+
+                                </StackLayout>
+                                <!-- Descrption About Product-->
+                                <Label FontSize="15" Margin="15,0,0,0" 
+                                   Text="{Binding DetailsProperty.Product.ShortDescription}" 
+                                   TextColor="#9f9f9f" MaxLines="6" LineBreakMode="TailTruncation"/>
+                                <!-- Buttons Favrate and Buy-->
+                                <Button Text="{x:Static XResource:MLResource.BuyNow}" BackgroundColor="#3A1D0F" TextColor="White" Grid.Column="1" Clicked="PopupOrderProduct"/>
+
+                            </StackLayout>
+                            <StackLayout Margin="0" Padding="10" Spacing="5">
+                                <!--Tab Page-->
+                                <Grid>
+                                    <Label Grid.Column="0" ClassId="0" x:Name="CommentBtn"
+                                           Text="{x:Static XResource:MLResource.Comment}" TextColor="#8B4624"
+                                           Style="{x:Static Style:GeneralStyles.LabelTapTitle}">
+                                        <Label.GestureRecognizers >
+                                            <TapGestureRecognizer  Tapped="SwitchTabBar"/>
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                    <Label Grid.Column="1" ClassId="1" x:Name="ReviewBtn"
+                                           Text="{x:Static XResource:MLResource.AddReview}"
+                                           Style="{x:Static Style:GeneralStyles.LabelTapTitle}">
+                                        <Label.GestureRecognizers >
+                                            <TapGestureRecognizer  Tapped="SwitchTabBar"/>
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                    <BoxView x:Name="box" Grid.Column="0" Style="{x:Static Style:GeneralStyles.BottomLine}"/>
+                                </Grid>
+                            </StackLayout>
+                            <StackLayout Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace15Padding20_10_Style}" 
+                                         HorizontalOptions="FillAndExpand" VerticalOptions="Start" x:Name="lsComments">
+                                <StackLayout x:Name="ListComment"
+                                          BindableLayout.ItemsSource="{Binding DetailsProperty.Product.LstItemComment}" VerticalOptions="Start">
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackLayout Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace5_Style}">
+                                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand"
+                                                             Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace10Padding5_Style}">
+                                                <FFImage:SvgCachedImage Source="{Binding ImageDefualt}" 
+                                                                            Style="{x:Static Style:GeneralStyles.FFImage35X35Style}"
+                                                                            VerticalOptions="Start" HorizontalOptions="Start"/>
+                                                <Label MaxLines="4" LineBreakMode="TailTruncation"
+                                                           HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Start"
+                                                           Text="{Binding Comment}" Style="{x:Static Style:GeneralStyles.LabelEmailUserStyle}"/>
+                                            </StackLayout>
+
+                                                <BoxView Style="{x:Static Style:GeneralStyles.BoxSparetedLineStyle}"/>
+                                            </StackLayout>
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                                </StackLayout>
+                            </StackLayout>
+                            <StackLayout Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace15Padding20_10_Style}" HorizontalOptions="FillAndExpand"
+                                         x:Name="ReviewView" IsVisible="False">
+                                <Label Text="{x:Static XResource:MLResource.YOURREVIEW}" Style="{x:Static Style:GeneralStyles.LabelNameProductStyle}"/>
+                                <CustomRenderer:CustomEditor HeightRequest="150" Style="{x:Static Style:GeneralStyles.EditorNoteStyle}"
+                                                             BackgroundColor="#F2F2F2" Placeholder="{x:Static XResource:MLResource.WriteYourCommentHere}" PlaceholderColor="#BFBFBF"
+                                                             TextColor="Black" Text="{Binding DetailsProperty.ReviewComment.Comment}"/>
+
+                                <Label Text="{x:Static XResource:MLResource.E_mail}" Style="{x:Static Style:GeneralStyles.LabelNameProductStyle}"/>
+                                <CustomRenderer:CustomEntry BackgroundColor="#F2F2F2" TextColor="Black" HorizontalTextAlignment="Start"
+                                                            Text="{Binding DetailsProperty.ReviewComment.Email}"
+                                                            Style="{x:Static Style:GeneralStyles.EntryWeightStyle}"/>
+                                <Button Text="{x:Static XResource:MLResource.SubmitYourComment}" BackgroundColor="#3A1D0F" 
+                                        Clicked="SubmitReview"
+                                        TextColor="White"
+                                        Style="{x:Static Style:GeneralStyles.ButtonRaduis10Marign30x0}"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </ScrollView>
+                </StackLayout>
+            </Grid>
+            <!--PopUp Add TO Cart-->
+            <ContentView x:Name="HolderPage" IsVisible="False" Margin="0" Padding="0" 
+                         VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" 
+                         BackgroundColor="#4D4A4948">
+                <Grid x:Name="FrameProduct" VerticalOptions="Center" Style="{x:Static Style:GeneralStyles.GridWithMargin30x0Style}">
+                    <BoxView HorizontalOptions="Fill" VerticalOptions="Fill" Color="White" Style="{x:Static Style:GeneralStyles.BoxViewRaduis10Margin0x75x0x0_Style}"/>
+                    <StackLayout Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace10Margin0x150x0x0Padding15x30_Style}">
+                        <StackLayout   Margin="0" Padding="0" Spacing="0" VerticalOptions="Start" HorizontalOptions="Center">
+                            <Label Text="{Binding DetailsProperty.Product.Name}" LineBreakMode="TailTruncation" Style="{x:Static Style:GeneralStyles.LabelNameProductBoldStyle}"/>
+                            <Label TextColor="#272A3F" HorizontalOptions="Center">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding DetailsProperty.Product.PriceSale, StringFormat='{0:N2}'}" Style="{x:Static Style:GeneralStyles.SpanCategoryAndOriginFont18_Style}"/>
+                                        <Span Text="{x:Static XResource:MLResource.AED}" Style="{x:Static Style:GeneralStyles.SpanCurrencyFont14_Style}"/>
+                                        <Span Text="/" Style="{x:Static Style:GeneralStyles.SpanCurrencyFont14_Style}"/>
+                                        <Span Text="{Binding DetailsProperty.Product.ShortCut}" Style="{x:Static Style:GeneralStyles.SpanCurrencyFont14_Style}"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </StackLayout>
+                        <StackLayout Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace5_Style}">
+                            <input:RadioButtonGroupView x:Name="FatOption" Orientation="Horizontal" IsRequired="True" Spacing="10" IsVisible="{Binding DetailsProperty.Product.IsFat}">
+                                <input:RadioButton Text="{x:Static XResource:MLResource.Fat}" Value="1" IsChecked="True" Style="{x:Static Style:GeneralStyles.InputChoice}"/>
+                                <input:RadioButton Text="{x:Static XResource:MLResource.Without_Fat}" Value="2" Style="{x:Static Style:GeneralStyles.InputChoice}"/>
+                            </input:RadioButtonGroupView>
+                            <input:RadioButtonGroupView x:Name="SizeOption" Orientation="Horizontal" IsRequired="True"  Spacing="10" IsVisible="{Binding DetailsProperty.Product.IsSizing}">
+                                <input:RadioButton Text="{x:Static XResource:MLResource.Large}" Value="1" IsChecked="True" Style="{x:Static Style:GeneralStyles.InputChoice}"/>
+                                <input:RadioButton Text="{x:Static XResource:MLResource.Medium}" Value="2" Style="{x:Static Style:GeneralStyles.InputChoice}"/>
+                                <input:RadioButton Text="{x:Static XResource:MLResource.Small}" Value="3" Style="{x:Static Style:GeneralStyles.InputChoice}"/>
+                            </input:RadioButtonGroupView>
+                            <input:RadioButtonGroupView x:Name="SoftOption" Orientation="Horizontal" IsRequired="True"  Spacing="10" IsVisible="{Binding DetailsProperty.Product.IsNature}">
+                                <input:RadioButton Text="{x:Static XResource:MLResource.Soft}" Value="1" IsChecked="True" Style="{x:Static Style:GeneralStyles.InputChoice}"/>
+                                <input:RadioButton Text="{x:Static XResource:MLResource.Roughly}" Value="2" Style="{x:Static Style:GeneralStyles.InputChoice}"/>
+                            </input:RadioButtonGroupView>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" Margin="0" Padding="0" Spacing="0"  Style="{x:Static Style:GeneralStyles.ViewFlowDirection}">
+                            <Label Text="{Binding DetailsProperty.Product.FullShortCut}" Style="{x:Static Style:GeneralStyles.LabelWeightStyle}"/>
+                            <StackLayout  Orientation="Horizontal" Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace10_Style}">
+                                <ImageButton Source="minus" BackgroundColor="Transparent" BorderColor="#3A1D0F" Style="{x:Static Style:GeneralStyles.ImageButtonMinusPlusStyle}"
+                                         Clicked="MinusWeight"/>
+                                <Entry x:Name="Quentity" Text="1.00" MaxLength="4" Keyboard="Numeric"
+                                   Style="{x:Static Style:GeneralStyles.EntryWeightStyle}" />
+                                <ImageButton Source="plus" BackgroundColor="Transparent" BorderColor="#3A1D0F" Style="{x:Static Style:GeneralStyles.ImageButtonMinusPlusStyle}"
+                                         Clicked="PlusWeight"/>
+                            </StackLayout>
+                        </StackLayout>
+                        <CustomRenderer:CustomEditorWithBord x:Name="Note"  Placeholder="{x:Static XResource:MLResource.WriteTobutcher}"   Text="{Binding Note}"                                                       
+                                                          AutoSize="TextChanges" TextColor="#272A3F" IsTextPredictionEnabled="True"
+                                                          Style="{x:Static Style:GeneralStyles.EditorNoteStyle}"/>
+                        <Button Text="{x:Static XResource:MLResource.AddToCart}"
+                                                BackgroundColor="#3A1D0F" Clicked="AddToCart"
+                                                Style="{x:Static Style:GeneralStyles.ButtonSubmitStyle}"/>
+                    </StackLayout>
+                    <Frame IsClippedToBounds="True"  Style="{x:Static Style:GeneralStyles.FrameImage150X150Style}"
+                                BorderColor="White" OutlineColor="White" BackgroundColor="#CFCCC8" HasShadow="True" HorizontalOptions="Center" VerticalOptions="Start">
+                        <Image  Aspect="AspectFill" Margin="0" Source="{Binding DetailsProperty.Product.ImageUrl}"/>
+                    </Frame>
+                </Grid>
+
+                <ContentView.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="PopupOrderProduct"/>
+                </ContentView.GestureRecognizers>
+            </ContentView>
+            <!--PopupMessage-->
+            <ContentView x:Name="HolderMessage" IsVisible="False" Margin="0" Padding="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="#4D4A4948">
+                <ContentView.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="HideMessage"/>
+                </ContentView.GestureRecognizers>
+            </ContentView>
+            <Frame IsClippedToBounds="True"  x:Name="PopupMessage" IsVisible="False" Style="{x:Static Style:GeneralStyles.FrameMaring15Raduis10}" HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
+                <StackLayout  Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace10_Style}">
+                    <Frame IsClippedToBounds="True"  Style="{x:Static Style:GeneralStyles.FramePadding10Marign0}" HasShadow="False" BackgroundColor="#3A1D0F">
+                        <Label x:Name="Title" Text="{x:Static XResource:MLResource.SubscribeWithUs}" HorizontalOptions="Start"
+                           TextColor="White" Style="{x:Static Style:GeneralStyles.LabelTitlePageStyle}"/>
+                    </Frame>
+                    <StackLayout  Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace10Padding20_10_Style}">
+                        <Label x:Name="Message" Text="{x:Static XResource:MLResource.MustLogin}"
+                            TextColor="#272A3F" Style="{x:Static Style:GeneralStyles.LabelFont15Subtitel}"/>
+                        <StackLayout   Orientation="Horizontal" Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace10_Style}">
+                            <Button Text="{x:Static XResource:MLResource.Signin}" TextColor="White"
+                                                    Style="{x:Static Style:GeneralStyles.CButtonRaduis10Marign30x0}"
+                                                    Clicked="OpenLoginPage"
+                                                    BackgroundColor="#3A1D0F"
+                                                    HorizontalOptions="FillAndExpand" VerticalOptions="Start"/>
+                            <Button Text="{x:Static XResource:MLResource.Later}" TextColor="#3A1D0F"
+                                BorderColor="#3A1D0F" 
+                                Style="{x:Static Style:GeneralStyles.ButtonRaduis10Marign30x0}"
+                                BackgroundColor="White" Clicked="HideMessage"
+                                HorizontalOptions="FillAndExpand" VerticalOptions="Start"/>
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,167 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="LahmaOnline.Pages.RegisterUser"
+             xmlns:UserControl="clr-namespace:LahmaOnline.UserControls"
+             xmlns:CustomRenderer="clr-namespace:LahmaOnline.CustomRenderer"
+             xmlns:Style="clr-namespace:LahmaOnline.StyleViews.Styles"
+             xmlns:FFImage="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+             android:Application.WindowSoftInputModeAdjust="Resize"
+             xmlns:XResource="clr-namespace:LahmaOnline.MultiLanguage"
+             xmlns:ConView="clr-namespace:LahmaOnline.Pages"
+             xmlns:ContentViewHelper="clr-namespace:LahmaOnline.Pages.ContentViewHelper"
+             xmlns:xf="clr-namespace:LahmaOnline.Effect"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <!--Header Page-->
+        <Grid Margin="0" Padding="0" VerticalOptions="FillAndExpand">
+            <FFImage:SvgCachedImage Source="BGlogin.svg" Margin="0" Aspect="AspectFill"/>
+
+            <StackLayout  Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace10Padding15x30_Style}" HorizontalOptions="FillAndExpand">
+                <StackLayout  Orientation="Horizontal" Style="{x:Static Style:GeneralStyles.StackLayoutMaring20x10Spacing5}">
+                    <Label Text="{x:Static XResource:MLResource.Signin}" TextColor="#6E7990" HorizontalOptions="StartAndExpand">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OpenSingInPage"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label Text="{x:Static XResource:MLResource.Signup}" FontAttributes="Bold" TextColor="#3A1D0F" HorizontalOptions="EndAndExpand"/>
+                </StackLayout>
+                <FFImage:SvgCachedImage Source="Logo.svg" Aspect="AspectFill" 
+                                        VerticalOptions="Start" HorizontalOptions="Start" 
+                                        Style="{x:Static Style:GeneralStyles.FFImage50X50Style}"/>
+                <StackLayout  Margin="0" Padding="0" Spacing="0">
+                    <Label Text="{x:Static XResource:MLResource.WelcometoLahma}" TextColor="#272A3F" FontAttributes="Bold" HorizontalOptions="Start" Style="{x:Static Style:GeneralStyles.LabelFontSize35}"/>
+                    <Label Text="{x:Static XResource:MLResource.Let_sgetstarted}" TextColor="#6E7990" Style="{x:Static Style:GeneralStyles.LabelTitleSize25}"/>
+                </StackLayout>
+                <Grid Margin="0" Padding="0">
+                    <StackLayout  IsVisible="True" x:Name="InfoUserFrame" Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace5Padding5_Style}" HorizontalOptions="FillAndExpand">
+                        <Frame IsClippedToBounds="True"  x:Name="fraEnFullName" Margin="0" BorderColor="#707070" HasShadow="False"
+                               Style="{x:Static Style:GeneralStyles.FrameRaduis10Padding0x0x3x0_Style}">
+                            <Grid Margin="0" Padding="0">
+                                <CustomRenderer:CustomEntry x:Name="txtEnFullName" VerticalOptions="Center"
+                                                        TextColor="#272A3F" IsTextPredictionEnabled="False" 
+                                                        Placeholder="{x:Static XResource:MLResource.FullNameEn}" 
+                                                        Style="{x:Static Style:GeneralStyles.EntryCustomMargin4x2x2x2}"/>
+                                <FFImage:SvgCachedImage IsVisible="False" x:Name="WRenName" Source="warning.svg" Style="{x:Static Style:GeneralStyles.FFImage15X15Style}" HorizontalOptions="End" VerticalOptions="Center"/>
+                            </Grid>
+                        </Frame>
+                        <Frame IsClippedToBounds="True"  x:Name="fraArFullName" Margin="0" BorderColor="#707070" HasShadow="False"
+                               Style="{x:Static Style:GeneralStyles.FrameRaduis10Padding0x0x3x0_Style}">
+                            <Grid>
+                                <CustomRenderer:CustomEntry x:Name="txtArFullName" VerticalOptions="Center"
+                                                        TextColor="#272A3F" IsTextPredictionEnabled="False" 
+                                                        Placeholder="{x:Static XResource:MLResource.FullNameAr}" 
+                                                        Style="{x:Static Style:GeneralStyles.EntryCustomMargin4x2x2x2}"/>
+                                <FFImage:SvgCachedImage IsVisible="False" x:Name="WRarName" Source="warning.svg" Style="{x:Static Style:GeneralStyles.FFImage15X15Style}" HorizontalOptions="End" VerticalOptions="Center"/>
+                            </Grid>
+                        </Frame>
+                        <Frame IsClippedToBounds="True"  x:Name="fraEmail" Margin="0" BorderColor="#707070" HasShadow="False" Style="{x:Static Style:GeneralStyles.FrameRaduis10Padding0x0x3x0_Style}">
+                            <Grid>
+                                <CustomRenderer:CustomEntry x:Name="txtEmail" VerticalOptions="Center"
+                        TextColor="#272A3F" IsTextPredictionEnabled="False"  Keyboard="Email"
+                                                            Placeholder="{x:Static XResource:MLResource.E_mail}" 
+                                                            Style="{x:Static Style:GeneralStyles.EntryCustomMargin4x2x2x2}"/>
+                                <FFImage:SvgCachedImage IsVisible="False" x:Name="WRemail" Source="warning.svg" Style="{x:Static Style:GeneralStyles.FFImage15X15Style}" HorizontalOptions="End" VerticalOptions="Center"/>
+                            </Grid>
+                        </Frame>
+                        <Frame IsClippedToBounds="True"  x:Name="fraMobile" Margin="0" BorderColor="#707070" HasShadow="False"
+                               Style="{x:Static Style:GeneralStyles.FrameRaduis10Padding0x0x3x0_Style}">
+                            <Grid>
+                                <CustomRenderer:CustomEntry x:Name="txtMobile" VerticalOptions="Center" Keyboard="Telephone"
+                                                            TextColor="#272A3F" IsTextPredictionEnabled="False" 
+                                                            Placeholder="{x:Static XResource:MLResource.NumberPhone}"
+                                                            Style="{x:Static Style:GeneralStyles.EntryCustomMargin4x2x2x2}"/>
+                                <FFImage:SvgCachedImage IsVisible="False" x:Name="WRmobile" Source="warning.svg" Style="{x:Static Style:GeneralStyles.FFImage15X15Style}" HorizontalOptions="End" VerticalOptions="Center"/>
+                            </Grid>
+                        </Frame>
+                        <Frame IsClippedToBounds="True"  x:Name="fraPassword" Margin="0" BorderColor="#707070" HasShadow="False" 
+                               Style="{x:Static Style:GeneralStyles.FrameRaduis10Padding0x0x3x0_Style}">
+                            <Grid>
+                                <CustomRenderer:CustomEntry x:Name="txtPassword" VerticalOptions="Center"
+                                                            TextColor="#272A3F" IsTextPredictionEnabled="False" Placeholder="{x:Static XResource:MLResource.Password}"
+                                                            IsPassword="True" 
+                                                            Style="{x:Static Style:GeneralStyles.EntryCustomMargin4x2x2x2}">
+                                    <CustomRenderer:CustomEntry.Effects>
+                                        <xf:ShowHidePassEffect/>
+                                    </CustomRenderer:CustomEntry.Effects>
+                                </CustomRenderer:CustomEntry>
+                                <FFImage:SvgCachedImage IsVisible="False" x:Name="WRpassword" Source="warning.svg" Style="{x:Static Style:GeneralStyles.FFImage15X15Style}" HorizontalOptions="End" VerticalOptions="Center"/>
+                            </Grid>
+                        </Frame>
+                    </StackLayout>
+                    <StackLayout  IsVisible="False" x:Name="InfoUserFrame2" Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace5Padding5_Style}" HorizontalOptions="FillAndExpand">
+
+                        <Frame IsClippedToBounds="True"  x:Name="fraBirthday" BorderColor="#707070" HasShadow="False" Style="{x:Static Style:GeneralStyles.FrameRaduis5Padding2_Style}" >
+                            <Grid>
+                                <DatePicker DateSelected="StoreBirthday" />
+
+                                <FFImage:SvgCachedImage IsVisible="False" x:Name="WRbirthday" Source="warning.svg" Style="{x:Static Style:GeneralStyles.FFImage15X15Style}" HorizontalOptions="End" VerticalOptions="Center"/>
+                            </Grid>
+                        </Frame>
+
+                        <Frame IsClippedToBounds="True"  x:Name="fraNationality" BorderColor="#707070" HasShadow="False" Style="{x:Static Style:GeneralStyles.FrameRaduis5Padding2_Style}" >
+                            <Grid>
+                                <Picker Title="{x:Static XResource:MLResource.SelectNationality}" 
+                                    ItemsSource="{Binding RegisterUserProperty.Nationality}"
+                                    SelectedIndexChanged="StoreNationality"
+                                    ItemDisplayBinding="{Binding Name}"/>
+                                <FFImage:SvgCachedImage IsVisible="False" x:Name="WRnationality" Source="warning.svg" Style="{x:Static Style:GeneralStyles.FFImage15X15Style}" HorizontalOptions="End" VerticalOptions="Center"/>
+                            </Grid>
+                        </Frame>
+
+                        <Frame IsClippedToBounds="True"  x:Name="fraGender" Style="{x:Static Style:GeneralStyles.FrameRaduis5Padding2_Style}" 
+                               BorderColor="#707070" HasShadow="False"  >
+                            <Grid>
+                                <Picker Title="{x:Static XResource:MLResource.SelectGender}" 
+                                    SelectedIndexChanged="StoreGender"
+                                    ItemsSource="{Binding RegisterUserProperty.GenderType}"
+                                    SelectedItem="{Binding RegisterUserProperty.GenderSelected}"/>
+                                <FFImage:SvgCachedImage IsVisible="False" x:Name="WRgender" Source="warning.svg" Style="{x:Static Style:GeneralStyles.FFImage15X15Style}" HorizontalOptions="End" VerticalOptions="Center"/>
+                            </Grid>
+                        </Frame>
+                        <Frame IsClippedToBounds="True"  x:Name="fraAddress" Margin="0" BorderColor="#707070" HasShadow="False" Style="{x:Static Style:GeneralStyles.FrameRaduis10Padding0x0x3x0_Style}">
+                            <Grid>
+                                <CustomRenderer:CustomEntry x:Name="txtAddress" 
+                                                        Text="{Binding RegisterUserProperty.infoUserRegister.Address}"
+                                                        TextColor="#272A3F" IsTextPredictionEnabled="False" Placeholder="{x:Static XResource:MLResource.DeliveryAddress}"
+                                                        Style="{x:Static Style:GeneralStyles.EntryCustomMargin4x2x2x2}"/>
+                                <FFImage:SvgCachedImage IsVisible="False" x:Name="WRaddress" Source="warning.svg" Style="{x:Static Style:GeneralStyles.FFImage15X15Style}" HorizontalOptions="End" VerticalOptions="Center"/>
+                            </Grid>
+                        </Frame>
+                    </StackLayout>
+                </Grid>
+                <StackLayout Orientation="Horizontal" Margin="0" Padding="0" Spacing="0" HorizontalOptions="FillAndExpand"
+                             FlowDirection="LeftToRight">
+                    <StackLayout Margin="0" Padding="0" Spacing="0" HorizontalOptions="Start">
+                        <Grid Margin="0" Padding="0">
+                            <Button x:Name="ButNext" Text="{x:Static XResource:MLResource.Next}" TextColor="White"
+                                BorderColor="#3A1D0F" Clicked="NextFrameRegister"
+                                Style="{x:Static Style:GeneralStyles.ButtonRaduis10Marign30x0}"
+                                BackgroundColor="#3A1D0F" Margin="0"
+                                HorizontalOptions="EndAndExpand" VerticalOptions="Start"/>
+
+                            <Button IsVisible="False" x:Name="ButSubmit" Text="{x:Static XResource:MLResource.Submit}" TextColor="#3A1D0F"
+                                BorderColor="#3A1D0F" Clicked="SubmitInfoUser"
+                                Style="{x:Static Style:GeneralStyles.ButtonRaduis10Marign30x0}"
+                                BackgroundColor="White" Margin="0"
+                                HorizontalOptions="EndAndExpand" VerticalOptions="Start"/>
+                        </Grid>
+                    </StackLayout>
+
+                    <Button x:Name="ButPrevious" HorizontalOptions="EndAndExpand" VerticalOptions="End"
+                            IsVisible="False"
+                            Text="{x:Static XResource:MLResource.Previous}" TextColor="White"
+                            BorderColor="#3A1D0F" Clicked="PreviousFrameRegister"
+                            Style="{x:Static Style:GeneralStyles.ButtonRaduis10Marign30x0}"
+                            BackgroundColor="#3A1D0F" Margin="0"/>
+                </StackLayout>
+            </StackLayout>
+
+            <ContentViewHelper:Loader IsVisible="{Binding RegisterUserProperty.IsLoading}"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

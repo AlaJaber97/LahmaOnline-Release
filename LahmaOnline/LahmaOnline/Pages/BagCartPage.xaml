@@ -1,0 +1,394 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="LahmaOnline.Pages.BagCartPage"
+             BackgroundColor="#F4F7FA"
+             xmlns:UserControl="clr-namespace:LahmaOnline.UserControls"
+             xmlns:CustomRenderer="clr-namespace:LahmaOnline.CustomRenderer"
+             xmlns:Style="clr-namespace:LahmaOnline.StyleViews.Styles"
+             xmlns:FFImage="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             xmlns:XResource="clr-namespace:LahmaOnline.MultiLanguage"
+             xmlns:ConView="clr-namespace:LahmaOnline.Pages"
+             xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
+             xmlns:Converter="clr-namespace:LahmaOnline.Converter"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Resources>
+        <Converter:intToFat x:Key="intToFat"/>
+        <Converter:intToSize x:Key="intToSize"/>
+        <Converter:intToNature x:Key="intToNature"/>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid>
+
+            <Grid Margin="0" Padding="0" RowSpacing="0" ColumnSpacing="0" VerticalOptions="FillAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <!--Navigation Bar-->
+                <StackLayout  Orientation="Horizontal" Grid.Row="0" Style="{x:Static Style:GeneralStyles.NavBarStyle}" VerticalOptions="Start">
+                    <Label Text="{x:Static XResource:MLResource.TitleProject}" Style="{x:Static Style:GeneralStyles.LabelTitlePageStyle}"/>
+                </StackLayout>
+                <!--Content Page-->
+                <ListView x:Name="ListCart" Grid.Row="1"  Margin="0"  
+                          VerticalOptions="FillAndExpand" HasUnevenRows="True"
+                          IsRefreshing="{Binding BagCartProperty.IsLoading}"
+                          Refreshing="LoadData" ItemsSource="{Binding BagCartProperty.InfoBagCart.ProductInCart}" >
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout  x:Name="StackProduct" Style="{x:Static Style:GeneralStyles.StackLayoutWithPadding5x5_Style}">
+                                    <Frame IsClippedToBounds="True"  Style="{x:Static Style:GeneralStyles.FrameRaduis10_Style}"
+                                                   BorderColor="White" OutlineColor="White" HasShadow="True" HorizontalOptions="FillAndExpand">
+                                        <StackLayout  Orientation="Horizontal" Style="{x:Static Style:GeneralStyles.StackLayoutWithSpacing10Padding20x10x10x10_Style}">
+                                            <Frame IsClippedToBounds="True"  Style="{x:Static Style:GeneralStyles.FrameImage110X120Style}"
+                                                            BorderColor="White" OutlineColor="White" HasShadow="True" HorizontalOptions="Start" VerticalOptions="Start">
+                                                <Image Aspect="Fill" Margin="0" Source="{Binding ItemInfo.ImageUrl}"/>
+                                            </Frame>
+                                            <StackLayout  Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace5_Style}" HorizontalOptions="FillAndExpand">
+                                                <FFImage:SvgCachedImage Source="delete.svg" Style="{x:Static Style:GeneralStyles.FFImage25X25Style}" HorizontalOptions="End" VerticalOptions="Start" Margin="0">
+                                                    <FFImage:SvgCachedImage.GestureRecognizers>
+                                                        <TapGestureRecognizer Tapped="DeleteItemFromCart"/>
+                                                    </FFImage:SvgCachedImage.GestureRecognizers>
+                                                </FFImage:SvgCachedImage>
+                                                <Label Text="{Binding ItemInfo.Name}" Style="{x:Static Style:GeneralStyles.LabelNameProductStyle}" LineBreakMode="TailTruncation"/>
+                                                <StackLayout  Orientation="Horizontal" Margin="0" Padding="0" Spacing="0">
+                                                    <StackLayout  Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace3_Style}">
+                                                        <Label>
+                                                            <Label.FormattedText>
+                                                                <FormattedString>
+                                                                    <Span Text="{x:Static XResource:MLResource.UnitPrice}" Style="{x:Static Style:GeneralStyles.SpanUnitPrice}"/>
+                                                                    <Span Text=": " Style="{x:Static Style:GeneralStyles.SpanUnitPrice}"/>
+                                                                    <Span Text="{Binding ItemInfo.PriceSale, StringFormat='{0:N2} '}" Style="{x:Static Style:GeneralStyles.SpanCurrencyFont18_Style}" TextColor="#272A3F"/>
+                                                                    <Span Text=" "/>
+                                                                    <Span Text="{x:Static XResource:MLResource.AED}" Style="{x:Static Style:GeneralStyles.SpanCurrencyFont14_Style}" TextColor="#272A3F"  FontAttributes="Bold"/>
+                                                                    <Span Text="/" Style="{x:Static Style:GeneralStyles.SpanCurrencyFont14_Style}" TextColor="#272A3F"  FontAttributes="Bold"/>
+                                                                    <Span Text="{Binding ItemInfo.ShortCut}" Style="{x:Static Style:GeneralStyles.SpanCurrencyFont14_Style}" FontAttributes="Bold" TextColor="#272A3F"/>
+                                                                </FormattedString>
+                                                            </Label.FormattedText>
+                                                        </Label>
+                                                        <Label>
+                                                            <Label.FormattedText>
+                                                                <FormattedString>
+                                                                    <Span Text="{x:Static XResource:MLResource.Weight}" Style="{x:Static Style:GeneralStyles.SpanUnitPrice}"/>
+                                                                    <Span Text=": " Style="{x:Static Style:GeneralStyles.SpanUnitPrice}"/>
+                                                                    <Span Text="{Binding Qty,StringFormat='{0:N2}'}" Style="{x:Static Style:GeneralStyles.SpanPriceFont18_Style}" TextColor="#272A3F"/>
+                                                                </FormattedString>
+                                                            </Label.FormattedText>
+                                                        </Label>
+                                                        <Label>
+                                                            <Label.FormattedText>
+                                                                <FormattedString>
+                                                                    <Span Text="{x:Static XResource:MLResource.TotalAmount}" Style="{x:Static Style:GeneralStyles.SpanUnitPrice}"/>
+                                                                    <Span Text=": " Style="{x:Static Style:GeneralStyles.SpanUnitPrice}"/>
+                                                                    <Span Text="{Binding TotalAmount,StringFormat=' {0:N2}'}" Style="{x:Static Style:GeneralStyles.SpanPriceFont18_Style}" TextColor="#272A3F"/>
+                                                                    <Span Text=" "/>
+                                                                    <Span Text="{x:Static XResource:MLResource.AED}" Style="{x:Static Style:GeneralStyles.SpanCurrencyFont14_Style}" TextColor="#272A3F"/>
+                                                                </FormattedString>
+                                                            </Label.FormattedText>
+                                                        </Label>
+                                                    </StackLayout>
+                                                    <BoxView Style="{x:Static Style:GeneralStyles.BoxViewWidth1}" Color="Gray" HorizontalOptions="CenterAndExpand" VerticalOptions="Fill">
+                                                        <BoxView.Triggers>
+                                                            <MultiTrigger TargetType="BoxView">
+                                                                <MultiTrigger.Conditions>
+                                                                    <BindingCondition Binding="{Binding Source={x:Reference labIsFat},Path=Text}" Value=""/>
+                                                                    <BindingCondition Binding="{Binding Source={x:Reference labIsNature},Path=Text}" Value=""/>
+                                                                    <BindingCondition Binding="{Binding Source={x:Reference labIsSize},Path=Text}" Value=""/>
+                                                                </MultiTrigger.Conditions>
+                                                                <Setter Property="IsVisible" Value="False"/>
+                                                            </MultiTrigger>
+                                                        </BoxView.Triggers>
+                                                    </BoxView>
+                                                    <StackLayout  Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace3_Style}" VerticalOptions="Start" HorizontalOptions="Start">
+                                                        <Label x:Name="labIsFat" Text="{Binding Fat, Converter={StaticResource Key=intToFat}}" Style="{x:Static Style:GeneralStyles.LabelUnitPrice}"
+                                                                       IsVisible="{Binding ItemInfo.IsFat}">
+                                                            <Label.Triggers>
+                                                                <DataTrigger TargetType="Label" Binding="{Binding Fat, Converter={StaticResource Key=intToFat}}"
+                                                                                     Value="">
+                                                                    <Setter Property="IsVisible" Value="True"/>
+                                                                </DataTrigger>
+                                                            </Label.Triggers>
+                                                        </Label>
+                                                        <Label x:Name="labIsSize" Text="{Binding Size, Converter={StaticResource Key=intToSize}}" Style="{x:Static Style:GeneralStyles.LabelUnitPrice}"
+                                                                       IsVisible="{Binding ItemInfo.IsSizing}">
+                                                            <Label.Triggers>
+                                                                <DataTrigger TargetType="Label" Binding="{Binding Size, Converter={StaticResource Key=intToSize}}"
+                                                                                     Value="">
+                                                                    <Setter Property="IsVisible" Value="False"/>
+                                                                </DataTrigger>
+                                                            </Label.Triggers>
+                                                        </Label>
+                                                        <Label x:Name="labIsNature" Text="{Binding Nature, Converter={StaticResource Key=intToNature}}" Style="{x:Static Style:GeneralStyles.LabelUnitPrice}"
+                                                                       IsVisible="{Binding ItemInfo.IsNature}">
+                                                            <Label.Triggers>
+                                                                <DataTrigger TargetType="Label" Binding="{Binding Nature, Converter={StaticResource Key=intToNature}}"
+                                                                                     Value="">
+                                                                    <Setter Property="IsVisible" Value="False"/>
+                                                                </DataTrigger>
+                                                            </Label.Triggers>
+                                                        </Label>
+                                                    </StackLayout>
+                                                </StackLayout>
+                                                <Label LineBreakMode="WordWrap" MaxLines="2">
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <Span Text="{x:Static XResource:MLResource.Note}" Style="{x:Static Style:GeneralStyles.SpanUnitPrice}"/>
+                                                            <Span Text=": " Style="{x:Static Style:GeneralStyles.SpanUnitPrice}"/>
+                                                            <Span x:Name="LabNote" Text="{Binding Note}" Style="{x:Static Style:GeneralStyles.SpanCurrencyFont14_Style}" FontAttributes="Bold" TextColor="#272A3F"/>
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                    <Label.Triggers>
+                                                        <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference LabNote}, Path=Text}"
+                                                                 Value="">
+                                                            <Setter Property="IsVisible" Value="False"/>
+                                                        </DataTrigger>
+                                                    </Label.Triggers>
+                                                </Label>
+
+                                            </StackLayout>
+                                            <StackLayout.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="PopupOrderProduct"/>
+                                            </StackLayout.GestureRecognizers>
+                                        </StackLayout>
+                                    </Frame>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <ListView.Footer>
+                        <StackLayout Margin="0" Padding="0" Spacing="0" IsVisible="{Binding BagCartProperty.IsNoItems}">
+                            <FFImage:SvgCachedImage Source="EmptyList.svg" HorizontalOptions="Center" VerticalOptions="Center"
+                                                        Style="{x:Static Style:GeneralStyles.FFImage250X250Style}"/>
+                            <Label Text="{x:Static XResource:MLResource.NoItemInCart}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center"
+                                       Style="{x:Static Style:GeneralStyles.LabelTitleSize25}"/>
+                        </StackLayout>
+                    </ListView.Footer>
+                </ListView>
+                <!--Invoice-->
+                <Frame IsClippedToBounds="True"  x:Name="Invoice" Grid.Row="1" Style="{x:Static Style:GeneralStyles.FrameMaring_15}"
+                                BackgroundColor="White" VerticalOptions="End"
+                                BorderColor="White" OutlineColor="White" HasShadow="True" IsVisible="False">
+                    <StackLayout  x:Name="DetailsInvoice" Margin="0" Padding="0" Spacing="0" VerticalOptions="End">
+                        <Grid Margin="0" Padding="0">
+                            <BoxView Style="{x:Static Style:GeneralStyles.BoxViewR20x20x0x0_Style}" Color="#3A1D0F" HorizontalOptions="FillAndExpand" VerticalOptions="Fill"/>
+                            <FFImage:SvgCachedImage Source="Minmuize.svg" Style="{x:Static Style:GeneralStyles.FFImage20X20Margin10Style}" HorizontalOptions="End" VerticalOptions="Center">
+                                <FFImage:SvgCachedImage.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="ShowDetailsInvoice"/>
+                                </FFImage:SvgCachedImage.GestureRecognizers>
+                            </FFImage:SvgCachedImage>
+                        </Grid>
+
+                        <StackLayout x:Name="StackDetailsInvoice"  Style="{x:Static Style:GeneralStyles.StackPadding20Spacing10}">
+                            <StackLayout Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace5_Style}">
+                                <!--Sub Total-->
+                                <StackLayout  Orientation="Horizontal" Margin="0" Padding="0" Spacing="0" HorizontalOptions="FillAndExpand">
+                                    <Label HorizontalOptions="StartAndExpand" TextColor="#272A3F">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{x:Static XResource:MLResource.Subtotal}" Style="{x:Static Style:GeneralStyles.SpanTitleFont22_Style}"  FontAttributes="None"/>
+                                                <Span Text="( " Style="{x:Static Style:GeneralStyles.SpanTitleFont22_Style}"  FontAttributes="None"/>
+                                                <Span Text="{Binding BagCartProperty.InfoBagCart.ItemsCount, StringFormat='{0:D}'}" Style="{x:Static Style:GeneralStyles.SpanTitleFont22_Style}"  FontAttributes="None"/>
+                                                <Span Text=" "/>
+                                                <Span Text="{x:Static XResource:MLResource.items}" Style="{x:Static Style:GeneralStyles.SpanTitleFont22_Style}"  FontAttributes="None"/>
+                                                <Span Text=" )" Style="{x:Static Style:GeneralStyles.SpanTitleFont22_Style}"  FontAttributes="None"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label HorizontalOptions="End" TextColor="#272A3F">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding BagCartProperty.InfoBagCart.SubTotal, StringFormat='{0:N2}'}"
+                                                           Style="{x:Static Style:GeneralStyles.SpanPriceFont22_Style}"/>
+                                                <Span Text=" "/>
+                                                <Span Text="{x:Static XResource:MLResource.AED}"
+                                                                      Style="{x:Static Style:GeneralStyles.SpanCurrencyFont18_Style}"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </StackLayout>
+                                <!--PaymentLessThan50-->
+                                <StackLayout  Orientation="Horizontal" Margin="0" Padding="0" Spacing="0" HorizontalOptions="FillAndExpand">
+                                    <Label Text="{x:Static XResource:MLResource.PaymentLessThan50AED}" Style="{x:Static Style:GeneralStyles.LabelTitleFont22_Style}" 
+                                                   FontAttributes="None" TextColor="#272A3F" HorizontalOptions="StartAndExpand"/>
+                                    <Label HorizontalOptions="End" TextColor="#272A3F">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span x:Name="PaymentLessThan50" Text="{Binding BagCartProperty.InfoBagCart.AddtionTax, StringFormat='{0:N2}'}"
+                                                          Style="{x:Static Style:GeneralStyles.SpanPriceFont22_Style}"/>
+                                                <Span Text=" "/>
+                                                <Span Text="{x:Static XResource:MLResource.AED}"
+                                                                      Style="{x:Static Style:GeneralStyles.SpanCurrencyFont18_Style}"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <StackLayout.Triggers>
+                                        <DataTrigger TargetType="StackLayout" 
+                                                         Binding="{Binding Source={x:Reference PaymentLessThan50}, Path=Text}"
+                                                         Value="0.00">
+                                            <Setter Property="IsVisible" Value="False"/>
+                                        </DataTrigger>
+                                    </StackLayout.Triggers>
+                                </StackLayout>
+                                <!--Total Before Tax-->
+                                <StackLayout Orientation="Horizontal" Margin="0" Padding="0" Spacing="0" HorizontalOptions="FillAndExpand">
+                                    <Label Text="{x:Static XResource:MLResource.TotalBeforeTax}" Style="{x:Static Style:GeneralStyles.LabelTitleFont22_Style}" 
+                                                   FontAttributes="None" TextColor="#272A3F" HorizontalOptions="StartAndExpand"/>
+                                    <Label HorizontalOptions="End" TextColor="#272A3F">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding BagCartProperty.InfoBagCart.TotalBeforeTax, StringFormat='{0:N2}'}"
+                                                                      Style="{x:Static Style:GeneralStyles.SpanPriceFont22_Style}"/>
+                                                <Span Text=" "/>
+                                                <Span Text="{x:Static XResource:MLResource.AED}"
+                                                                      Style="{x:Static Style:GeneralStyles.SpanCurrencyFont18_Style}"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </StackLayout>
+                                <!--Tax (5%)-->
+                                <StackLayout Orientation="Horizontal" Margin="0" Padding="0" Spacing="0" HorizontalOptions="FillAndExpand">
+                                    <Label TextColor="#272A3F" HorizontalOptions="StartAndExpand">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{x:Static XResource:MLResource.Tax}" Style="{x:Static Style:GeneralStyles.SpanTitleFont22_Style}" FontAttributes="None"/>
+                                                <Span Text="( " Style="{x:Static Style:GeneralStyles.SpanTitleFont22_Style}" FontAttributes="None"/>
+                                                <Span Text="5" Style="{x:Static Style:GeneralStyles.SpanTitleFont22_Style}"  FontAttributes="None"/>
+                                                <Span Text="% )" Style="{x:Static Style:GeneralStyles.SpanTitleFont22_Style}" FontAttributes="None"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label HorizontalOptions="End" TextColor="#272A3F">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding BagCartProperty.InfoBagCart.TotalTax, StringFormat='{0:N2}'}"
+                                                                      Style="{x:Static Style:GeneralStyles.SpanPriceFont22_Style}"/>
+                                                <Span Text=" "/>
+                                                <Span Text="{x:Static XResource:MLResource.AED}"
+                                                                      Style="{x:Static Style:GeneralStyles.SpanCurrencyFont18_Style}"/>
+
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </StackLayout>
+                                <!--Total-->
+                                <StackLayout Orientation="Horizontal" Margin="0" Padding="0" Spacing="0" HorizontalOptions="FillAndExpand">
+                                    <Label Text="{x:Static XResource:MLResource.TotalAmount}" Style="{x:Static Style:GeneralStyles.LabelTitleFont22_Style}" 
+                                                   FontAttributes="None"
+                                                   TextColor="#272A3F" HorizontalOptions="StartAndExpand"/>
+                                    <Label HorizontalOptions="End" TextColor="#272A3F">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding BagCartProperty.InfoBagCart.TotalAmount, StringFormat='{0:N2}'}"
+                                                                      Style="{x:Static Style:GeneralStyles.SpanPriceFont22_Style}"/>
+                                                <Span Text=" "/>
+                                                <Span Text="{x:Static XResource:MLResource.AED}"
+                                                                      Style="{x:Static Style:GeneralStyles.SpanCurrencyFont18_Style}"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </StackLayout>
+                            </StackLayout>
+                            <Button Text="{x:Static XResource:MLResource.CheckOut}" TextColor="White"
+                                    Style="{x:Static Style:GeneralStyles.ButtonRaduis10Marign30x0}"
+                                    Clicked="OpenChectOutPage"                                                        
+                                    BackgroundColor="#3A1D0F" 
+                                    HorizontalOptions="FillAndExpand" VerticalOptions="End"/>
+                        </StackLayout>
+                    </StackLayout>
+                    <Frame.Triggers>
+                        <MultiTrigger TargetType="Frame">
+                            <MultiTrigger.Conditions>
+                                <BindingCondition Binding="{Binding BagCartProperty.IsLoading}" Value="False"/>
+                                <BindingCondition Binding="{Binding BagCartProperty.IsNoItems}" Value="False"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="IsVisible" Value="True"/>
+                        </MultiTrigger>
+                    </Frame.Triggers>
+                </Frame>
+            </Grid>
+            <!--Popup Edit Product-->
+            <ContentView x:Name="HolderPage" IsVisible="False" Margin="0" Padding="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="#4D4A4948">
+                <Grid x:Name="FrameProduct" VerticalOptions="Center" Opacity="0" IsVisible="False" Style="{x:Static Style:GeneralStyles.GridWithMargin30x0Style}">
+                    <BoxView HorizontalOptions="Fill" VerticalOptions="Fill" Color="White" Style="{x:Static Style:GeneralStyles.BoxViewRaduis10Margin0x75x0x0_Style}"/>
+
+                    <StackLayout  Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace10Margin0x150x0x0Padding15x30_Style}">
+                        <StackLayout  Margin="0" Padding="0" Spacing="0" VerticalOptions="Start" HorizontalOptions="Center">
+                            <Label Text="{Binding BagCartProperty.ProductSelect.ItemInfo.Name}" LineBreakMode="TailTruncation" Style="{x:Static Style:GeneralStyles.LabelNameProductBoldStyle}"/>
+                            <Label TextColor="#272A3F" HorizontalOptions="Center">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding BagCartProperty.ProductSelect.ItemInfo.PriceSale, StringFormat='{0:N2} '}" Style="{x:Static Style:GeneralStyles.SpanCategoryAndOriginFont18_Style}"/>
+                                        <Span Text=" "/>
+                                        <Span Text="{x:Static XResource:MLResource.AED}" Style="{x:Static Style:GeneralStyles.SpanCurrencyFont14_Style}"/>
+                                        <Span Text="/" Style="{x:Static Style:GeneralStyles.SpanCurrencyFont14_Style}"/>
+                                        <Span Text="{Binding BagCartProperty.ProductSelect.ItemInfo.ShortCut}" Style="{x:Static Style:GeneralStyles.SpanCurrencyFont14_Style}"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </StackLayout>
+                        <StackLayout  Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace5_Style}">
+
+                            <input:RadioButtonGroupView x:Name="FatOption" Orientation="Horizontal" Spacing="5" IsVisible="{Binding BagCartProperty.ProductSelect.ItemInfo.IsFat}">
+                                <input:RadioButton Text="{x:Static XResource:MLResource.Fat}" Value="1" Style="{x:Static Style:GeneralStyles.InputChoice}"/>
+                                <input:RadioButton Text="{x:Static XResource:MLResource.Without_Fat}" Value="2" Style="{x:Static Style:GeneralStyles.InputChoice}"/>
+                            </input:RadioButtonGroupView>
+
+                            <input:RadioButtonGroupView x:Name="SizeOption" Orientation="Horizontal" Spacing="5" IsVisible="{Binding BagCartProperty.ProductSelect.ItemInfo.IsSizing}">
+                                <input:RadioButton Text="{x:Static XResource:MLResource.Large}" Value="1" Style="{x:Static Style:GeneralStyles.InputChoice}"/>
+                                <input:RadioButton Text="{x:Static XResource:MLResource.Medium}" Value="2" Style="{x:Static Style:GeneralStyles.InputChoice}"/>
+                                <input:RadioButton Text="{x:Static XResource:MLResource.Small}" Value="3" Style="{x:Static Style:GeneralStyles.InputChoice}"/>
+                            </input:RadioButtonGroupView>
+
+
+                            <input:RadioButtonGroupView x:Name="SoftOption" Orientation="Horizontal" Spacing="5" IsVisible="{Binding BagCartProperty.ProductSelect.ItemInfo.IsNature}">
+                                <input:RadioButton Text="{x:Static XResource:MLResource.Soft}" Value="1" Style="{x:Static Style:GeneralStyles.InputChoice}"/>
+                                <input:RadioButton Text="{x:Static XResource:MLResource.Roughly}" Value="2" Style="{x:Static Style:GeneralStyles.InputChoice}"/>
+                            </input:RadioButtonGroupView>
+                        </StackLayout>
+
+                        <StackLayout  Orientation="Horizontal" Margin="0" Padding="0" Spacing="0"  Style="{x:Static Style:GeneralStyles.ViewFlowDirection}">
+                            <Label Text="{Binding BagCartProperty.ProductSelect.ItemInfo.FullShortCut}" Style="{x:Static Style:GeneralStyles.LabelWeightStyle}"/>
+                            <StackLayout  Orientation="Horizontal" Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace10_Style}">
+                                <ImageButton Source="minus" BackgroundColor="Transparent" BorderColor="#3A1D0F" Style="{x:Static Style:GeneralStyles.ImageButtonMinusPlusStyle}"
+                                         Clicked="MinusWeight"/>
+                                <Entry x:Name="Weight" Text="{Binding BagCartProperty.ProductSelect.Qty}" Placeholder="0.00" MaxLength="4" Keyboard="Numeric"
+                                   Style="{x:Static Style:GeneralStyles.EntryWeightStyle}" />
+                                <ImageButton Source="plus" BackgroundColor="Transparent" BorderColor="#3A1D0F" Style="{x:Static Style:GeneralStyles.ImageButtonMinusPlusStyle}"
+                                         Clicked="PlusWeight"/>
+                            </StackLayout>
+                        </StackLayout>
+                        <CustomRenderer:CustomEditorWithBord Text="{Binding BagCartProperty.ProductSelect.Note}"
+                                                        Placeholder="{x:Static XResource:MLResource.WriteTobutcher}"                                                   
+                                                          AutoSize="TextChanges" TextColor="#272A3F" IsTextPredictionEnabled="True"
+                                                          Style="{x:Static Style:GeneralStyles.EditorNoteStyle}"/>
+                        <StackLayout  Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace3_Style}">
+                            <Button Text="{x:Static XResource:MLResource.Edit}"
+                                    BackgroundColor="#3A1D0F" Clicked="AcceptEdit"
+                                    Style="{x:Static Style:GeneralStyles.ButtonSubmitStyle}"/>
+                            <Button Text="{x:Static XResource:MLResource.MoreDetails}"  Clicked="OpenProductDetailsPage"
+                                VerticalOptions="Start" BorderColor="#3A1D0F" BackgroundColor="WhiteSmoke"
+                                TextColor="#3A1D0F" Style="{x:Static Style:GeneralStyles.ButtonSubmitStyleWithBord}"/>
+                        </StackLayout>
+                    </StackLayout>
+                    <Frame IsClippedToBounds="True"  Style="{x:Static Style:GeneralStyles.FrameImage150X150Style}"
+                        BorderColor="White" OutlineColor="White" BackgroundColor="#CFCCC8" HasShadow="True" 
+                           HorizontalOptions="CenterAndExpand" VerticalOptions="Start">
+                        <Image  Aspect="AspectFill" Margin="0">
+                            <Image.Source>
+                                <UriImageSource Uri="{Binding BagCartProperty.ProductSelect.ItemInfo.ImageUrl}" CachingEnabled="False"/>
+                            </Image.Source>
+                        </Image>
+                    </Frame>
+                </Grid>
+
+                <ContentView.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="PopupOrderProduct"/>
+                </ContentView.GestureRecognizers>
+            </ContentView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

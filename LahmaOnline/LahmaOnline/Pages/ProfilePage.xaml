@@ -1,0 +1,364 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"             
+             x:Class="LahmaOnline.Pages.ProfilePage"
+             BackgroundColor="#F4F7FA"
+             xmlns:UserControl="clr-namespace:LahmaOnline.UserControls"
+             xmlns:CustomRenderer="clr-namespace:LahmaOnline.CustomRenderer"
+             xmlns:Style="clr-namespace:LahmaOnline.StyleViews.Styles"
+             xmlns:FFImage="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             xmlns:XResource="clr-namespace:LahmaOnline.MultiLanguage"
+             xmlns:ConView="clr-namespace:LahmaOnline.Pages"
+             xmlns:contentviewhelper="clr-namespace:LahmaOnline.Pages.ContentViewHelper"
+             xmlns:xf="clr-namespace:LahmaOnline.Effect"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <Grid Margin="0" Padding="0">
+            <Grid Margin="0" Padding="0" Grid.Row="0" VerticalOptions="FillAndExpand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <!--Header Page-->
+                    <Grid Margin="0" Padding="0" Grid.Row="0" VerticalOptions="StartAndExpand">
+                        <BoxView BackgroundColor="#4D4A4948" Style="{x:Static Style:GeneralStyles.BoxViewShadowStyle}"
+                                HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                        <BoxView BackgroundColor="White" Style="{x:Static Style:GeneralStyles.BoxViewBGheaderStyle}"
+                                HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+                    <StackLayout  Margin="0" Padding="0" Spacing="0" Style="{x:Static Style:GeneralStyles.ViewFlowDirection}">
+
+                        <StackLayout Orientation="Horizontal" Style="{x:Static Style:GeneralStyles.StackHeaderStyle}">
+                            <Label Text="{x:Static XResource:MLResource.TitleProject}" TextColor="#272A3F"
+                                        Style="{x:Static Style:GeneralStyles.LabelTitlePageStyle}" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"/>
+                            <FFImage:SvgCachedImage x:Name="imgPincelEdit" Source="PincelEdit.svg" Style="{x:Static Style:GeneralStyles.FFImage15X15Style}">
+                                <FFImage:SvgCachedImage.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="ShowPopupBasicInfo"/>
+                                </FFImage:SvgCachedImage.GestureRecognizers>
+                            </FFImage:SvgCachedImage>
+                        </StackLayout>
+                        <Frame IsClippedToBounds="True"  Style="{x:Static Style:GeneralStyles.FrameImage100X100Style}" HorizontalOptions="Center" VerticalOptions="Start">
+                            <Image Source="{Binding ProfileProperty.UserProfile.ImageUrl}" Aspect="AspectFill" Margin="0"/>
+                        </Frame>
+                        <StackLayout Style="{x:Static Style:GeneralStyles.StackLayoutMaring20x10x20x30Spacing5}" HorizontalOptions="CenterAndExpand">
+                            <Label Text="{Binding ProfileProperty.UserProfile.FullName}" Style="{x:Static Style:GeneralStyles.LabelNameUserStyle}"/>
+                            <Label Text="{Binding ProfileProperty.UserProfile.Email}" Style="{x:Static Style:GeneralStyles.LabelEmailUserStyle}"/>
+                            <Label Text="{Binding ProfileProperty.UserProfile.Mobile,StringFormat='{0:(###) ###-####}'}" Style="{x:Static Style:GeneralStyles.LabelNumberPhoneUserStyle}"/>
+                        </StackLayout>
+                    </StackLayout>
+                    <FFImage:SvgCachedImage x:Name="imgSetting" Source="settings.svg" HorizontalOptions="Center" VerticalOptions="Center" IsVisible="False"
+                                            Style="{x:Static Style:GeneralStyles.FFImage50X50Style}">
+                    </FFImage:SvgCachedImage>
+                </Grid>
+                    <!--Content Page-->
+                <ScrollView Margin="0" Padding="0" Grid.Row="1">
+                    <StackLayout Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace15Padding20_10_Style}" VerticalOptions="StartAndExpand">
+                        <StackLayout x:Name="StackUserInfo" Margin="0" Padding="0" Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace15Padding20_10_Style}">
+                            <!--Password-->
+                            <StackLayout Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace5_Style}">
+                                <StackLayout Orientation="Horizontal" Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace10_Style}">
+                                    <FFImage:SvgCachedImage Source="Lock.svg" Style="{x:Static Style:GeneralStyles.FFImage20X20Style}" VerticalOptions="Center"/>
+                                    <Label Text="{x:Static XResource:MLResource.ChangePassword}" Style="{x:Static Style:GeneralStyles.LabelTitleOptionStyle}"/>
+
+                                    <FFImage:SvgCachedImage Source="arrow_right.svg" IsOpaque="True" VerticalOptions="Center" 
+                                                            Rotation="{Binding .,Converter={StaticResource Key=CalRotation}}" 
+                                                            Style="{x:Static Style:GeneralStyles.FFImage15X15Style}" HorizontalOptions="End"/>
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="ShowEditFrame"/>
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+                                <StackLayout IsVisible="False" Style="{x:Static Style:GeneralStyles.StackLayoutPadding20x10Spacing5}">
+                                    <Frame IsClippedToBounds="True"  x:Name="fraCurrentPass" Padding="0" BorderColor="#707070" HasShadow="False" 
+                                               Style="{x:Static Style:GeneralStyles.FrameRaduis10Padding0x0x3x0_Style}">
+                                        <Grid Margin="0" Padding="0" HorizontalOptions="FillAndExpand">
+                                            <CustomRenderer:CustomEntry x:Name="txtCurrentPass" VerticalOptions="Center"
+                                                        TextColor="#272A3F" IsTextPredictionEnabled="False" 
+                                                        HorizontalOptions="FillAndExpand" IsPassword="True"
+                                                        Placeholder="{x:Static XResource:MLResource.CurrentPassword}"
+                                                        Style="{x:Static Style:GeneralStyles.EntryCustomFont10Margin4x2x2x2}">
+                                                <CustomRenderer:CustomEntry.Effects>
+                                                    <xf:ShowHidePassEffect/>
+                                                </CustomRenderer:CustomEntry.Effects>
+                                            </CustomRenderer:CustomEntry>
+                                            <FFImage:SvgCachedImage IsVisible="False" x:Name="WRcurrentP" Source="warning.svg" Style="{x:Static Style:GeneralStyles.FFImage15X15Style}" 
+                                                                    HorizontalOptions="End" VerticalOptions="Center"/>
+                                        </Grid>
+                                    </Frame>
+                                    <Frame IsClippedToBounds="True"  x:Name="fraNewPasword" Padding="0"  BorderColor="#707070" HasShadow="False" 
+                                               Style="{x:Static Style:GeneralStyles.FrameRaduis10Padding0x0x3x0_Style}">
+                                        <StackLayout Orientation="Horizontal" Margin="0" Padding="0" Spacing="0" 
+                                                         Style="{x:Static Style:GeneralStyles.ViewFlowDirection}">
+                                            <Grid Margin="0" Padding="0" HorizontalOptions="FillAndExpand">
+                                                <CustomRenderer:CustomEntry x:Name="txtNewPassword" IsPassword="True"
+                                                        TextColor="#272A3F" IsTextPredictionEnabled="False" 
+                                                        Placeholder="{x:Static XResource:MLResource.NewPassword}"
+                                                        Style="{x:Static Style:GeneralStyles.EntryCustomFont10Margin4x2x2x2}">
+                                                    <CustomRenderer:CustomEntry.Effects>
+                                                        <xf:ShowHidePassEffect/>
+                                                    </CustomRenderer:CustomEntry.Effects>
+                                                </CustomRenderer:CustomEntry>
+                                                <FFImage:SvgCachedImage IsVisible="False" x:Name="WRnewP" Source="warning.svg" 
+                                                                        Style="{x:Static Style:GeneralStyles.FFImage15X15Style}" HorizontalOptions="End" VerticalOptions="Center"/>
+                                            </Grid>
+                                            <Button Text="{x:Static XResource:MLResource.Submit}" TextColor="White" 
+                                                    Style="{x:Static Style:GeneralStyles.ButtonFont10}"
+                                                    BackgroundColor="#3A1D0F" Clicked="EditPassword"
+                                                    VerticalOptions="Start" HorizontalOptions="End"/>
+                                        </StackLayout>
+                                    </Frame>
+                                </StackLayout>
+                            </StackLayout>
+                            <!--Gender-->
+                            <StackLayout Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace5_Style}">
+                                <StackLayout  Orientation="Horizontal" Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace10_Style}">
+                                    <FFImage:SvgCachedImage Source="user.svg" Style="{x:Static Style:GeneralStyles.FFImage20X20Style}" VerticalOptions="Center"/>
+                                    <Label Text="{x:Static XResource:MLResource.Gender}" Style="{x:Static Style:GeneralStyles.LabelTitleOptionStyle}"/>
+                                    <FFImage:SvgCachedImage Source="arrow_right.svg" IsOpaque="True"  VerticalOptions="Center" Rotation="{Binding .,Converter={StaticResource Key=CalRotation}}" Style="{x:Static Style:GeneralStyles.FFImage15X15Style}" HorizontalOptions="End"/>
+
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="ShowEditFrame"/>
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+                                <StackLayout IsVisible="False" Style="{x:Static Style:GeneralStyles.StackLayoutPadding20x10Spacing5}">
+                                    <Frame IsClippedToBounds="True"  x:Name="fraGender" Padding="0" Style="{x:Static Style:GeneralStyles.FrameRaduis10Padding0x0x3x0_Style}" 
+                                            BorderColor="#707070" HasShadow="False">
+                                        <StackLayout Orientation="Horizontal" Margin="0" Padding="0" Spacing="0" Style="{x:Static Style:GeneralStyles.ViewFlowDirection}">
+                                            <Grid Margin="0" Padding="0" HorizontalOptions="FillAndExpand">
+                                                <Picker Title="{x:Static XResource:MLResource.SelectGender}"
+                                                    Style="{x:Static Style:GeneralStyles.PickerFont10Margin4x2x2x2}"
+                                                    ItemsSource="{Binding ProfileProperty.GenderType}"
+                                                    SelectedItem="{Binding ProfileProperty.GenderSelected, Mode=TwoWay}"
+                                                    ItemDisplayBinding="{Binding .}"/>
+                                                <FFImage:SvgCachedImage IsVisible="False" x:Name="WRgender" 
+                                                                Source="warning.svg" 
+                                                                Style="{x:Static Style:GeneralStyles.FFImage15X15Style}" 
+                                                                HorizontalOptions="End" VerticalOptions="Center"/>
+                                            </Grid>
+                                            <Button Text="{x:Static XResource:MLResource.Submit}" TextColor="White" 
+                                                    Style="{x:Static Style:GeneralStyles.ButtonFont10}"
+                                                    BackgroundColor="#3A1D0F" Clicked="EditGender"
+                                                    VerticalOptions="Start" HorizontalOptions="End"/>
+                                        </StackLayout>
+                                    </Frame>
+                                </StackLayout>
+                            </StackLayout>
+                            <!--Birthday-->
+                            <StackLayout Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace5_Style}">
+                                <StackLayout  Orientation="Horizontal" Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace10_Style}">
+                                    <FFImage:SvgCachedImage Source="BirthdayCake.svg" Style="{x:Static Style:GeneralStyles.FFImage20X20Style}" VerticalOptions="Center"/>
+                                    <Label Text="{x:Static XResource:MLResource.Birthday}" Style="{x:Static Style:GeneralStyles.LabelTitleOptionStyle}"/>
+                                    <FFImage:SvgCachedImage Source="arrow_right.svg" IsOpaque="True"  
+                                                            VerticalOptions="Center" Rotation="{Binding .,Converter={StaticResource Key=CalRotation}}" 
+                                                            Style="{x:Static Style:GeneralStyles.FFImage15X15Style}" HorizontalOptions="End"/>
+
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="ShowEditFrame"/>
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+                                <StackLayout IsVisible="False" Style="{x:Static Style:GeneralStyles.StackLayoutPadding20x10Spacing5}">
+                                    <Frame IsClippedToBounds="True"  x:Name="fraBirthday" Padding="0" Style="{x:Static Style:GeneralStyles.FrameRaduis10Padding0x0x3x0_Style}" 
+                                            BorderColor="#707070" HasShadow="False">
+                                        <StackLayout Orientation="Horizontal" Margin="0" Padding="0" Spacing="0" Style="{x:Static Style:GeneralStyles.ViewFlowDirection}">
+                                            <Grid Margin="0" Padding="0" HorizontalOptions="FillAndExpand">
+
+                                                <DatePicker x:Name="pickerBirthday"             
+                                                                Format="dd-MMM-yyyy"
+                                                                Date="{Binding ProfileProperty.Birthday}"
+                                                                MaximumDate="{Binding ProfileProperty.MaxDate}"
+                                                                Style="{x:Static Style:GeneralStyles.DatePickerFont10Margin4x2x2x2}"/>
+                                                <FFImage:SvgCachedImage IsVisible="False" x:Name="WRbirthday" 
+                                                                Source="warning.svg" 
+                                                                Style="{x:Static Style:GeneralStyles.FFImage15X15Style}" 
+                                                                HorizontalOptions="End" VerticalOptions="Center"/>
+                                            </Grid>
+                                            <Button Text="{x:Static XResource:MLResource.Submit}" TextColor="White" 
+                                                    Style="{x:Static Style:GeneralStyles.ButtonFont10}"
+                                                    BackgroundColor="#3A1D0F" Clicked="EditBirthday"
+                                                    VerticalOptions="Start" HorizontalOptions="End"/>
+                                        </StackLayout>
+                                    </Frame>
+                                </StackLayout>
+                            </StackLayout>
+                            <!--Address-->
+                            <StackLayout Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace5_Style}">
+                                <StackLayout  Orientation="Horizontal" Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace10_Style}">
+                                    <FFImage:SvgCachedImage Source="LocationSmall.svg" Style="{x:Static Style:GeneralStyles.FFImage20X20Style}" VerticalOptions="Center"/>
+                                    <Label Text="{x:Static XResource:MLResource.DeliveryAddress}" Style="{x:Static Style:GeneralStyles.LabelTitleOptionStyle}"/>
+                                    <FFImage:SvgCachedImage Source="arrow_right.svg" IsOpaque="True"  VerticalOptions="Center" 
+                                                            Rotation="{Binding .,Converter={StaticResource Key=CalRotation}}" 
+                                                            Style="{x:Static Style:GeneralStyles.FFImage15X15Style}" HorizontalOptions="End"/>
+
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="ShowEditFrame"/>
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+                                <StackLayout IsVisible="False" Style="{x:Static Style:GeneralStyles.StackLayoutPadding20x10Spacing5}">
+                                    <Frame IsClippedToBounds="True"  x:Name="fraAddress" Padding="0" Style="{x:Static Style:GeneralStyles.FrameRaduis10Padding0x0x3x0_Style}" 
+                                            BorderColor="#707070" HasShadow="False">
+                                        <StackLayout Orientation="Horizontal" Margin="0" Padding="0" Spacing="0" Style="{x:Static Style:GeneralStyles.ViewFlowDirection}">
+                                            <Grid Margin="0" Padding="0" HorizontalOptions="FillAndExpand">
+                                                <CustomRenderer:CustomEntry x:Name="txtAddress"
+                                                        Text="{Binding ProfileProperty.AddressSelected}"
+                                                        TextColor="#272A3F" IsTextPredictionEnabled="False" 
+                                                        Placeholder="{x:Static XResource:MLResource.NewAddress}"
+                                                        Style="{x:Static Style:GeneralStyles.EntryCustomFont10Margin4x2x2x2}"/>
+                                                <FFImage:SvgCachedImage IsVisible="False" x:Name="WRaddress" 
+                                                                Source="warning.svg" 
+                                                                Style="{x:Static Style:GeneralStyles.FFImage15X15Style}" 
+                                                                HorizontalOptions="End" VerticalOptions="Center"/>
+                                            </Grid>
+                                            <Button Text="{x:Static XResource:MLResource.Submit}" TextColor="White" 
+                                                    Style="{x:Static Style:GeneralStyles.ButtonFont10}"
+                                                    BackgroundColor="#3A1D0F" Clicked="EditAddress"
+                                                    VerticalOptions="Start" HorizontalOptions="End"/>
+                                        </StackLayout>
+                                    </Frame>
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
+                        <!--Language-->
+                            <StackLayout Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace5_Style}">
+                                <StackLayout Orientation="Horizontal" Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace10_Style}">
+                                    <FFImage:SvgCachedImage Source="Language.svg" Style="{x:Static Style:GeneralStyles.FFImage20X20Style}" VerticalOptions="Center"/>
+                                    <Label Text="{x:Static XResource:MLResource.Language}" Style="{x:Static Style:GeneralStyles.LabelTitleOptionStyle}"/>
+                                    <FFImage:SvgCachedImage Source="arrow_right.svg" IsOpaque="True"  VerticalOptions="Center" 
+                                                            Rotation="{Binding .,Converter={StaticResource Key=CalRotation}}" 
+                                                            Style="{x:Static Style:GeneralStyles.FFImage15X15Style}" HorizontalOptions="End"/>
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="ShowEditFrame"/>
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+                                <StackLayout IsVisible="False" Style="{x:Static Style:GeneralStyles.StackLayoutPadding20x10Spacing5}">
+                                    <Frame IsClippedToBounds="True"  x:Name="fraLanguage" Padding="0" Style="{x:Static Style:GeneralStyles.FrameRaduis10Padding0x0x3x0_Style}" 
+                                            BorderColor="#707070" HasShadow="False">
+                                        <StackLayout Orientation="Horizontal" Margin="0" Padding="0" Spacing="0" Style="{x:Static Style:GeneralStyles.ViewFlowDirection}">
+                                            <Grid Margin="0" Padding="0" HorizontalOptions="FillAndExpand">
+                                                <Picker Title="{x:Static XResource:MLResource.SelectLanguage}" 
+                                                        SelectedIndex="{Binding ProfileProperty.LanguageIndex}"
+                                                        Style="{x:Static Style:GeneralStyles.PickerFont10Margin4x2x2x2}">
+                                                    <Picker.ItemsSource>
+                                                        <x:Array Type="{x:Type x:String}">
+                                                            <x:String>English</x:String>
+                                                            <x:String>عربي</x:String>
+                                                        </x:Array>
+                                                    </Picker.ItemsSource>
+                                                </Picker>
+                                            </Grid>
+                                            <Button Text="{x:Static XResource:MLResource.Submit}" TextColor="White" 
+                                                    Style="{x:Static Style:GeneralStyles.ButtonFont10}"
+                                                    BackgroundColor="#3A1D0F" Clicked="EditLanguage"
+                                                    VerticalOptions="Start" HorizontalOptions="End"/>
+                                        </StackLayout>
+                                    </Frame>
+                                </StackLayout>                            
+                        </StackLayout>
+                        </StackLayout>
+                </ScrollView>
+                </Grid>
+            <!--HolderMessage Login-->
+            <ContentView x:Name="HolderMessageLogin" IsVisible="False" Margin="0" Padding="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="#4D4A4948">
+                <ContentView.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="HideMessageLogin"/>
+                </ContentView.GestureRecognizers>
+            </ContentView>
+            <Frame IsClippedToBounds="True"  x:Name="PopupMessageLogin" IsVisible="False" Style="{x:Static Style:GeneralStyles.FrameMaring15Raduis10}" HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
+                <StackLayout  Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace10_Style}">
+                    <Frame IsClippedToBounds="True"  Style="{x:Static Style:GeneralStyles.FramePadding10Marign0}" HasShadow="False" BackgroundColor="#3A1D0F">
+                        <Label x:Name="Title" Text="{x:Static XResource:MLResource.SubscribeWithUs}" HorizontalOptions="Start"
+                           TextColor="White" Style="{x:Static Style:GeneralStyles.LabelTitlePageStyle}"/>
+                    </Frame>
+                    <StackLayout  Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace10Padding20_10_Style}">
+                        <Label x:Name="Message" Text="{x:Static XResource:MLResource.MustLogin}"
+                            TextColor="#272A3F" Style="{x:Static Style:GeneralStyles.LabelFont15Subtitel}"/>
+                        <StackLayout   Orientation="Horizontal" Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace10_Style}">
+                            <Button Text="{x:Static XResource:MLResource.Signin}" TextColor="White"
+                                                    Style="{x:Static Style:GeneralStyles.CButtonRaduis10Marign30x0}"
+                                                    Clicked="OpenLoginPage"
+                                                    BackgroundColor="#3A1D0F"
+                                                    HorizontalOptions="FillAndExpand" VerticalOptions="Start"/>
+                            <Button Text="{x:Static XResource:MLResource.Later}" TextColor="#3A1D0F"
+                                BorderColor="#3A1D0F" 
+                                Style="{x:Static Style:GeneralStyles.ButtonRaduis10Marign30x0}"
+                                BackgroundColor="White" Clicked="HideMessageLogin"
+                                HorizontalOptions="FillAndExpand" VerticalOptions="Start"/>
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+
+            <!--HolderMessage Restart-->
+            <ContentView x:Name="HolderMessageRestart" IsVisible="False" Margin="0" Padding="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="#4D4A4948">
+                <ContentView.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="HideMessageRestart"/>
+                </ContentView.GestureRecognizers>
+            </ContentView>
+            <Frame IsClippedToBounds="True"  x:Name="PopupMessageRestart" IsVisible="False" Style="{x:Static Style:GeneralStyles.FrameMaring15Raduis10}" HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
+                <StackLayout  Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace10_Style}">
+                    <Frame IsClippedToBounds="True"  Style="{x:Static Style:GeneralStyles.FramePadding10Marign0}" HasShadow="False" BackgroundColor="#3A1D0F">
+                        <Label x:Name="TitleR" Text="{x:Static XResource:MLResource.TitleRestartToSeeChange}" HorizontalOptions="Start"
+                           TextColor="White" Style="{x:Static Style:GeneralStyles.LabelTitlePageStyle}"/>
+                    </Frame>
+                    <StackLayout  Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace10Padding20_10_Style}">
+                        <Label x:Name="MessageR" Text="{x:Static XResource:MLResource.RestartToSeeChange}"
+                            TextColor="#272A3F" Style="{x:Static Style:GeneralStyles.LabelFont15Subtitel}"/>
+                        <StackLayout   Orientation="Horizontal" Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace10_Style}">
+                            <Button Text="{x:Static XResource:MLResource.Ok}" TextColor="White"
+                                                    Style="{x:Static Style:GeneralStyles.CButtonRaduis10Marign30x0}"
+                                                    Clicked="HideMessageRestart"
+                                                    BackgroundColor="#3A1D0F"
+                                                    HorizontalOptions="FillAndExpand" VerticalOptions="Start"/>
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+            
+            <ContentView x:Name="HolderEditInfoUser" IsVisible="False" Margin="0" Padding="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="#4D4A4948">
+                <ContentView.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="ShowPopupBasicInfo"/>
+                </ContentView.GestureRecognizers>
+            </ContentView>
+            <Frame IsClippedToBounds="True"  x:Name="PopupEditInfoUser" Style="{x:Static Style:GeneralStyles.FrameMaring30Raduis10}"
+                   HorizontalOptions="Fill" VerticalOptions="Center" IsVisible="False">
+                <StackLayout  x:Name="InfoUserFrame" Style="{x:Static Style:GeneralStyles.StackLayoutWithSpace10Padding15x30_Style}" HorizontalOptions="FillAndExpand">
+                    <Label Text="{x:Static XResource:MLResource.EditYourInformation}" Style="{x:Static Style:GeneralStyles.LabelFontSize35}" HorizontalTextAlignment="Center" TextColor="#272A3F"/>
+                    <Frame IsClippedToBounds="True"  x:Name="fraEnFullName" Margin="0" Padding="0" BorderColor="#707070" HasShadow="False"
+                           Style="{x:Static Style:GeneralStyles.FrameRaduis10_Style}">
+                        <CustomRenderer:CustomEntry x:Name="txtEnFullName" VerticalOptions="Center"
+                                                    Text="{Binding ProfileProperty.UserProfile.EnFullName}"
+                                                    TextColor="#272A3F" IsTextPredictionEnabled="False" 
+                                                    Placeholder="{x:Static XResource:MLResource.FullNameEn}" 
+                                                    Style="{x:Static Style:GeneralStyles.EntryCustomFont10Margin4x2x2x2}"/>
+                    </Frame>
+                    <Frame IsClippedToBounds="True"  x:Name="fraArFullName" Margin="0" Padding="0" BorderColor="#707070" HasShadow="False"
+                                            Style="{x:Static Style:GeneralStyles.FrameRaduis10_Style}">
+                        <CustomRenderer:CustomEntry x:Name="txtArFullName" VerticalOptions="Center"
+                                                    Text="{Binding ProfileProperty.UserProfile.ArFullName}"
+                                                    TextColor="#272A3F" IsTextPredictionEnabled="False" 
+                                                    Placeholder="{x:Static XResource:MLResource.FullNameAr}" 
+                                                    Style="{x:Static Style:GeneralStyles.EntryCustomFont10Margin4x2x2x2}"/>
+                    </Frame>
+                    <Frame IsClippedToBounds="True"  x:Name="fraEmail" Margin="0" Padding="0" BorderColor="#707070" HasShadow="False" Style="{x:Static Style:GeneralStyles.FrameRaduis10_Style}">
+                        <CustomRenderer:CustomEntry x:Name="txtEmail" VerticalOptions="Center"
+                                                    Text="{Binding ProfileProperty.UserProfile.Email}"                                                                        
+                                                    TextColor="#272A3F" IsTextPredictionEnabled="False" Placeholder="{x:Static XResource:MLResource.E_mail}" 
+                                                    Style="{x:Static Style:GeneralStyles.EntryCustomFont10Margin4x2x2x2}"/>
+                    </Frame>
+                    <Frame IsClippedToBounds="True"  x:Name="fraMobile" Margin="0" Padding="0" BorderColor="#707070" HasShadow="False" Style="{x:Static Style:GeneralStyles.FrameRaduis10_Style}">
+                        <CustomRenderer:CustomEntry x:Name="txtMobile" VerticalOptions="Center" Keyboard="Telephone"
+                                                    Text="{Binding ProfileProperty.UserProfile.Mobile,StringFormat='{0:(###) ###-####}'}"
+                                                    TextColor="#272A3F" IsTextPredictionEnabled="False" Placeholder="{x:Static XResource:MLResource.NumberPhone}" 
+                                                    Style="{x:Static Style:GeneralStyles.EntryCustomFont10Margin4x2x2x2}"/>
+                    </Frame>
+
+                    <Button Text="{x:Static XResource:MLResource.AcceptEditInformation}" 
+                            Style="{x:Static Style:GeneralStyles.ButtonSubmitStyleWithBord}" Clicked="EditBasicInformation"
+                            BackgroundColor="#492D1D" TextColor="White" />
+                </StackLayout>
+            </Frame>
+
+            <contentviewhelper:Loader IsVisible="{Binding ProfileProperty.IsLoading}"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

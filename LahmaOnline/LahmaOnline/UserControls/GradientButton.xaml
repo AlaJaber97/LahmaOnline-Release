@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:CustomRenderer="clr-namespace:LahmaOnline.CustomRenderer"
+             x:Class="LahmaOnline.UserControls.GradientButton">
+  <ContentView.Content>
+        <Grid x:Name="GridButton" Margin="0" RowSpacing="0" Padding="0" 
+                    HorizontalOptions="FillAndExpand">
+            <CustomRenderer:GradientBoxView x:Name="ButtonBG" Margin="0"
+                    HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+            <Button x:Name="ButtonMain" Margin="0" BackgroundColor="Transparent" 
+                    Clicked="OnClicked" Command="{Binding CommandHandler}"
+                    HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+        </Grid>
+    </ContentView.Content>
+</ContentView>
